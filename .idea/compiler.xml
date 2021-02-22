@@ -10,7 +10,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+<<<<<<< HEAD
       <module name="test" target="7" />
+=======
+      <module name="test" target="1.7" />
+>>>>>>> Delete Workflow.yml
     </bytecodeTargetLevel>
   </component>
 </project>
