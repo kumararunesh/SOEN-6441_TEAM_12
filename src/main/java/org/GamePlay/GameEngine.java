@@ -66,5 +66,76 @@ public class GameEngine {
         }
     }
 
-   
+    public static void playGame() {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("**************************************");
+            System.out.println("Enter 'loadmap' command to continue");
+            System.out.println("**************************************");
+            String command = sc.nextLine();
+            String[] com=command.split(" ");
+            File file;
+            GameEngine game = new GameEngine();
+            if (com[0].equalsIgnoreCase("loadmap")) {
+                if(com.length==2) {
+                    if (com[1].endsWith(".map")) {
+                        String filename = com[1];
+                        file = new File("src//main//resources//maps//" + filename);
+                        if(file.exists())
+                        {
+                            game.startGameEngine(file);
+                            playGame pGame = new playGame(playersList,cou);
+//                            test pGame = new test(playersList,cou);
+                            pGame.playGameLoop();
+                            System.out.println("Deployment Phase Over!!!!!!!!");
+                            System.out.println("");
+                            System.out.println("");
+                            System.out.println("");
+                            break;
+                        }
+                        else
+                        {
+                            System.out.println("File you entered doesn't exist\n");
+                            continue;
+                        }
+
+                    } else {
+                        System.out.println("Enter the command with .map extension");
+                        continue;
+                    }
+                }
+                else
+                {
+                    System.out.println("Wrong command. Enter 'loadmap filename.map'");
+                    continue;
+                }
+            } else {
+                System.out.println("Wrong command. Please retry");
+            }
+        }
+        String command;
+        while(true)
+        {
+            System.out.println("In order to see the map Command is Showmap\nElse type continue");
+            command  = sc.nextLine();
+            if(command.equalsIgnoreCase("showmap"))
+            {
+                showMap map = new showMap(playersList,cou);
+                map.mapShow();
+                break;
+            }
+            else if(command.equalsIgnoreCase("continue"))
+            {
+                break;
+            }
+            else
+            {
+                System.out.println("You misspelled showmap ");
+                continue;
+            }
+        }
+        try {
+            Main.menu();
+        } catch (Exception e) {}
+    }
 }
