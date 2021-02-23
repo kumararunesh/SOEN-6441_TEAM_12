@@ -3,97 +3,135 @@ package org.GamePlay;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * This class is used to display all the details while playing the Game. It will display details like countries, and its continents,
+ * armies deployed on that particular country, the owner of that country and the adjacency matrix for the neighbouring countries.
+ */
 public class showMap {
+    /**
+     * PLAYERS_LIST is the Hashmap used to store all the name of the different players as the String and the
+     * Player object is stored as the value. It is basically used to store all the details about the Player
+     */
     static ConcurrentHashMap <String,Player> PLAYERS_LIST = new ConcurrentHashMap<>();
+    /**
+     * COU is the object of the country.
+     */
     static Country COU;
+    /**
+     * ADJACENTNEIGHBOURS is the 2D matrix used to store all the neighbours in the form of Adjacency Matrix.
+     * If there's the link between the countries, then it will be represented by X.
+     */
     static String[][] ADJACENTNEIGHBOURS;
+    /**
+     * Details is the 2D matrix used to store all the details about the various Countries. It include countries,
+     * owner,continent and number of armies placed at that country.
+     */
     String[][] DETAILS;
+
+    /**
+     * Constructor used to initialize the global variables
+     * @param p_players_list is the HashMap containing all the Name of the players as the String and its value containing the Player Object
+     * @param p_cou is the object of the Country Class from where we can have complete detail of the Country.
+     */
     public showMap(ConcurrentHashMap<String ,Player> p_players_list, Country p_cou)
     {
         this.COU = p_cou;
         this.PLAYERS_LIST = p_players_list;
     }
 
-    public void addElement(int row, int col, String element)
+    /**
+     * This method is used to add element to the adjacency matrix which is used for representing the country and its neighbours.
+     * @param p_row represents the row number of the 2D Matrix.
+     * @param p_col represents the column number of the 2D Matrix.
+     * @param p_element represents the data to be added at that specific index.
+     */
+
+    public void l_addElement(int p_row, int p_col, String p_element)
     {
-        ADJACENTNEIGHBOURS[row][col]=element;
+        ADJACENTNEIGHBOURS[p_row][p_col]=p_element;
     }
 
+    /**
+     * Method which is used to print all the details of the country which includes country name, its continent,
+     * its owner, armies deployed on that country. It also shows the country and its neighbouring country by X and O.
+     * "X" means that the country on Y-axis is connected with the country on the X-axis.
+     * while the "O" (oh) represents that the country is not connected.
+     */
     public void check() {
         ADJACENTNEIGHBOURS = new String[COU.COUNTRIESLIST.size()+1][COU.COUNTRIESLIST.size()+1];
         DETAILS = new String[COU.COUNTRIESLIST.size()][4];
-        ArrayList<String> allCountries = new ArrayList<>(COU.COUNTRIESLIST.keySet());
-        int row=0;
-        for(String countries: COU.COUNTRIESLIST.keySet())
+        ArrayList<String> l_allCountries = new ArrayList<>(COU.COUNTRIESLIST.keySet());
+        int l_row=0;
+        for(String l_countries: COU.COUNTRIESLIST.keySet())
         {
-            DETAILS[row][0]= countries;
-            DETAILS[row][1]= COU.COUNTRIESLIST.get(countries).OWNER;
-            DETAILS[row][2]= COU.COUNTRIESLIST.get(countries).CONTINENT;
-            if(COU.COUNTRIESLIST.get(countries).NUMOFARMIESPLACED!=null) {
-                DETAILS[row][3] = COU.COUNTRIESLIST.get(countries).NUMOFARMIESPLACED.toString();
+            DETAILS[l_row][0]= l_countries;
+            DETAILS[l_row][1]= COU.COUNTRIESLIST.get(l_countries).OWNER;
+            DETAILS[l_row][2]= COU.COUNTRIESLIST.get(l_countries).CONTINENT;
+            if(COU.COUNTRIESLIST.get(l_countries).NUMOFARMIESPLACED!=null) {
+                DETAILS[l_row][3] = COU.COUNTRIESLIST.get(l_countries).NUMOFARMIESPLACED.toString();
             }else
             {
-                DETAILS[row][3] ="0";
+                DETAILS[l_row][3] ="0";
             }
-            row+=1;
+            l_row+=1;
         }
 
         ADJACENTNEIGHBOURS[0][0]=" ";
-        row=1;
-        for(String country: COU.COUNTRIESLIST.keySet())
+        l_row=1;
+        for(String l_country: COU.COUNTRIESLIST.keySet())
         {
-            ADJACENTNEIGHBOURS[0][row] = country;
-            row+=1;
+            ADJACENTNEIGHBOURS[0][l_row] = l_country;
+            l_row+=1;
         }
-        row=1;
-        for(String country:COU.COUNTRIESLIST.keySet())
+        l_row=1;
+        for(String l_country:COU.COUNTRIESLIST.keySet())
         {
-            ADJACENTNEIGHBOURS[row][0]=country;
-            row+=1;
+            ADJACENTNEIGHBOURS[l_row][0]=l_country;
+            l_row+=1;
         }
 
-        row=1;
+        l_row=1;
 
-        for(String country:COU.COUNTRIESLIST.keySet())
+        for(String l_country:COU.COUNTRIESLIST.keySet())
         {
 
-            for(String neighbour : COU.COUNTRIESLIST.get(country).NEIGHBOURS)
+            for(String l_neighbour : COU.COUNTRIESLIST.get(l_country).NEIGHBOURS)
             {
-                int temp = allCountries.indexOf(neighbour);
-                addElement(row,temp+1,"X");
+                int l_temp = l_allCountries.indexOf(l_neighbour);
+                l_addElement(l_row,l_temp+1,"X");
             }
-            for(int i = 0; i< ADJACENTNEIGHBOURS[row].length; i++)
+            for(int l_index = 0; l_index< ADJACENTNEIGHBOURS[l_row].length; l_index++)
             {
-                if(ADJACENTNEIGHBOURS[row][i]==null)
+                if(ADJACENTNEIGHBOURS[l_row][l_index]==null)
                 {
-                    addElement(row,i,"O");
+                    l_addElement(l_row,l_index,"O");
                 }
             }
-            addElement(row,row,"X");
-            row+=1;
+            l_addElement(l_row,l_row,"X");
+            l_row+=1;
         }
 
         System.out.println("The details are: ");
-        row=0;
-        int col =0;
+        l_row=0;
+        int l_col =0;
         System.out.println("Country\t Owner\t Continent\t Armies");
-        for(row=0; row< DETAILS.length; row++)
+        for(l_row=0; l_row< DETAILS.length; l_row++)
         {
-            for(col=0;col<4;col++)
+            for(l_col=0;l_col<4;l_col++)
             {
-                System.out.print(DETAILS[row][col]+"\t");
+                System.out.print(DETAILS[l_row][l_col]+"\t");
             }
             System.out.println("");
         }
 
         System.out.println("Adjacency matrix: ");
-        row=0;
-        col=0;
-        for(row=0; row< ADJACENTNEIGHBOURS.length; row++)
+        l_row=0;
+        l_col=0;
+        for(l_row=0; l_row< ADJACENTNEIGHBOURS.length; l_row++)
         {
-            for(col=0; col< ADJACENTNEIGHBOURS[row].length; col++)
+            for(l_col=0; l_col< ADJACENTNEIGHBOURS[l_row].length; l_col++)
             {
-                System.out.print(ADJACENTNEIGHBOURS[row][col]+" ");
+                System.out.print(ADJACENTNEIGHBOURS[l_row][l_col]+" ");
             }
             System.out.println(" ");
         }
