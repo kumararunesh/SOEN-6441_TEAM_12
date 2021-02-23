@@ -17,7 +17,13 @@ public class showMap {
         this.cou = cou;
         this.playersList = playersList;
     }
-public void check() {
+
+    public void addElement(int row, int col, String element)
+    {
+        adjacentNeighbours[row][col]=element;
+    }
+
+    public void check() {
         adjacentNeighbours = new String[cou.countriesList.size()+1][cou.countriesList.size()+1];
         details = new String[cou.countriesList.size()][4];
         ArrayList<String> allCountries = new ArrayList<>(cou.countriesList.keySet());
@@ -35,8 +41,43 @@ public void check() {
             }
             row+=1;
         }
-		
-	        System.out.println("The details are: ");
+
+        adjacentNeighbours[0][0]=" ";
+        row=1;
+        for(String country: cou.countriesList.keySet())
+        {
+            adjacentNeighbours[0][row] = country;
+            row+=1;
+        }
+        row=1;
+        for(String country:cou.countriesList.keySet())
+        {
+            adjacentNeighbours[row][0]=country;
+            row+=1;
+        }
+
+        row=1;
+
+        for(String country:cou.countriesList.keySet())
+        {
+
+            for(String neighbour:cou.countriesList.get(country).neighbours)
+            {
+                int temp = allCountries.indexOf(neighbour);
+                addElement(row,temp+1,"X");
+            }
+            for(int  i=0;i<adjacentNeighbours[row].length;i++)
+            {
+                if(adjacentNeighbours[row][i]==null)
+                {
+                    addElement(row,i,"O");
+                }
+            }
+            addElement(row,row,"X");
+            row+=1;
+        }
+
+        System.out.println("The details are: ");
         row=0;
         int col =0;
         System.out.println("Country\t Owner\t Continent\t Armies");
@@ -47,6 +88,18 @@ public void check() {
                 System.out.print(details[row][col]+"\t");
             }
             System.out.println("");
+        }
+
+        System.out.println("Adjacency matrix: ");
+        row=0;
+        col=0;
+        for(row=0;row<adjacentNeighbours.length;row++)
+        {
+            for(col=0;col<adjacentNeighbours[row].length;col++)
+            {
+                System.out.print(adjacentNeighbours[row][col]+" ");
+            }
+            System.out.println(" ");
         }
     }
 }
