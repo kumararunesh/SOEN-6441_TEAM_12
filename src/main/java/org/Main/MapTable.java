@@ -20,7 +20,7 @@ public class MapTable {
     public ArrayList<String> countryList(File p_file) throws Exception {
 
         ReadLines d_line = new ReadLines();
-        int l_n =d_line.countryandborderline(p_file);
+        int l_n =d_line.countryAndBorderLine(p_file);
 
         ArrayList<String> l_list = new ArrayList<>();
 
@@ -63,7 +63,7 @@ public class MapTable {
     public ArrayList<String> continentList(File p_file) throws Exception {
 
         ReadLines d_line = new ReadLines();
-        int n = d_line.continentline(p_file);
+        int n = d_line.continentLine(p_file);
 
         ArrayList<String> l_list1 = new ArrayList<>();
 
@@ -105,7 +105,7 @@ public class MapTable {
     public HashMap<String,Integer> continentAndValue(File p_file) throws Exception{
 
         ReadLines d_line = new ReadLines();
-        int l_n = d_line.continentline(p_file);
+        int l_n = d_line.continentLine(p_file);
 
         HashMap<String,Integer> l_cont_val = new HashMap<>();
 
@@ -147,7 +147,7 @@ public class MapTable {
     public HashMap<Integer,String> countryAndKey(File p_file) throws Exception{
 
         ReadLines d_line = new ReadLines();
-        int l_n = d_line.countryandborderline(p_file);
+        int l_n = d_line.countryAndBorderLine(p_file);
 
         HashMap<Integer,String> l_country_val = new HashMap<>();
 
@@ -190,7 +190,7 @@ public class MapTable {
     public HashMap<String,String> countryAndItsContinent(File p_file) throws Exception{
 
         ReadLines d_line = new ReadLines();
-        int l_n = d_line.countryandborderline(p_file);
+        int l_n = d_line.countryAndBorderLine(p_file);
         ArrayList<String> l_continent = continentList(p_file);
         HashMap<String,String> l_country_cont = new HashMap<>();
 
@@ -296,7 +296,7 @@ public class MapTable {
     public HashMap<String,Integer> countryAndItsUniqueContinent(File p_file) throws Exception{
 
         ReadLines d_line = new ReadLines();
-        int l_n = d_line.countryandborderline(p_file);
+        int l_n = d_line.countryAndBorderLine(p_file);
         HashMap<String, Integer> l_country_cont_key = new HashMap<>();
 
         Scanner d_sc = new Scanner(p_file);
@@ -335,7 +335,7 @@ public class MapTable {
      */
     public HashMap<String,Integer> uniqueKeyAndItsCountry(File p_file) throws Exception{
         ReadLines d_line = new ReadLines();
-        int l_n = d_line.countryandborderline(p_file);
+        int l_n = d_line.countryAndBorderLine(p_file);
         HashMap<String, Integer> l_country_key = new HashMap<>();
 
         Scanner d_sc = new Scanner(p_file);
