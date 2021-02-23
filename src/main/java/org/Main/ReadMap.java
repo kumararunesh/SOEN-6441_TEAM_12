@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * This class is used to read the map file. This class will be used directly or indirectly in order to read from the MAP files
+ * This class is used to read the map files. This class will be used directly or indirectly in order to read from the MAP files
  */
 public class ReadMap {
     /**
