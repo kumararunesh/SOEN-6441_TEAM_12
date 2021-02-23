@@ -102,12 +102,12 @@ public class MapTable {
      * @return HashMap of string and Integer whose key will contain the continent name and value will contain the control value of that particular continent.
      * @throws Exception continentline is being used which is throwing exception and thus it needs to be handled.
      */
-    public HashMap<String,Integer> continentandvalue(File p_file) throws Exception{
+    public HashMap<String,Integer> continentAndValue(File p_file) throws Exception{
 
         ReadLines d_line = new ReadLines();
         int l_n = d_line.continentline(p_file);
 
-        HashMap<String,Integer> l_contval = new HashMap<>();
+        HashMap<String,Integer> l_cont_val = new HashMap<>();
 
         Scanner d_sc = new Scanner(p_file);
         int l_count=0;
@@ -129,12 +129,12 @@ public class MapTable {
                     }
                     String[] l_input = l_text.split(" ");
                     int l_val = Integer.parseInt(l_input[1]);
-                    l_contval.put(l_input[0],l_val);
+                    l_cont_val.put(l_input[0],l_val);
                 }
                 l_count = 1 ;
             }
         }
-        return l_contval;
+        return l_cont_val;
     }
 
     /**
@@ -144,12 +144,12 @@ public class MapTable {
      * @return HashMap of Integer as a key and String as a value.
      * @throws Exception as countryandborderline is being used which throws exception and it needs to be handled.
      */
-    public HashMap<Integer,String> countryanditskey(File p_file) throws Exception{
+    public HashMap<Integer,String> countryAndKey(File p_file) throws Exception{
 
         ReadLines d_line = new ReadLines();
         int l_n = d_line.countryandborderline(p_file);
 
-        HashMap<Integer,String> l_countryval = new HashMap<>();
+        HashMap<Integer,String> l_country_val = new HashMap<>();
 
         Scanner d_sc = new Scanner(p_file);
         int l_count=0;
@@ -171,12 +171,12 @@ public class MapTable {
                     }
                     String[] l_input = l_text.split(" ");
                     int l_val = Integer.parseInt(l_input[0]);
-                    l_countryval.put(l_val,l_input[1]);
+                    l_country_val.put(l_val,l_input[1]);
                 }
                 l_count = 1 ;
             }
         }
-        return l_countryval;
+        return l_country_val;
     }
 
     /**
@@ -187,12 +187,12 @@ public class MapTable {
      * @throws Exception as countryandborderline is being used by this method which throws the exception and it needs to be handled.
      */
 
-    public HashMap<String,String> countryanditscontinent(File p_file) throws Exception{
+    public HashMap<String,String> countryAndItsContinent(File p_file) throws Exception{
 
         ReadLines d_line = new ReadLines();
         int l_n = d_line.countryandborderline(p_file);
         ArrayList<String> l_continent = continentList(p_file);
-        HashMap<String,String> l_countrycont = new HashMap<>();
+        HashMap<String,String> l_country_cont = new HashMap<>();
 
         Scanner d_sc = new Scanner(p_file);
         int l_count=0;
@@ -215,12 +215,12 @@ public class MapTable {
                     String[] l_input = l_text.split(" ");
                     int l_val = Integer.parseInt(l_input[2]);
                     String l_x = l_continent.get(l_val-1);
-                    l_countrycont.put(l_input[1],l_x);
+                    l_country_cont.put(l_input[1],l_x);
                 }
                 l_count = 1 ;
             }
         }
-        return l_countrycont;
+        return l_country_cont;
     }
 
     /**
@@ -231,7 +231,7 @@ public class MapTable {
      * @return a Hashmap of String and ArrayList. Country will be the key of this hashmap and all the neighbouring countries will be available in form of the arraylist.
      * @throws Exception is being thrown as if the scanner can't open/find the file.
      */
-    public HashMap<String, ArrayList> countryanditsneighbours(File p_file) throws Exception {
+    public HashMap<String, ArrayList> countryAndItsNeighbours(File p_file) throws Exception {
 
         HashMap<String,ArrayList> l_countryNeigh= new HashMap<>();
         HashMap <Integer,String> l_countryIndex= new HashMap<>();
@@ -293,11 +293,11 @@ public class MapTable {
      * @return HashMap whose key is Country's name and the value is the Unique value of the continent.
      * @throws Exception as this method is using the countryandborderline method that is throwing exception
      */
-    public HashMap<String,Integer> countryanditsuniquecontinent(File p_file) throws Exception{
+    public HashMap<String,Integer> countryAndItsUniqueContinent(File p_file) throws Exception{
 
         ReadLines d_line = new ReadLines();
         int l_n = d_line.countryandborderline(p_file);
-        HashMap<String, Integer> l_countrycontkey = new HashMap<>();
+        HashMap<String, Integer> l_country_cont_key = new HashMap<>();
 
         Scanner d_sc = new Scanner(p_file);
         int l_count=0;
@@ -319,12 +319,12 @@ public class MapTable {
                     }
                     String[] l_input = l_text.split(" ");
                     int l_val = Integer.parseInt(l_input[2]);
-                    l_countrycontkey.put(l_input[1],l_val);
+                    l_country_cont_key.put(l_input[1],l_val);
                 }
                 l_count = 1 ;
             }
         }
-        return l_countrycontkey;
+        return l_country_cont_key;
     }
 
     /**
@@ -333,10 +333,10 @@ public class MapTable {
      * @return a HashMap of String and Integer. Key of this hashmap is Country's unique ID and the value is the Country's Unique ID.
      * @throws Exception as it is using the countryandborderline method which is throwing the exception
      */
-    public HashMap<String,Integer> uniqueKeyanditscountry(File p_file) throws Exception{
+    public HashMap<String,Integer> uniqueKeyAndItsCountry(File p_file) throws Exception{
         ReadLines d_line = new ReadLines();
         int l_n = d_line.countryandborderline(p_file);
-        HashMap<String, Integer> l_countrykey = new HashMap<>();
+        HashMap<String, Integer> l_country_key = new HashMap<>();
 
         Scanner d_sc = new Scanner(p_file);
         int l_count=0;
@@ -358,11 +358,11 @@ public class MapTable {
                     }
                     String[] l_input = l_text.split(" ");
                     int l_val = Integer.parseInt(l_input[0]);
-                    l_countrykey.put(l_input[1],l_val);
+                    l_country_key.put(l_input[1],l_val);
                 }
                 l_count = 1 ;
             }
         }
-        return l_countrykey;
+        return l_country_key;
     }
 }
