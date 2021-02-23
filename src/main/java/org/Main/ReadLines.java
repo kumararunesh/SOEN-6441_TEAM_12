@@ -16,16 +16,7 @@ public class ReadLines {
      * @return Integer variable l_country_lines which signifies the total number of lines for the country
      * @throws Exception as it is using the variable country_lines from the ReadMap.java files which throws the exception
      */
-    public int countryAndBorderLine(File p_file) throws Exception{
-        ReadMap d_line = new ReadMap();
-        int l_a = d_line.countrylines(p_file);
-        int l_b = d_line.continentlines(p_file);
-        int l_c = d_line.totallines(p_file);
-        int l_d = d_line.borderlines(p_file);
-        int l_country_lines = l_d-l_a;
 
-        return l_country_lines;
-    }
 
     /**
      * This method returns the total number of lines for the continents. Let's say continent index starts from line number 4
