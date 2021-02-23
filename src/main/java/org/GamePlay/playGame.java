@@ -149,6 +149,18 @@ public class playGame {
                 }
 
 
+                int l_maxArmiesToDeploy = d_player.ARMIESNUM;
+                Order d_nextOrder = d_player.next_order();
+                if(d_nextOrder instanceof DeployOrder) {
+                    System.out.println("Executing Order For Player : " + d_player.getNAME());
+                    d_nextOrder.Execute(d_player);
+                    System.out.println("");
+                }
+                else
+                {
+                    System.out.println("Passing order for Player: "+d_player.NAME);
+                    d_nextOrder.Execute(d_player);
+                }
             }
             if(l_playersName.size()==0)
             {
