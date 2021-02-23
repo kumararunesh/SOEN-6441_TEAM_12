@@ -11,50 +11,7 @@ public class playGame {
         this.playersList = playerList;
         this.cou=cou;
     }
-    public void playGameLoop()
-    {
-        System.out.println("Main game loop: assign reinforcements phase");
-        for (String s : playersList.keySet()) {
-            Player p = playersList.get(s);
-            System.out.println("For Player : "+p.getName());
-            int armiesByCountries =(int)Math.floor( p.owned.size()/3);
-            if(armiesByCountries < 3)
-            {
-                armiesByCountries = 3;
-            }
-            int nextIndex=1;
-            int flag_break=0;
-            for(int j=0;j<p.owned.size();j++)
-            {
-                if(nextIndex<p.owned.size()&&p.owned.get(j).continent.equalsIgnoreCase(p.owned.get(nextIndex).continent))
-                {
-                    flag_break=0;
-                    continue;
-                }
-                else
-                {
-                    flag_break+=1;
-                    break;
-                }
-            }
-            if(flag_break==1)
-            {
-                p.continentValue=0;
-            }
-            else
-            {
-                if(p.owned.size()==cou.countriesList.get(p.owned.get(0).CountryId).numOfCountriesInContinent) {
-                    p.continentValue += (Integer) p.owned.get(1).continentBonus;
-                }
-                else
-                {
-                    p.continentValue=0;
-                }
-            }
-            p.armiesNum = armiesByCountries + p.continentValue;
-            System.out.println("Army count for "+p.name+"--> "+p.armiesNum);
-            System.out.println("");
-        }
+
         System.out.println("Main game loop: issue orders phase");
         Boolean flag = true;
         int i = 0;

@@ -15,7 +15,7 @@ public class MapTable {
      * string inside the map and the will read the map line by line and will append the country's name into the arraylist.
      * @param p_file This contains the name of the file to be read.
      * @return Arraylist named l_list containing the names of the all the countries.
-     * @throws Exception as it is using the countryandborderline method which is basically throwing the exception.
+     * @throws Exception as it is using the countryAndBorderLine method which is basically throwing the exception.
      */
     public ArrayList<String> countryList(File p_file) throws Exception {
 
@@ -58,7 +58,7 @@ public class MapTable {
      * will give us the continent name.
      * @param p_file is the parameter containing the filename to be read.
      * @return ArrayList containing all the names of the continent.
-     * @throws Exception The exception thrown by the continentline method needs to be handled.
+     * @throws Exception The exception thrown by the continentLine method needs to be handled.
      */
     public ArrayList<String> continentList(File p_file) throws Exception {
 
@@ -100,7 +100,7 @@ public class MapTable {
      * 0th index as the continent name and 1st index as the Continent control value and will place it in HashMap at their respective position
      * @param p_file is the filename which needs to be read in order to fetch these details.
      * @return HashMap of string and Integer whose key will contain the continent name and value will contain the control value of that particular continent.
-     * @throws Exception continentline is being used which is throwing exception and thus it needs to be handled.
+     * @throws Exception continentLine is being used which is throwing exception and thus it needs to be handled.
      */
     public HashMap<String,Integer> continentAndValue(File p_file) throws Exception{
 
@@ -142,7 +142,7 @@ public class MapTable {
      * index as the country's unique key and the 1st index as the country's name and will place it in HashMap at their respective position.
      * @param p_file which contains the file name which has to be read.
      * @return HashMap of Integer as a key and String as a value.
-     * @throws Exception as countryandborderline is being used which throws exception and it needs to be handled.
+     * @throws Exception as countryAndBorderLine is being used which throws exception and it needs to be handled.
      */
     public HashMap<Integer,String> countryAndKey(File p_file) throws Exception{
 
@@ -184,7 +184,7 @@ public class MapTable {
      * using the continentList method.
      * @param p_file contains the name of the file that has to be read.
      * @return HashMap which contains the continent's name as the value and the country's name as the key.
-     * @throws Exception as countryandborderline is being used by this method which throws the exception and it needs to be handled.
+     * @throws Exception as countryAndBorderLine is being used by this method which throws the exception and it needs to be handled.
      */
 
     public HashMap<String,String> countryAndItsContinent(File p_file) throws Exception{
@@ -291,7 +291,7 @@ public class MapTable {
      * This method will look for the countries in the map file and then will look for its continent's unique value and will place it in HashMap at their respective position.
      * @param p_file is map file that needs to be read.
      * @return HashMap whose key is Country's name and the value is the Unique value of the continent.
-     * @throws Exception as this method is using the countryandborderline method that is throwing exception
+     * @throws Exception as this method is using the countryAndBorderLine method that is throwing exception
      */
     public HashMap<String,Integer> countryAndItsUniqueContinent(File p_file) throws Exception{
 
@@ -331,7 +331,7 @@ public class MapTable {
      * This method will look for the country in the map file and then creates a hashmap whose key will be country's name and the value would be the country's Unique key
      * @param p_file is the map file which we want to read.
      * @return a HashMap of String and Integer. Key of this hashmap is Country's unique ID and the value is the Country's Unique ID.
-     * @throws Exception as it is using the countryandborderline method which is throwing the exception
+     * @throws Exception as it is using the countryAndBorderLine method which is throwing the exception
      */
     public HashMap<String,Integer> uniqueKeyAndItsCountry(File p_file) throws Exception{
         ReadLines d_line = new ReadLines();
