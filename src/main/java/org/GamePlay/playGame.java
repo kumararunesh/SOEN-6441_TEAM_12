@@ -1,84 +1,106 @@
 package org.GamePlay;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * This class is used to assign the troops
+ * Deploy the reinforcements
+ * show the map
+ */
 public class playGame {
-    ConcurrentHashMap<String,Player> playersList = new ConcurrentHashMap<>();
-    Country cou;
-    public playGame(ConcurrentHashMap<String, Player> playerList, Country cou)
+    //@param PLAYERSLIST is the hashmap for the players
+    //@param COUNTRY is the hashmap for the country list
+    ConcurrentHashMap<String,Player> PLAYERSLIST = new ConcurrentHashMap<>();
+    Country COUNTRY;
+
+    /**
+     * Parameterised constructor for playGame
+     * @param p_player_list list of players playing the game
+     * @param p_country the list of countries in the game
+     */
+    public playGame(ConcurrentHashMap<String, Player> p_player_list, Country p_country)
     {
-        this.playersList = playerList;
-        this.cou=cou;
+        this.PLAYERSLIST = p_player_list;
+        this.COUNTRY =p_country;
     }
+
+    /**
+     * Method for Assignments of the reinforcements
+     */
     public void playGameLoop()
     {
         System.out.println("Main game loop: assign reinforcements phase");
-        for (String s : playersList.keySet()) {
-            Player p = playersList.get(s);
-            System.out.println("For Player : "+p.getName());
-            int armiesByCountries =(int)Math.floor( p.owned.size()/3);
-            if(armiesByCountries < 3)
+
+        for (String l_player : PLAYERSLIST.keySet()) {
+            Player d_player = PLAYERSLIST.get(l_player);
+            System.out.println("For Player : "+d_player.getNAME());
+            int l_armiesByCountries =(int)Math.floor( d_player.OWNED.size()/3);
+            if(l_armiesByCountries < 3)
             {
-                armiesByCountries = 3;
+                l_armiesByCountries = 3;
             }
-            int nextIndex=1;
-            int flag_break=0;
-            for(int j=0;j<p.owned.size();j++)
+            int l_nextIndex=1;
+            int l_flag_break=0;
+            for(int l_j=0;l_j<d_player.OWNED.size();l_j++)
             {
-                if(nextIndex<p.owned.size()&&p.owned.get(j).continent.equalsIgnoreCase(p.owned.get(nextIndex).continent))
+                if(l_nextIndex<d_player.OWNED.size()&&d_player.OWNED.get(l_j).CONTINENT.equalsIgnoreCase(d_player.OWNED.get(l_nextIndex).CONTINENT))
                 {
-                    flag_break=0;
+                    l_flag_break=0;
                     continue;
                 }
                 else
                 {
-                    flag_break+=1;
+                    l_flag_break+=1;
                     break;
                 }
             }
-            if(flag_break==1)
+            if(l_flag_break==1)
             {
-                p.continentValue=0;
+                d_player.CONTINENTVALUE=0;
             }
             else
             {
-                if(p.owned.size()==cou.countriesList.get(p.owned.get(0).CountryId).numOfCountriesInContinent) {
-                    p.continentValue += (Integer) p.owned.get(1).continentBonus;
+                if(d_player.OWNED.size()== COUNTRY.COUNTRIESLIST.get(d_player.OWNED.get(0).COUNTRYID).NUMOFCOUNTRIESINCONTINENT) {
+                    d_player.CONTINENTVALUE += (Integer) d_player.OWNED.get(1).CONTINENTBONUS;
                 }
                 else
                 {
-                    p.continentValue=0;
+                    d_player.CONTINENTVALUE=0;
                 }
             }
-            p.armiesNum = armiesByCountries + p.continentValue;
-            System.out.println("Army count for "+p.name+"--> "+p.armiesNum);
+            d_player.ARMIESNUM = l_armiesByCountries + d_player.CONTINENTVALUE;
+            System.out.println("Army count for "+d_player.NAME+"--> "+d_player.ARMIESNUM);
             System.out.println("");
         }
-
         System.out.println("Main game loop: issue orders phase");
-        Boolean flag = true;
-        int i = 0;
-        while(flag){      //Loop for iterating until all players give pass
-            for (String s : playersList.keySet()) {
-                Player p = playersList.get(s);
-                Boolean flag_1 = true;
-                while(flag_1){  //loop for correct input for order until a player inputs correct order
-                    System.out.println(p.name+" Please issue orders from the below commands");
+        Boolean l_flag = true;
+        int l_i = 0;
+        while(l_flag){
+
+            //Loop for iterating until all players give pass
+            l_i=0;
+            for (String s : PLAYERSLIST.keySet()) {
+                Player p = PLAYERSLIST.get(s);
+                Boolean l_flag_1 = true;
+                while(l_flag_1){
+
+                    //loop for correct input for order until a player inputs correct order
+                    System.out.println(p.NAME+" Please issue orders from the below commands");
                     System.out.println("*************************");
                     System.out.println("**Deploy**\n**Pass**\n**ShowMap**");
                     System.out.println("*************************");
-                    Scanner sc = new Scanner(System.in);
-                    String command = sc.nextLine();
-                    String commandSplit[] = command.split(" ");
-                    if(commandSplit[0].equalsIgnoreCase("deploy")) {
-                        if (commandSplit.length == 3) {
-                            flag_1 = false;
-                            String countryId = commandSplit[1];
-                            int armiesToPlace = Integer.parseInt(commandSplit[2]);
-                            Order newOrder = new DeployOrder(countryId, armiesToPlace, cou);
-                            p.issue_order(newOrder);
-
+                    Scanner d_sc = new Scanner(System.in);
+                    String l_command = d_sc.nextLine();
+                    String l_commandSplit[] = l_command.split(" ");
+                    if(l_commandSplit[0].equalsIgnoreCase("deploy")) {
+                        if (l_commandSplit.length == 3) {
+                            l_flag_1 = false;
+                            String l_countryId = l_commandSplit[1];
+                            int l_armiesToPlace = Integer.parseInt(l_commandSplit[2]);
+                            Order d_newOrder = new DeployOrder(l_countryId, l_armiesToPlace, COUNTRY);
+                            p.issue_order(d_newOrder);
                         }
                         else
                         {
@@ -86,47 +108,51 @@ public class playGame {
                             continue;
                         }
                     }
-                    else if(commandSplit[0].equalsIgnoreCase("pass"))
+                    else if(l_commandSplit[0].equalsIgnoreCase("pass"))
                     {
-                        i++;
-                        flag_1=false;
+                        PassOrder d_order = new PassOrder(p, COUNTRY);
+                        p.issue_order(d_order);
+                        l_i++;
+                        l_flag_1=false;
                     }
-                    else if(commandSplit[0].equalsIgnoreCase("showmap"))
+                    else if(l_commandSplit[0].equalsIgnoreCase("showmap"))
                     {
-                        showMap map = new showMap(playersList,cou);
-                        map.mapShow();
+                        showMap d_map = new showMap(PLAYERSLIST, COUNTRY);
+                        d_map.check();
                     }
                     else
                     {
                         System.out.println("Wrong command. Re-enter the correct one");
                     }
                 }
-                if(i == playersList.size())
+                if(l_i == PLAYERSLIST.size())
                 {
-                    flag =false; //for outer loop
+                    l_flag =false;
+
                 }
             }
         }
         System.out.println("Execute Order Phase\n");
-        flag = true ;
-        int p1=0;
-        while(flag){      //Loop for iterating until all players give pass
-            for (String s : playersList.keySet()) {
-                Player p = playersList.get(s);
-                if(p.orders.size()==0)
+        l_flag = true ;
+        int l_p1=0;
+        ArrayList<String> l_playersName = new ArrayList<>(PLAYERSLIST.keySet());
+        while(l_flag){
+            //Loop for iterating until all players give pass
+            for (String l_player : l_playersName) {
+                Player d_player = PLAYERSLIST.get(l_player);
+
+                if(d_player.ORDERS.size()==0)
                 {
-                    p1+=1;
+                    l_p1+=1;
+                    l_playersName.remove(l_player);
                     break;
                 }
-                System.out.println("Executing Order For Player : " + p.getName());
-                int maxArmiesToDeploy = p.armiesNum;
-                DeployOrder nextOrder =(DeployOrder) p.next_order();
-                nextOrder.Execute(p);
-                System.out.println("");
+
+
             }
-            if(p1==playersList.size())
+            if(l_playersName.size()==0)
             {
-                break;
+                l_flag=false;
             }
         }
     }
