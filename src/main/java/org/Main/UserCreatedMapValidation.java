@@ -101,10 +101,35 @@ public class UserCreatedMapValidation {
         }
         else if(l_finalFlag==0)
         {
-            testing[0]="Validated";
-            System.out.println("Validated");
+            String a = "Validated";
+            String b ="Invalid Map";
+
             MapCreate d_save  = new MapCreate();
-            d_save.fileCreation(p_file, p_continent, p_continentsize, p_ContVal, p_countrytotal, p_countries, p_continentcountryvalue, p_adjacentcountries);
+            File file = d_save.fileCreation(p_file, p_continent, p_continentsize, p_ContVal, p_countrytotal, p_countries, p_continentcountryvalue, p_adjacentcountries);
+            GraphConnected validate = new GraphConnected(file);
+            boolean check = validate.ifGraphConnected();
+            if(check==true){
+                System.out.println("**************************************");
+                System.out.println("Graph is Connected");
+                System.out.println("**************************************");
+                System.out.println("");
+                testing[0]=a;
+                System.out.println("**************************************");
+                System.out.println("Validated");
+                System.out.println("**************************************");
+            }
+            else{
+                System.out.println("**************************************");
+                System.out.println("Graph is not Connected");
+                System.out.println("**************************************");
+                System.out.println("");
+                testing[0]=b;
+                System.out.println("");
+                System.out.println("**************************************");
+                System.out.println("Map is Incorrect");
+                System.out.println("**************************************");
+
+            }
         }
         return testing;
     }
