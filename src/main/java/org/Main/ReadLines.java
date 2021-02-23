@@ -13,35 +13,35 @@ public class ReadLines {
      * This method is used for counting the number of line between the string [countries] and the [borders] which will
      * eventually give the country names and its unique value.
      * @param p_file is the name of the map file to be read.
-     * @return Integer variable l_countrylines which signifies the total number of lines for the country
-     * @throws Exception as it is using the variable countrylines from the ReadMap.java files which throws the exception
+     * @return Integer variable l_country_lines which signifies the total number of lines for the country
+     * @throws Exception as it is using the variable country_lines from the ReadMap.java files which throws the exception
      */
-    public int countryandborderline(File p_file) throws Exception{
+    public int countryAndBorderLine(File p_file) throws Exception{
         ReadMap d_line = new ReadMap();
         int l_a = d_line.countrylines(p_file);
         int l_b = d_line.continentlines(p_file);
         int l_c = d_line.totallines(p_file);
         int l_d = d_line.borderlines(p_file);
-        int l_countrylines = l_d-l_a;
+        int l_country_lines = l_d-l_a;
 
-        return l_countrylines;
+        return l_country_lines;
     }
 
     /**
      * This method returns the total number of lines for the continents. Let's say continent index starts from line number 4
      * and goes upto line number 10. Therefore it will return the 10-4 = 6. This is used to extract the continent Name and its Control Value
      * @param p_file is the name of the map file to be read.
-     * @return Integer variable l_continentlines which represents total number of lines for the continents.
-     * @throws Exception as it is using the countrylines method from the ReadMap.java file which is throwing an exception.
+     * @return Integer variable l_continent_lines which represents total number of lines for the continents.
+     * @throws Exception as it is using the country_lines method from the ReadMap.java file which is throwing an exception.
      */
-    public int continentline(File p_file) throws Exception {
+    public int continentLine(File p_file) throws Exception {
         ReadMap d_line = new ReadMap();
         int l_a = d_line.countrylines(p_file);
         int l_b = d_line.continentlines(p_file);
         int l_c = d_line.totallines(p_file);
         int l_d = d_line.borderlines(p_file);
-        int l_continentlines = l_a-l_b;
+        int l_continent_lines = l_a-l_b;
 
-        return l_continentlines;
+        return l_continent_lines;
     }
 }
