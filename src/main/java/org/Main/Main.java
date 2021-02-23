@@ -98,7 +98,7 @@ public class Main {
             try {
                 if (l_text[0].equalsIgnoreCase("edit")) {
                     String l_file = null;
-                    File l_directoryPath = new File("src\\Main\\test");
+                    File l_directoryPath = new File("src\\main\\resources\\maps\\");
                     String l_contents[] = l_directoryPath.list();
 
                     for (int l_i = 0; l_i < l_contents.length; l_i++) {
@@ -137,7 +137,7 @@ public class Main {
      */
 
     public static void createMapByUser(File p_file1) throws Exception {
-        FILE = new File("src\\Main\\test\\" + p_file1);
+        FILE = new File("src\\main\\resources\\maps\\" + p_file1);
         MapCreate d_create = new MapCreate();
         d_create.createMap(FILE);
     }
