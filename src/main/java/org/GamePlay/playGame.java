@@ -81,13 +81,13 @@ public class playGame {
 
             //Loop for iterating until all players give pass
             l_i=0;
-            for (String s : PLAYERSLIST.keySet()) {
-                Player p = PLAYERSLIST.get(s);
+            for (String l_s : PLAYERSLIST.keySet()) {
+                Player l_p = PLAYERSLIST.get(l_s);
                 Boolean l_flag_1 = true;
                 while(l_flag_1){
 
                     //loop for correct input for order until a player inputs correct order
-                    System.out.println(p.NAME+" Please issue orders from the below commands");
+                    System.out.println(l_p.NAME+" Please issue orders from the below commands");
                     System.out.println("*************************");
                     System.out.println("**Deploy**\n**Pass**\n**ShowMap**");
                     System.out.println("*************************");
@@ -100,7 +100,7 @@ public class playGame {
                             String l_countryId = l_commandSplit[1];
                             int l_armiesToPlace = Integer.parseInt(l_commandSplit[2]);
                             Order d_newOrder = new DeployOrder(l_countryId, l_armiesToPlace, COUNTRY);
-                            p.issue_order(d_newOrder);
+                            l_p.issue_order(d_newOrder);
                         }
                         else
                         {
@@ -110,8 +110,8 @@ public class playGame {
                     }
                     else if(l_commandSplit[0].equalsIgnoreCase("pass"))
                     {
-                        PassOrder d_order = new PassOrder(p, COUNTRY);
-                        p.issue_order(d_order);
+                        PassOrder d_order = new PassOrder(l_p, COUNTRY);
+                        l_p.issue_order(d_order);
                         l_i++;
                         l_flag_1=false;
                     }
