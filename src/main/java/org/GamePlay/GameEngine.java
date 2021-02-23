@@ -6,51 +6,51 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class GameEngine {
-    static ConcurrentHashMap<String, Player> playersList = new ConcurrentHashMap<String, Player>(); // concurrent only - thread safe .
-    static Country cou;
-    public void startGameEngine(File file) {
-        Scanner sc = new Scanner(System.in);
-        String playerName = "";
-        Boolean flag = true;
+    static ConcurrentHashMap<String, Player> PLAYERS_LIST = new ConcurrentHashMap<String, Player>(); // concurrent only - thread safe .
+    static Country COUNTRY;
+    public void startGameEngine(File p_file) {
+        Scanner l_sc = new Scanner(System.in);
+        String l_player_name = "";
+        Boolean l_flag = true;
         System.out.println("*************************");
         System.out.println("Startup Phase");
-        while (flag) {
+        while (l_flag) {
             System.out.println("");
             System.out.println("*************************");
             System.out.println("1.Add/Remove Player \n2.Assign countries");
             System.out.println("*************************");
-            String command = sc.nextLine();
-            String[] commandSplit = command.split("-");
-            if(commandSplit[0].equalsIgnoreCase("gameplayer "))
+            String l_command = l_sc.nextLine();
+            String[] l_command_split = l_command.split("-");
+            if(l_command_split[0].equalsIgnoreCase("gameplayer "))
             {
-                for(int i=1;i<commandSplit.length;i++)
+                for(int l_i=1;l_i<l_command_split.length;l_i++)
                 {
-                    String commandSplit1[] = commandSplit[i].split(" ");
-                    if(commandSplit1[0].equalsIgnoreCase("add"))
+                    String l_command_split1[] = l_command_split[l_i].split(" ");
+                    if(l_command_split1[0].equalsIgnoreCase("add"))
                     {
-                        if(playersList.containsKey(commandSplit1[1]))
+                        if(PLAYERS_LIST.containsKey(l_command_split1[1]))
                         {
-                            System.out.println("Player "+commandSplit1[1]+" already exists Please re-enter your name");
+                            System.out.println("Player "+l_command_split1[1]+" already exists Please re-enter your name");
                             break;
                         }
-                        playersList.put(commandSplit1[1],new Player(commandSplit1[1]));
+                        PLAYERS_LIST.put(l_command_split1[1],new Player(l_command_split1[1]));
                     }
-                    else if(commandSplit1[0].equalsIgnoreCase("remove"))
+                    else if(l_command_split1[0].equalsIgnoreCase("remove"))
                     {
-                        playersList.remove(commandSplit1[1]);
+                        PLAYERS_LIST.remove(l_command_split1[1]);
                     }
                 }
             }
-            else if(commandSplit[0].equalsIgnoreCase("assigncountries"))
+            else if(l_command_split[0].equalsIgnoreCase("assigncountries"))
             {
-                if (playersList.size() < 2) {
-                    System.out.println("There is only one player , Please input at least one more to play ");
+                if (PLAYERS_LIST.size() < 2) {
+                    System.out.println("Minimum 2 players are required to play the game");
                     continue;
                 }
                 else {
-                    flag = false;
-                    Assign assign = new Assign(playersList,cou);
-                    assign.assignCountries(file);
+                    l_flag = false;
+                    Assign d_assign = new Assign(PLAYERS_LIST, COUNTRY);
+                    d_assign.assignCountries(p_file);
                     break;
                 }
             }
@@ -60,33 +60,33 @@ public class GameEngine {
             }
             System.out.println("");
             System.out.println("All Players as of now");
-            for (String s : playersList.keySet()) {
-                System.out.println(playersList.get(s).getName());
+            for (String l_s : PLAYERS_LIST.keySet()) {
+                System.out.println(PLAYERS_LIST.get(l_s).getNAME());
             }
         }
     }
 
     public static void playGame() {
-        Scanner sc = new Scanner(System.in);
+        Scanner l_sc = new Scanner(System.in);
         while (true) {
             System.out.println("**************************************");
             System.out.println("Enter 'loadmap' command to continue");
             System.out.println("**************************************");
-            String command = sc.nextLine();
-            String[] com=command.split(" ");
-            File file;
-            GameEngine game = new GameEngine();
-            if (com[0].equalsIgnoreCase("loadmap")) {
-                if(com.length==2) {
-                    if (com[1].endsWith(".map")) {
-                        String filename = com[1];
-                        file = new File("src//main//resources//maps//" + filename);
-                        if(file.exists())
+            String l_command = l_sc.nextLine();
+            String[] l_com=l_command.split(" ");
+            File l_file;
+            GameEngine d_game = new GameEngine();
+            if (l_com[0].equalsIgnoreCase("loadmap")) {
+                if(l_com.length==2) {
+                    if (l_com[1].endsWith(".map")) {
+                        String filename = l_com[1];
+                        l_file = new File("src//main//resources//test//" + filename);
+                        if(l_file.exists())
                         {
-                            game.startGameEngine(file);
-                            playGame pGame = new playGame(playersList,cou);
+                            d_game.startGameEngine(l_file);
+                            playGame d_playgame = new playGame(PLAYERS_LIST, COUNTRY);
 //                            test pGame = new test(playersList,cou);
-                            pGame.playGameLoop();
+                            d_playgame.playGameLoop();
                             System.out.println("Deployment Phase Over!!!!!!!!");
                             System.out.println("");
                             System.out.println("");
@@ -113,18 +113,18 @@ public class GameEngine {
                 System.out.println("Wrong command. Please retry");
             }
         }
-        String command;
+        String l_command;
         while(true)
         {
             System.out.println("In order to see the map Command is Showmap\nElse type continue");
-            command  = sc.nextLine();
-            if(command.equalsIgnoreCase("showmap"))
+            l_command  = l_sc.nextLine();
+            if(l_command.equalsIgnoreCase("showmap"))
             {
-                showMap map = new showMap(playersList,cou);
-                map.mapShow();
+                showMap d_map = new showMap(PLAYERS_LIST, COUNTRY);
+                d_map.check();
                 break;
             }
-            else if(command.equalsIgnoreCase("continue"))
+            else if(l_command.equalsIgnoreCase("continue"))
             {
                 break;
             }
@@ -135,6 +135,10 @@ public class GameEngine {
             }
         }
         try {
+            for(String l_player:PLAYERS_LIST.keySet())
+            {
+                PLAYERS_LIST.remove(l_player);
+            }
             Main.menu();
         } catch (Exception e) {}
     }
