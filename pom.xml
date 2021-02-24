@@ -19,9 +19,7 @@
 	</properties>
 	
 	<properties>
-                 <project.reporting.outputDirectory>
-                            ./target
-                 </project.reporting.outputDirectory>
+                 <project.reporting.outputDirectory>target</project.reporting.outputDirectory>
         </properties>
 
 	<dependencies>
