@@ -26,7 +26,7 @@ jobs:
       run: mvn test
     - name: JavaDoc Generation
       run: mvn javadoc:javadoc
-    - name: Copy to Documentation Website Location
+    - name: Copy to Documentation Target Location
       run: |
         rm -rf target
         cp -rf target
