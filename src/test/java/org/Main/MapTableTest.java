@@ -1,5 +1,7 @@
 package org.Main;
 
+import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -8,10 +10,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-
-import org.junit.jupiter.api.Test;
-
 
 /**
  * This class is a test class which test different methods of MapTable class
@@ -365,3 +363,4 @@ public class MapTableTest {
     }
 
 }
+
