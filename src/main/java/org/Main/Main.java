@@ -32,27 +32,33 @@ public class Main {
         System.out.println("*************************");
         System.out.println("* 1- MAP EDITOR *");
         System.out.println("* 2- GAME PLAY  *");
+        System.out.println("* 3- EXIT       *");
         System.out.println("*************************\n");
         System.out.println("Enter your option");
         while(true) {
-            int l_option = SC.nextInt();
-            SC.nextLine();
-            switch (l_option) {
-                case (1):
-                    MapEditor();
-                    break;
-
-                case (2):
-                    playGame();
-                    break;
-
-                default:
-                    System.out.println("Enter Valid Command\n");
+            String l_option = SC.nextLine();
+            try{
+                int l_x = Integer.parseInt(l_option);
+                switch (l_x) {
+                    case (1):
+                        MapEditor();
+                        break;
+                    case (2):
+                        playGame();
+                        break;
+                    case (3):
+                        System.exit(0);
+                        break;
+                    default:
+                        System.out.println("Enter Valid Command\n");
+            }
+            } catch (Exception e) {
+                System.out.println("Enter correct value");
             }
         }
     }
-    
-    /***
+
+    /**
      * This method allows user to select whether user wants to see the map or edit the map.
      * Implemented using switch cases.
      * @throws Exception If the command entered by user is wrong, this will throw exception.
@@ -73,11 +79,9 @@ public class Main {
                 case("showmap"):
                     mapShow();
                     break;
-
                 case("editmap"):
                     EditMap();
                     break;
-
                 default:
                     System.out.println("Enter Valid Command\n");
             }
@@ -137,7 +141,7 @@ public class Main {
      */
 
     public static void createMapByUser(File p_file1) throws Exception {
-        FILE = new File("src\\main\\resources\\maps" + p_file1);
+        FILE = new File("src\\main\\resources\\maps\\" + p_file1);
         MapCreate l_create = new MapCreate();
         l_create.createMap(FILE);
     }
