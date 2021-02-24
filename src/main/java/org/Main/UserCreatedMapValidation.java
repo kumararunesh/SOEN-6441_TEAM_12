@@ -8,7 +8,7 @@ import java.io.File;
  */
 
 public class UserCreatedMapValidation {
-    String[] testing = new String[1];
+    String[] TESTING = new String[1];
     /**
      * This method will get the details of the map after user creates a map from scratch and then it will validate the map on some conditions.
      * If the map is validated, then the file will get saved else it will show that the file in not correct.
@@ -95,17 +95,42 @@ public class UserCreatedMapValidation {
         }
         if(l_finalFlag==1)
         {
-            testing[0]="Map is Incorrect";
+            TESTING[0]="Map is Incorrect";
             System.out.println("Map is Incorrect");
             Main.menu();
         }
         else if(l_finalFlag==0)
         {
-            testing[0]="Validated";
-            System.out.println("Validated");
+            String l_a = "Validated";
+            String l_b ="Invalid Map";
+
             MapCreate d_save  = new MapCreate();
-            d_save.fileCreation(p_file, p_continent, p_continentsize, p_ContVal, p_countrytotal, p_countries, p_continentcountryvalue, p_adjacentcountries);
+            File p_File = d_save.fileCreation(p_file, p_continent, p_continentsize, p_ContVal, p_countrytotal, p_countries, p_continentcountryvalue, p_adjacentcountries);
+            GraphConnected validate = new GraphConnected(p_File);
+            boolean check = validate.ifGraphConnected();
+            if(check==true){
+                System.out.println("**************************************");
+                System.out.println("Graph is Connected");
+                System.out.println("**************************************");
+                System.out.println("");
+                TESTING[0]=l_a;
+                System.out.println("**************************************");
+                System.out.println("Validated");
+                System.out.println("**************************************");
+            }
+            else{
+                System.out.println("**************************************");
+                System.out.println("Graph is not Connected");
+                System.out.println("**************************************");
+                System.out.println("");
+                TESTING[0]=l_b;
+                System.out.println("");
+                System.out.println("**************************************");
+                System.out.println("Map is Incorrect");
+                System.out.println("**************************************");
+
+            }
         }
-        return testing;
+        return TESTING;
     }
 }

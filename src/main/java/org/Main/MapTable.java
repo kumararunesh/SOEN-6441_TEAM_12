@@ -3,6 +3,7 @@ package org.Main;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -364,5 +365,123 @@ public class MapTable {
             }
         }
         return l_countrykey;
+    }
+
+
+    /**
+     * This method will read the file and fetch countries unique id and its neighbours unique id.
+     * @param p_file This is the parameter which contains the actual .map file from which we fetch relevant data.
+     * @return This returns Hashmap whose key contains particular countries unique id.
+     * And corresponding value contains the Arraylist of neighbor countries.
+     * @throws Exception As countryandborderline method throws exception.
+     */
+    public HashMap<Integer,ArrayList> CountryAndItsNeighbours(File p_file) throws Exception{
+        ReadLines d_line = new ReadLines();
+        int l_n = d_line.countryandborderline(p_file);
+        HashMap<Integer,ArrayList> l_intNeigh = new HashMap<>();
+        List<Integer> l_check = new ArrayList<>();
+
+
+        Scanner d_sc = new Scanner(p_file);
+        int l_count=0;
+        int l_i;
+        int l_a=0;
+        while(d_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(d_sc.next().equals("[borders]")){
+                for(l_i=0;l_i<l_n;l_i++){
+                    if(!d_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = d_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = d_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split(" ");
+
+                    List<Integer> l_list = new ArrayList<>();
+
+
+                    int [] l_arr = new int [l_input.length];
+                    ArrayList<Integer> l_brd = new ArrayList<>();
+
+
+                    for(int l_j=0;l_j<l_input.length;l_j++) {
+
+                        if(l_input.length==1){
+                            l_list.add(Integer.parseInt(l_input[l_j]));
+                            l_check.add(Integer.parseInt(l_input[l_j]));
+                        }
+                        else if(l_j==0){
+                            l_list.add(Integer.parseInt(l_input[l_j]));
+                            l_check.add(Integer.parseInt((l_input[l_j])));
+                        }
+                        else{
+                            l_brd.add(Integer.parseInt(l_input[l_j]));
+                        }
+
+
+
+                    }
+
+                    int l_val = l_list.get(0);
+                    l_list.remove(0);
+
+                    l_intNeigh.put(l_val,l_brd);
+
+
+                }
+                l_count = 1 ;
+
+            }
+        }
+
+        return l_intNeigh;
+    }
+
+    /**
+     * This function fetches the first country present in each line under borders section in .map file.
+     * @param p_file This is the actual .map file from where the data is fetched.
+     * @return The list which contains the countries unique id.
+     * @throws Exception As countryandborderline method throws exception.
+     */
+    public List max(File p_file) throws Exception{
+        ReadLines d_line = new ReadLines();
+        int l_n = d_line.countryandborderline(p_file);
+        List<Integer> l_check = new ArrayList<>();
+
+
+        Scanner d_sc = new Scanner(p_file);
+        int l_count=0;
+        int l_i;
+        int l_a=0;
+        while(d_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(d_sc.next().equals("[countries]")){
+                for(l_i=0;l_i<l_n-1;l_i++){
+                    if(!d_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = d_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = d_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split(" ");
+                    l_check.add(Integer.parseInt(l_input[0]));
+
+                }
+                l_count = 1 ;
+
+            }
+
+        }
+
+        return l_check;
     }
 }
