@@ -35,7 +35,7 @@
                                        <artifactId>maven-javadoc-plugin</artifactId>
                                        <version>3.2.0</version>
                                        <configuration>
-                                            <reportOutputDirectory>${project.reporting.outputDirectory}/target</reportOutputDirectory>
+                                            <reportOutputDirectory>target</reportOutputDirectory>
                                             <destDir>target</destDir>
                                         </configuration>
                                 </plugin>
