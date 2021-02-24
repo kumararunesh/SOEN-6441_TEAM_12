@@ -76,12 +76,23 @@ public class playGame {
                         if (l_commandSplit.length == 3) {
                             String l_countryId = l_commandSplit[1];
                             if (COUNTRY.COUNTRIESLIST.containsKey(l_countryId)){
-
-                                int l_armiesToPlace = Integer.parseInt(l_commandSplit[2]);
-								l_flag_1 = false;
-								Order d_newOrder = new DeployOrder(l_countryId, l_armiesToPlace, COUNTRY);
-								p.issue_order(d_newOrder);
-                                
+                                String regex = "\\d+";
+                                if(l_commandSplit[2].matches(regex)){
+                                    int l_armiesToPlace = Integer.parseInt(l_commandSplit[2]);
+                                    if (l_armiesToPlace > 0) {
+                                        l_flag_1 = false;
+                                        Order d_newOrder = new DeployOrder(l_countryId, l_armiesToPlace, COUNTRY);
+                                        p.issue_order(d_newOrder);
+                                    } else {
+                                        System.out.println("Negative Army count not allowed");
+                                        continue;
+                                    }
+                            }
+                                else
+                                {
+                                    System.out.println("The army number should be an integer");
+                                    continue;
+                                }
                             }
                             else
                             {
