@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This class is a test class which test different methods of MapTable class
@@ -342,7 +343,6 @@ public class MapTableTest {
      * If the countries and their unique key are different then expected than this test will get pass.
      */
 
-
     @Test
     public void testUniqueKeyAndItsCountryNot() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
@@ -362,5 +362,50 @@ public class MapTableTest {
         }
     }
 
-}
+    /**
+     * This method test whether the unique ID's of different countries present in a map is same as expected or not.
+     */
 
+    @Test
+    public void testMax() {
+        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        MapTable l_map = new MapTable();
+        try {
+            List<Integer> l_list = new ArrayList<>();
+            l_list.add(1);
+            l_list.add(2);
+            l_list.add(3);
+            l_list.add(4);
+            l_list.add(5);
+            l_list.add(6);
+
+            assertEquals(l_list, l_map.max(l_file));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method test whether unique ID's of different countries present in a map are different than expected.
+     * If the unique ID's of different countries are different then expected than this test will get pass.
+     */
+
+    @Test
+    public void testMaxNot() {
+        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        MapTable l_map = new MapTable();
+        try {
+            List<Integer> l_list = new ArrayList<>();
+            l_list.add(1);
+            l_list.add(3);
+            l_list.add(3);
+            l_list.add(4);
+            l_list.add(5);
+            l_list.add(6);
+
+            assertNotEquals(l_list, l_map.max(l_file));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
