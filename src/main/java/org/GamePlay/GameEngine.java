@@ -5,9 +5,22 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+
 public class GameEngine {
+    /**
+     * GLobal List of Players
+     */
     static ConcurrentHashMap<String, Player> PLAYERS_LIST = new ConcurrentHashMap<String, Player>(); // concurrent only - thread safe .
+
+    /**
+     * Global Country Object
+     */
     static Country COUNTRY;
+
+    /**
+     * Game Startup Phase Implementation
+     * @param p_file Map File
+     */
     public void startGameEngine(File p_file) {
         Scanner l_sc = new Scanner(System.in);
         String l_player_name = "";
@@ -49,8 +62,8 @@ public class GameEngine {
                 }
                 else {
                     l_flag = false;
-                    Assign d_assign = new Assign(PLAYERS_LIST, COUNTRY);
-                    d_assign.assignCountries(p_file);
+                    Assign l_assign = new Assign(PLAYERS_LIST, COUNTRY);
+                    l_assign.assignCountries(p_file);
                     break;
                 }
             }
@@ -61,11 +74,18 @@ public class GameEngine {
             System.out.println("");
             System.out.println("All Players as of now");
             for (String l_s : PLAYERS_LIST.keySet()) {
-                System.out.println(PLAYERS_LIST.get(l_s).getNAME());
+                System.out.println(PLAYERS_LIST.get(l_s).getD_name());
             }
         }
     }
 
+    /**
+     *Main Game loop
+     * Phase 1 : Reinforcement Phase
+     * Phase 2 : Issue Order Phase
+     * Phase 3 : Execute Order Phase
+     *
+     */
     public static void playGame() {
         Scanner l_sc = new Scanner(System.in);
         while (true) {
@@ -75,17 +95,18 @@ public class GameEngine {
             String l_command = l_sc.nextLine();
             String[] l_com=l_command.split(" ");
             File l_file;
-            GameEngine d_game = new GameEngine();
+            GameEngine l_game = new GameEngine();
             if (l_com[0].equalsIgnoreCase("loadmap")) {
                 if(l_com.length==2) {
                     if (l_com[1].endsWith(".map")) {
                         String filename = l_com[1];
-                        l_file = new File("src//main//resources//test//" + filename);
+                        l_file = new File("src//main//resources//maps//" + filename);
                         if(l_file.exists())
                         {
-                            d_game.startGameEngine(l_file);
-                            playGame d_playgame = new playGame(PLAYERS_LIST, COUNTRY);
-                            d_playgame.playGameLoop();
+                            l_game.startGameEngine(l_file);
+                            playGame l_playgame = new playGame(PLAYERS_LIST, COUNTRY);
+//                            test pGame = new test(playersList,cou);
+                            l_playgame.playGameLoop();
                             System.out.println("Deployment Phase Over!!!!!!!!");
                             System.out.println("");
                             System.out.println("");
@@ -119,8 +140,8 @@ public class GameEngine {
             l_command  = l_sc.nextLine();
             if(l_command.equalsIgnoreCase("showmap"))
             {
-                showMap d_map = new showMap(PLAYERS_LIST, COUNTRY);
-                d_map.check();
+                showMap l_map = new showMap(PLAYERS_LIST, COUNTRY);
+                l_map.check();
                 break;
             }
             else if(l_command.equalsIgnoreCase("continue"))
