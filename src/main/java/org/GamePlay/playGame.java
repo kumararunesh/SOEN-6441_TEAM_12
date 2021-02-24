@@ -4,14 +4,39 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * This class is used to assign the troops
+ * Deploy the reinforcements
+ * show the map
+ */
 public class playGame {
+
+    /**
+     * PLAYERSLIST is the hashmap for storing all the information about the players
+     */
     ConcurrentHashMap<String,Player> PLAYERSLIST = new ConcurrentHashMap<>();
+    /**
+     * COUNTRY is the object of the Country Class.
+     */
+
     Country COUNTRY;
+    /**
+     * Parameterised constructor for playGame
+     * @param p_playerList list of players playing the game
+     * @param p_cou the list of countries in the game
+     */
     public playGame(ConcurrentHashMap<String, Player> p_playerList, Country p_cou)
     {
         this.PLAYERSLIST = p_playerList;
         this.COUNTRY =p_cou;
     }
+    /**
+     * Method for Assignments of the reinforcements. This method will ask from the player about the order. And will save it to the the orders queue
+     * of the respective player if the user inputs the correct command. There are 3 Main commands.
+     * Deploy: Command which is used to deploy the armies on the particular country. The country should be available in the Map.
+     * Pass: This command is used to pass the turn to the next player if the player doesn't want to give any deploy order. This function will terminate if all the players give the Pass Command
+     * ShowMap: Command which shows the details about the countries.
+     */
     public void playGameLoop()
     {
         System.out.println("Main game loop: assign reinforcements phase");
