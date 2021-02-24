@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * This class is used to read the map files. This class will be used directly or indirectly in order to read from the MAP files
+ * This class is used to read the map file. This class will be used directly or indirectly in order to read from the MAP files
  */
 public class ReadMap {
     /**
@@ -16,11 +16,11 @@ public class ReadMap {
      * @throws FileNotFoundException if the compiler is not able to find the file specified in the parameter.
      */
     public int totallines(File p_file) throws FileNotFoundException {
-        Scanner d_sc1 = new Scanner(p_file);
+        Scanner l_sc1 = new Scanner(p_file);
         int l_count = 0;
-        while (d_sc1.hasNextLine()) {
+        while (l_sc1.hasNextLine()) {
             l_count++;
-            d_sc1.nextLine();
+            l_sc1.nextLine();
         }
         return l_count;
     }
@@ -34,11 +34,11 @@ public class ReadMap {
      */
     public int countrylines(File p_file) throws FileNotFoundException{
         int l_a = 0;
-        Scanner d_sc2 = new Scanner(p_file);
-        while (d_sc2.hasNextLine()){
+        Scanner l_sc2 = new Scanner(p_file);
+        while (l_sc2.hasNextLine()){
             l_a++;
-            d_sc2.nextLine();
-            if(d_sc2.next().equals("[countries]")){
+            l_sc2.nextLine();
+            if(l_sc2.next().equals("[countries]")){
                 break;
             }
         }
@@ -54,11 +54,11 @@ public class ReadMap {
      */
     public int continentlines(File p_file) throws Exception{
         int l_b = 0;
-        Scanner d_sc3 = new Scanner(p_file);
-        while (d_sc3.hasNextLine()){
+        Scanner l_sc3 = new Scanner(p_file);
+        while (l_sc3.hasNextLine()){
             l_b++;
-            d_sc3.nextLine();
-            if(d_sc3.next().equals("[continents]")){
+            l_sc3.nextLine();
+            if(l_sc3.next().equals("[continents]")){
                 break;
             }
         }
@@ -75,11 +75,11 @@ public class ReadMap {
     public int borderlines(File p_file) throws Exception{
         int l_c = 0;
 
-        Scanner d_sc4 = new Scanner(p_file);
-        while (d_sc4.hasNextLine()){
+        Scanner l_sc4 = new Scanner(p_file);
+        while (l_sc4.hasNextLine()){
             l_c++;
-            d_sc4.nextLine();
-            if(d_sc4.next().equals("[borders]")){
+            l_sc4.nextLine();
+            if(l_sc4.next().equals("[borders]")){
                 break;
             }
         }
