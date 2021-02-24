@@ -68,7 +68,23 @@ public class ReadLinesTest {
             }
         }
 
+        /**
+         * This method will test whether the number of continent in the map doesn't match.
+         * If the continent lines are different then as expected then the test case will get pass.
+         */
 
+        @Test
+        public void TestContinentLinesNot()
+        {
+            ReadLines l_map = new ReadLines();
+            File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+            try {
+                assertNotEquals(4,l_map.continentline(l_file));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
 
 
 
