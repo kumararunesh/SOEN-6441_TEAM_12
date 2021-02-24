@@ -21,12 +21,12 @@ public class MapCreate {
 
     public static void createMap(File p_file){
         int l_continent;
-        Scanner d_input;
+        Scanner l_input;
         while (true) {
             try {
-                d_input = new Scanner(System.in);
+                l_input = new Scanner(System.in);
                 System.out.println("Enter no of Continents");
-                l_continent = d_input.nextInt();
+                l_continent = l_input.nextInt();
                 if (l_continent > 0) {
                     break;
                 } else {
@@ -43,8 +43,8 @@ public class MapCreate {
         String l_x;
         for (int l_i = 0; l_i < l_continent; l_i++) {
             System.out.println("Enter " + (l_i + 1) + " l_continent name");
-            Scanner d_sc = new Scanner(System.in);
-            l_x = d_sc.nextLine();
+            Scanner l_sc = new Scanner(System.in);
+            l_x = l_sc.nextLine();
             for (int l_k = 0; l_k < l_c; l_k++) {
                 while (true) {
                     if (!l_x.equals(l_cont_name[l_k])) {
@@ -53,7 +53,7 @@ public class MapCreate {
                     } else {
                         System.out.println("Continent Already Exists\n");
                         System.out.println("Enter another Continent name");
-                        l_x = d_sc.nextLine();
+                        l_x = l_sc.nextLine();
                     }
                 }
             }
@@ -67,8 +67,8 @@ public class MapCreate {
         for (int l_i = 0; l_i < l_continent; l_i++) {
             while (true) {
                 System.out.println("Enter Control Value of " + l_cont_name[l_i]);
-                Scanner d_sc = new Scanner(System.in);
-                l_cont_val[l_i] = d_sc.nextLine();
+                Scanner l_sc = new Scanner(System.in);
+                l_cont_val[l_i] = l_sc.nextLine();
                 try {
                     int l_number = Integer.parseInt(l_cont_val[l_i]);
                     if (l_number > 0) {
@@ -87,7 +87,7 @@ public class MapCreate {
         while (true) {
             try {
                 System.out.println("Enter total number of Countries");
-                l_country_total = d_input.nextInt();
+                l_country_total = l_input.nextInt();
                 if (l_country_total > 0) {
                     break;
                 } else {
@@ -105,7 +105,7 @@ public class MapCreate {
         int l_sum = 0;
         while (true) {
             System.out.println("Enter number of countries in " + l_cont_name[l_key]);
-            l_country_num[l_key] = d_input.nextInt();
+            l_country_num[l_key] = l_input.nextInt();
             l_sum = l_sum + l_country_num[l_key];
             l_key++;
             if (l_key == l_continent) {
@@ -133,8 +133,8 @@ public class MapCreate {
         String l_y;
         for (int l_i = 0; l_i < l_country_total; l_i++) {
             System.out.println("Enter " + (l_i + 1) + " country name");
-            Scanner d_sc = new Scanner(System.in);
-            l_y = d_sc.nextLine();
+            Scanner l_sc = new Scanner(System.in);
+            l_y = l_sc.nextLine();
             for (int l_j = 0; l_j < l_continent; l_j++) {
                 while (true) {
                     if (!l_y.equals(l_cont_name[l_j])) {
@@ -142,7 +142,7 @@ public class MapCreate {
                     } else {
                         System.out.println("Country and Continent name cannot be same\n");
                         System.out.println("Enter another " + (l_i + 1) + " Country name");
-                        l_y = d_sc.nextLine();
+                        l_y = l_sc.nextLine();
                     }
                 }
             }
@@ -154,7 +154,7 @@ public class MapCreate {
                     } else {
                         System.out.println("Country Already Exists\n");
                         System.out.println("Enter another Country name");
-                        l_y = d_sc.nextLine();
+                        l_y = l_sc.nextLine();
                     }
                 }
             }
@@ -171,10 +171,10 @@ public class MapCreate {
             System.out.println("");
 
             while (true) {
-                Scanner d_sc1 = new Scanner(System.in);
+                Scanner l_sc1 = new Scanner(System.in);
                 System.out.println("Enter the l_continent unique value in which you want to add country");
                 try {
-                    int l_value = d_sc1.nextInt();
+                    int l_value = l_sc1.nextInt();
                     if (l_value > 0) {
                         int l_val = (int) l_adj.values().toArray()[l_value - 1];
                         int l_num = l_val - 1;
@@ -205,18 +205,18 @@ public class MapCreate {
         int l_i = 0;
         while (l_i < l_country_total) {
             System.out.println("Enter the unique keys of adjacent countries of " + (l_i + 1) + " country");
-            Scanner d_sc3 = new Scanner(System.in);
-            l_adjacent_countries[l_i] = d_sc3.nextLine();
+            Scanner l_sc3 = new Scanner(System.in);
+            l_adjacent_countries[l_i] = l_sc3.nextLine();
             l_i += 1;
         }
         while(true) {
             try {
-                Scanner d_sc = new Scanner(System.in);
+                Scanner l_sc = new Scanner(System.in);
                 System.out.println("Enter validatemap command");
-                String l_reply = d_sc.nextLine();
+                String l_reply = l_sc.nextLine();
                 if (l_reply.equalsIgnoreCase("validatemap")) {
-                    UserCreatedMapValidation d_validate = new UserCreatedMapValidation();
-                    d_validate.mapValidate(p_file, l_cont_name, l_continent, l_cont_val, l_country_total, l_country_names, l_continent_country_value, l_adjacent_countries);
+                    UserCreatedMapValidation l_validate = new UserCreatedMapValidation();
+                    l_validate.mapValidate(p_file, l_cont_name, l_continent, l_cont_val, l_country_total, l_country_names, l_continent_country_value, l_adjacent_countries);
                     break;
                 }
                 else{
@@ -240,7 +240,7 @@ public class MapCreate {
      * @throws Exception If file doesn't found at the directed path then this will throw exception.
      */
 
-    public static void fileCreation(File p_file, String[] p_continent_name, int p_continent, String[] p_continent_value, int p_country_total, String[] p_country_names, int[] p_continent_country_value, String[] p_adjacent_countries) throws Exception {
+    public static File fileCreation(File p_file, String[] p_continent_name, int p_continent, String[] p_continent_value, int p_country_total, String[] p_country_names, int[] p_continent_country_value, String[] p_adjacent_countries) throws Exception {
         PrintWriter l_print_writer = new PrintWriter(p_file);
         l_print_writer.println("[Map]");
         l_print_writer.println("author=");
@@ -272,6 +272,9 @@ public class MapCreate {
         System.out.println("Map Created Successfully");
         l_print_writer.close();
         Main.menu();
+        return p_file;
     }
 }
+
+
 
