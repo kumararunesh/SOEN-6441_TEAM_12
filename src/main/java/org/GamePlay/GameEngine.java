@@ -84,7 +84,13 @@ public class GameEngine {
         }
     }
 
-
+    /**
+     *Main Game loop
+     * Phase 1 : Reinforcement Phase
+     * Phase 2 : Issue Order Phase
+     * Phase 3 : Execute Order Phase
+     *
+     */
     public static void playGame() {
         Scanner l_sc = new Scanner(System.in);
         while (true) {
