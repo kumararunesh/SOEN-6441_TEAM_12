@@ -26,6 +26,6 @@ jobs:
       run: mvn test
     - name: JavaDoc Generation
       run: mvn javadoc:javadoc
-           git add target
+         
       
 
