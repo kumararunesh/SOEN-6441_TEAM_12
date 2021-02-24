@@ -17,6 +17,12 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
+	
+	<properties>
+                 <project.reporting.outputDirectory>
+                            ./target
+                 </project.reporting.outputDirectory>
+        </properties>
 
 	<dependencies>
 		<dependency>
@@ -35,7 +41,7 @@
                                        <artifactId>maven-javadoc-plugin</artifactId>
                                        <version>3.2.0</version>
                                        <configuration>
-                                            <reportOutputDirectory>target</reportOutputDirectory>
+                                            <reportOutputDirectory>${project.reporting.outputDirectory}/target</reportOutputDirectory>
                                             <destDir>target</destDir>
                                         </configuration>
                                 </plugin>
