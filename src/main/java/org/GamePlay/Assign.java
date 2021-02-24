@@ -2,7 +2,6 @@ package org.GamePlay;
 
 import org.Main.MapTable;
 
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,105 +9,114 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Assign countries to all players
+ */
 public class Assign {
-    ConcurrentHashMap <String,Player> playersList = new ConcurrentHashMap<>();
-    Country cou;
-    public Assign(ConcurrentHashMap <String,Player> playersList,Country cou)
-    {
-        this.playersList=playersList;
-        this.cou = cou;
+    ConcurrentHashMap<String, Player> d_playersList = new ConcurrentHashMap<>();
+    Country l_country;
+
+    /**
+     * Constructor to initialise
+     *
+     * @param p_players_list list of players
+     * @param p_country      country to be assigned
+     */
+    public Assign(ConcurrentHashMap<String, Player> p_players_list, Country p_country) {
+        this.d_playersList = p_players_list;
+        this.l_country = p_country;
     }
 
-    public void assignCountries(File file)
-    {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("There are " + playersList.size() + " Players");
-        int i = 0;
+    /**
+     * Assign all the countries
+     *
+     * @param p_file Map File
+     */
+    public void assignCountries(File p_file) {
+        Scanner l_sc = new Scanner(System.in);
+        System.out.println("There are " + d_playersList.size() + " Players");
+        int l_i = 1;
         System.out.println("");
-        for (String s : playersList.keySet()) {
-            System.out.println("Player " + i + " : " + s);
-            i++;
+        for (String l_string : d_playersList.keySet()) {
+            System.out.println("Player " + l_i + " : " + l_string);
+            l_i++;
         }
         System.out.println("");
         System.out.println("Starting assigning countries");
 
-        MapTable table = new MapTable();
-        HashMap<Integer,String> tempMap= new HashMap<>();
-        HashMap <String,String> countryContinent = new HashMap<>();
-        HashMap <String, Integer> continentKey = new HashMap<>();
-        HashMap <String,ArrayList> countryNeigh  = new HashMap<>();
+        MapTable l_table = new MapTable();
+        HashMap<Integer, String> l_temp_map = new HashMap<>();
+        HashMap<String, String> l_country_continent = new HashMap<>();
+        HashMap<String, Integer> l_continent_key = new HashMap<>();
+        HashMap<String, ArrayList> l_country_neighbour = new HashMap<>();
         try {
-            tempMap = table.countryanditskey(file);
-            countryContinent = table.countryanditscontinent(file); //String-String
-            continentKey = table.continentandvalue(file); //String-Integer
-            countryNeigh = table.countryanditsneighbours(file);
-        } catch (Exception e) {}
+            l_temp_map = l_table.countryanditskey(p_file);
+            l_country_continent = l_table.countryanditscontinent(p_file); //String-String
+            l_continent_key = l_table.continentandvalue(p_file); //String-Integer
+            l_country_neighbour = l_table.countryanditsneighbours(p_file);
+        } catch (Exception e) {
+        }
 
-        for(String z: tempMap.values())
-        {
-            int numberOfCountriesInContinent =0;
-            for(String country:countryContinent.keySet())
-            {
-                if(countryContinent.get(country).equalsIgnoreCase(countryContinent.get(z)))
-                {
-                    numberOfCountriesInContinent+=1;
+        for (String l_z : l_temp_map.values()) {
+            int l_number_of_countries_in_continent = 0;
+            for (String l_country : l_country_continent.keySet()) {
+                if (l_country_continent.get(l_country).equalsIgnoreCase(l_country_continent.get(l_z))) {
+                    l_number_of_countries_in_continent += 1;
                 }
             }
 
-            if(countryContinent.containsKey(z)) {
-                Integer continentControlValue = continentKey.get(countryContinent.get(z));
-                cou = new Country(z, countryContinent.get(z),continentControlValue,numberOfCountriesInContinent,countryNeigh.get(z));
-                cou.COUNTRIESLIST.put(z, cou);
+            if (l_country_continent.containsKey(l_z)) {
+                Integer l_continent_control_value = l_continent_key.get(l_country_continent.get(l_z));
+                l_country = new Country(l_z, l_country_continent.get(l_z), l_continent_control_value, l_number_of_countries_in_continent, l_country_neighbour.get(l_z));
+                l_country.COUNTRIESLIST.put(l_z, l_country);
             }
         }
 
-        ArrayList<String> totalCountries= new ArrayList<>();
-        for(String country:cou.COUNTRIESLIST.keySet())
-        {
-            totalCountries.add(cou.COUNTRIESLIST.get(country).COUNTRYID);
+        ArrayList<String> l_total_countries = new ArrayList<>();
+        for (String l_country : l_country.COUNTRIESLIST.keySet()) {
+            l_total_countries.add(this.l_country.COUNTRIESLIST.get(l_country).d_countryId);
         }
-        int numOfCountriesPerPlayer = totalCountries.size()/playersList.size();
-        int remainingCountries = totalCountries.size()%playersList.size();
+        int l_num_of_countries_per_player = l_total_countries.size() / d_playersList.size();
+        int l_remaining_countries = l_total_countries.size() % d_playersList.size();
 
-        Random random = new Random();
+        Random l_random = new Random();
 
-        for (String playerName1 : playersList.keySet()) {
-            int x = 0;
-            ArrayList<Country> countriesOwned = new ArrayList<>();
-            while (x < numOfCountriesPerPlayer) {
-                int randomInt = random.nextInt(totalCountries.size());
-                Country o = cou.COUNTRIESLIST.get(totalCountries.get(randomInt));
-                countriesOwned.add(o);
-                totalCountries.remove(randomInt);
-                x += 1;
+        for (String l_player_name1 : d_playersList.keySet()) {
+            int l_x = 0;
+            ArrayList<Country> l_countries_owned = new ArrayList<>();
+            while (l_x < l_num_of_countries_per_player) {
+                int l_random_int = l_random.nextInt(l_total_countries.size());
+                Country l_country = this.l_country.COUNTRIESLIST.get(l_total_countries.get(l_random_int));
+                l_countries_owned.add(l_country);
+                this.l_country.COUNTRIESLIST.get(l_total_countries.get(l_random_int)).d_owner = l_player_name1;
+                l_total_countries.remove(l_random_int);
+                l_x += 1;
             }
-            Player p = new Player(playerName1);
-            for (int f = 0; f < countriesOwned.size(); f++) {
-                p.OWNED.add(countriesOwned.get(f));
+            Player l_player = new Player(l_player_name1);
+            for (int l_f = 0; l_f < l_countries_owned.size(); l_f++) {
+                l_player.d_owned.add(l_countries_owned.get(l_f));
             }
-            playersList.put(playerName1, p);
+            d_playersList.put(l_player_name1, l_player);
         }
-        if(remainingCountries!=0)
-        {
-            ArrayList<String> playerNames = new ArrayList<>();
-            for(String playername: playersList.keySet())
-            {
-                playerNames.add(playername);
+        if (l_remaining_countries != 0) {
+            ArrayList<String> l_player_names = new ArrayList<>();
+            for (String l_playername : d_playersList.keySet()) {
+                l_player_names.add(l_playername);
             }
-            for(int j=0;j<remainingCountries;j++)
-            {
-                int randomPlayerIndex = random.nextInt(playerNames.size());
-                int randomCountryIndex = random.nextInt(totalCountries.size());
-                Country o = cou.COUNTRIESLIST.get(totalCountries.get(randomCountryIndex));
-                playersList.get(playerNames.get(randomPlayerIndex)).OWNED.add(o);
-                playerNames.remove(randomPlayerIndex);
-                totalCountries.remove(randomCountryIndex);
+            for (int l_j = 0; l_j < l_remaining_countries; l_j++) {
+                int l_random_player_index = l_random.nextInt(l_player_names.size());
+                int l_random_country_index = l_random.nextInt(l_total_countries.size());
+                Country l_country = this.l_country.COUNTRIESLIST.get(l_total_countries.get(l_random_country_index));
+                d_playersList.get(l_player_names.get(l_random_player_index)).d_owned.add(l_country);
+                this.l_country.COUNTRIESLIST.get(l_total_countries.get(l_random_country_index)).d_owner = l_player_names.get(l_random_player_index);
+                l_player_names.remove(l_random_player_index);
+                l_total_countries.remove(l_random_country_index);
             }
         }
-        for (String player : playersList.keySet()) {
-            System.out.print(player + " = ");
-            for (int k = 0; k < playersList.get(player).OWNED.size(); k++) {
-                System.out.print(playersList.get(player).OWNED.get(k).COUNTRYID + " ");
+        for (String l_player : d_playersList.keySet()) {
+            System.out.print(l_player + " = ");
+            for (int l_k = 0; l_k < d_playersList.get(l_player).d_owned.size(); l_k++) {
+                System.out.print(d_playersList.get(l_player).d_owned.get(l_k).d_countryId + " ");
             }
             System.out.println("");
         }
