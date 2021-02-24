@@ -1,20 +1,28 @@
 package org.GamePlay;
 
 /**
- * This class extends the Order class and called when player want to pass and don't want to give any order.
- * This class just pass the order so as the counter will not ask the same player to order.
+ *Child class extending the Order Class , it deals with only Pass Order command
  */
-
 public class PassOrder extends Order {
-    Player d_P;
-    Country d_COU;
 
-    public PassOrder(Player p_p,Country p_cou)
-    {
-        this.d_P = p_p;
-        this.d_COU = p_cou;
+    Player d_player;
+    Country d_cou;
+
+    /**
+     * Constructor to initilise the Pass Order object .
+     *
+     * @param p_p   player name
+     * @param p_cou Country
+     */
+    public PassOrder(Player p_p, Country p_cou) {
+        this.d_player = p_p;
+        this.d_cou = p_cou;
     }
+    /**
+     *Blank Implementation of Execute in Pass Order
+     * @param p_player Player Object
+     */
     @Override
-    void Execute(Player p_p) {}
-}
+    void Execute(Player p_player) {}
 
+}
