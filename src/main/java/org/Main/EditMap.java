@@ -304,6 +304,8 @@ public class EditMap {
                             }
                         } else {
                             System.out.println("The country you entered doesn't exist");
+                            l_flag_error=1;
+                            l_flag_to_save=1;
                         }
                     } else if (l_command[0].equalsIgnoreCase("remove")) {
                         if (l_countries.contains(l_command[1])) {
