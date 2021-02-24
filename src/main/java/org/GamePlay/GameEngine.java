@@ -85,7 +85,6 @@ public class GameEngine {
                         {
                             d_game.startGameEngine(l_file);
                             playGame d_playgame = new playGame(PLAYERS_LIST, COUNTRY);
-//                            test pGame = new test(playersList,cou);
                             d_playgame.playGameLoop();
                             System.out.println("Deployment Phase Over!!!!!!!!");
                             System.out.println("");
