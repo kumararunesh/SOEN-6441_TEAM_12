@@ -18,5 +18,11 @@ public class PassOrder extends Order {
         this.d_player = p_p;
         this.d_cou = p_cou;
     }
+    /**
+     *Blank Implementation of Execute in Pass Order
+     * @param p_player Player Object
+     */
+    @Override
+    void Execute(Player p_player) {}
 
 }
