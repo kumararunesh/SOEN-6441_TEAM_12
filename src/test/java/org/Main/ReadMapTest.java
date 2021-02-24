@@ -103,6 +103,22 @@ public class ReadMapTest {
         }
     }
 
+    /**
+     * This method test whether the total number of border lines in map is different then expected.
+     * If the total number of border lines present in map is different as expected then this test will get pass.
+     */
 
+    @Test
+    public void testBorderLinesNot()
+    {
+        ReadMap l_map = new ReadMap();
+        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        try {
+            assertNotEquals(296,l_map.borderlines(l_file));
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     
 }
