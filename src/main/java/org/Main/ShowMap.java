@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class ShowMap {
 
-    File FILE;
+    File d_FILE;
 
     /**
      * This method initially check whether there is any predefined maps. If the file is empty then it will ask the user to create a new map.
@@ -24,9 +24,9 @@ public class ShowMap {
     public void mapshow() throws Exception {
         while (true) {
             try {
-                Scanner d_sc = new Scanner(System.in);
-                File d_directoryPath = new File("src\\Main\\test");
-                String l_contents[] = d_directoryPath.list();
+                Scanner l_sc = new Scanner(System.in);
+                File l_directoryPath = new File("src\\main\\resources\\maps\\");
+                String l_contents[] = l_directoryPath.list();
                 if(l_contents.length == 0){
                     System.out.println("There are no predefined maps");
                     System.out.println("Let's create a new map");
@@ -42,16 +42,16 @@ public class ShowMap {
                 System.out.println("*************************");
                 System.out.println("");
                 System.out.println("Enter the name of the map you want to select (Don't use extension)");
-                String l_x = d_sc.nextLine();
-                FILE = new File("src\\Main\\test\\" + l_x + ".map");
+                String l_x = l_sc.nextLine();
+                d_FILE = new File("src\\main\\resources\\maps\\" + l_x + ".map");
 
-                MapTable d_list = new MapTable();
-                ArrayList<String> l_countries = d_list.countryList(FILE);
-                ArrayList<String> l_continent = d_list.continentList(FILE);
-                HashMap<String, Integer> l_contval = d_list.continentandvalue(FILE);
-                HashMap<Integer, String> l_countrykey = d_list.countryanditskey(FILE);
-                HashMap<String, String> l_countrycont = d_list.countryanditscontinent(FILE);
-                HashMap<String, ArrayList> l_countryneigh = d_list.countryanditsneighbours(FILE);
+                MapTable l_list = new MapTable();
+                ArrayList<String> l_countries = l_list.countryList(d_FILE);
+                ArrayList<String> l_continent = l_list.continentList(d_FILE);
+                HashMap<String, Integer> l_contval = l_list.continentandvalue(d_FILE);
+                HashMap<Integer, String> l_countrykey = l_list.countryanditskey(d_FILE);
+                HashMap<String, String> l_countrycont = l_list.countryanditscontinent(d_FILE);
+                HashMap<String, ArrayList> l_countryneigh = l_list.countryanditsneighbours(d_FILE);
 
                 System.out.println("************** COUNTRIES **************");
                 for (int l_i = 0; l_i < l_countries.size(); l_i++) {
