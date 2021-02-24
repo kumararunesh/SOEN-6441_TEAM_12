@@ -46,8 +46,7 @@ public class Assign {
 
         for(String z: tempMap.values())
         {
-            int numberOf
-                ntriesInContinent =0;
+            int numberOfcountriesInContinent =0;
             for(String country:countryContinent.keySet())
             {
                 if(countryContinent.get(country).equalsIgnoreCase(countryContinent.get(z)))
