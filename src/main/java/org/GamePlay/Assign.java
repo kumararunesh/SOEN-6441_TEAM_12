@@ -46,7 +46,7 @@ public class Assign {
 
         for(String z: tempMap.values())
         {
-            int numberOfcountriesInContinent =0;
+            int numberOfCountriesInContinent =0;
             for(String country:countryContinent.keySet())
             {
                 if(countryContinent.get(country).equalsIgnoreCase(countryContinent.get(z)))
@@ -63,9 +63,9 @@ public class Assign {
         }
 
         ArrayList<String> totalCountries= new ArrayList<>();
-        for(String country:cou.countriesList.keySet())
+        for(String country:cou.COUNTRIESLIST.keySet())
         {
-            totalCountries.add(cou.countriesList.get(country).CountryId);
+            totalCountries.add(cou.COUNTRIESLIST.get(country).CountryId);
         }
         int numOfCountriesPerPlayer = totalCountries.size()/playersList.size();
         int remainingCountries = totalCountries.size()%playersList.size();
@@ -77,7 +77,7 @@ public class Assign {
             ArrayList<Country> countriesOwned = new ArrayList<>();
             while (x < numOfCountriesPerPlayer) {
                 int randomInt = random.nextInt(totalCountries.size());
-                Country o = cou.countriesList.get(totalCountries.get(randomInt));
+                Country o = cou.COUNTRIESLIST.get(totalCountries.get(randomInt));
                 countriesOwned.add(o);
                 totalCountries.remove(randomInt);
                 x += 1;
@@ -99,7 +99,7 @@ public class Assign {
             {
                 int randomPlayerIndex = random.nextInt(playerNames.size());
                 int randomCountryIndex = random.nextInt(totalCountries.size());
-                Country o = cou.countriesList.get(totalCountries.get(randomCountryIndex));
+                Country o = cou.COUNTRIESLIST.get(totalCountries.get(randomCountryIndex));
                 playersList.get(playerNames.get(randomPlayerIndex)).OWNED.add(o);
                 playerNames.remove(randomPlayerIndex);
                 totalCountries.remove(randomCountryIndex);
@@ -108,7 +108,7 @@ public class Assign {
         for (String player : playersList.keySet()) {
             System.out.print(player + " = ");
             for (int k = 0; k < playersList.get(player).OWNED.size(); k++) {
-                System.out.print(playersList.get(player).OWNED.get(k).CountryId + " ");
+                System.out.print(playersList.get(player).OWNED.get(k).COUNTRYID + " ");
             }
             System.out.println("");
         }
