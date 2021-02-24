@@ -46,7 +46,8 @@ public class Assign {
 
         for(String z: tempMap.values())
         {
-            int numberOfCountriesInContinent =0;
+            int numberOf
+                ntriesInContinent =0;
             for(String country:countryContinent.keySet())
             {
                 if(countryContinent.get(country).equalsIgnoreCase(countryContinent.get(z)))
@@ -58,7 +59,7 @@ public class Assign {
             if(countryContinent.containsKey(z)) {
                 Integer continentControlValue = continentKey.get(countryContinent.get(z));
                 cou = new Country(z, countryContinent.get(z),continentControlValue,numberOfCountriesInContinent,countryNeigh.get(z));
-                cou.countriesList.put(z, cou);
+                cou.COUNTRIESLIST.put(z, cou);
             }
         }
 
@@ -84,7 +85,7 @@ public class Assign {
             }
             Player p = new Player(playerName1);
             for (int f = 0; f < countriesOwned.size(); f++) {
-                p.owned.add(countriesOwned.get(f));
+                p.OWNED.add(countriesOwned.get(f));
             }
             playersList.put(playerName1, p);
         }
@@ -100,15 +101,15 @@ public class Assign {
                 int randomPlayerIndex = random.nextInt(playerNames.size());
                 int randomCountryIndex = random.nextInt(totalCountries.size());
                 Country o = cou.countriesList.get(totalCountries.get(randomCountryIndex));
-                playersList.get(playerNames.get(randomPlayerIndex)).owned.add(o);
+                playersList.get(playerNames.get(randomPlayerIndex)).OWNED.add(o);
                 playerNames.remove(randomPlayerIndex);
                 totalCountries.remove(randomCountryIndex);
             }
         }
         for (String player : playersList.keySet()) {
             System.out.print(player + " = ");
-            for (int k = 0; k < playersList.get(player).owned.size(); k++) {
-                System.out.print(playersList.get(player).owned.get(k).CountryId + " ");
+            for (int k = 0; k < playersList.get(player).OWNED.size(); k++) {
+                System.out.print(playersList.get(player).OWNED.get(k).CountryId + " ");
             }
             System.out.println("");
         }
