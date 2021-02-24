@@ -31,7 +31,27 @@ public class ReadLinesTest {
         {
             e.printStackTrace();
         }
-    }
+
+        /**
+         * This method will test whether the number of border and country lines in the map doesn't match.
+         * If the border and country lines are different then as expected then the test case will get pass.
+         */
+
+        @Test
+        public void TestCountryAndBorderLinesNot()
+        {
+            ReadLines l_map = new ReadLines();
+            File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+            try {
+                assertNotEquals(6,l_map.countryandborderline(l_file));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+
+
 
 
 
