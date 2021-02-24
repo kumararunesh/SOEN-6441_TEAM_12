@@ -27,6 +27,17 @@ jobs:
     - name: JavaDoc Generation
       run: mvn javadoc:javadoc
     - name: Copy to Documentation Target Location
-      run: |
-        rm -rf target
-        cp -rf target
+    - uses: avinal/github-pages-deploy-action@main
+      with:
+                   
+        GITHUB_TOKEN: ${{ github.token }}
+               
+        LANGUAGE: "<write-as-directed-above>"
+                    
+        MAKE_COMMAND: "make html"
+                     
+        PAGES_BRANCH: "gh-pages"
+                    
+        BUILD_FROM: "main"
+               
+        DOCS_FOLDER: "target"
