@@ -63,6 +63,14 @@ public class DeployOrder extends Order {
             p_p.d_armiesNum = 0;
          }
       }
-
+      else
+      {
+         p_p.d_armiesNum = p_p.d_armiesNum - d_armiesToPlace;
+         if(p_p.d_armiesNum <0)
+         {
+            p_p.d_armiesNum =0;
+         }
+         System.out.println("You don't own this country. Penalty has been applied. Now your army count is "+ p_p.d_armiesNum);
+      }
    }
 }
