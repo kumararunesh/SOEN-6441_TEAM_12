@@ -50,6 +50,24 @@ public class ReadLinesTest {
             }
         }
 
+        /**
+         * This method will test whether the number of continent lines in the map is same as expected or not.
+         * If the continent lines are same as expected then the test case will get pass.
+         */
+
+        @Test
+        public void TestContinentLines()
+        {
+            ReadLines l_map = new ReadLines();
+            File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+            try {
+                assertEquals(3,l_map.continentline(l_file));
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
 
 
 
