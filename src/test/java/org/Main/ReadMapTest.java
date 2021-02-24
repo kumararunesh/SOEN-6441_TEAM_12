@@ -48,7 +48,7 @@ public class ReadMapTest {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * This method test whether the total number of Country lines in map is same as expected or not.
      * If the total number of country lines present in map is same as expected then this test will get pass.
@@ -120,7 +120,7 @@ public class ReadMapTest {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * This method test whether the total number of continent lines in map is same as expected or not.
      * If the total number of continent lines present in map is same as expected then this test will get pass.
