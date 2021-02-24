@@ -121,4 +121,39 @@ public class ReadMapTest {
         }
     }
     
+    /**
+     * This method test whether the total number of continent lines in map is same as expected or not.
+     * If the total number of continent lines present in map is same as expected then this test will get pass.
+     */
+
+    @Test
+    public void testContinentLines()
+    {
+        ReadMap l_map = new ReadMap();
+        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        try {
+            assertEquals(6,l_map.continentlines(l_file));
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method test whether the total number of continent lines in map is different then expected.
+     * If the total number of continent lines present in map is different as expected then this test will get pass.
+     */
+
+    @Test
+    public void testContinentLinesNot()
+    {
+        ReadMap l_map = new ReadMap();
+        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        try {
+            assertNotEquals(296,l_map.continentlines(l_file));
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
