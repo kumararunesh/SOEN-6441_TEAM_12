@@ -6,7 +6,7 @@ package org.GamePlay;
 public abstract class Order {
 
     /**
-     * This is the abstract method decleration which will execute the orders issued by each player.
+     * This is the abstract method declaration which will execute the orders issued by each player.
      * @param p_p this is the player object, which will execute the correct orders from each individual player.
      */
     abstract void Execute(Player p_p);

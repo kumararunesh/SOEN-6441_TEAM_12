@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"org.GamePlay","l":"playGame"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"org.Main","l":"EditMap"}];updateSearchResults();
