@@ -6,5 +6,11 @@ import java.util.Queue;
 
 public class Player {
 
+    ArrayList<Country> OWNED = new ArrayList<Country>();
+    Queue<Order> ORDERS = new LinkedList<Order>();// Queue only
+    Integer ARMIESNUM;
+    String NAME;
+    int CONTINENTVALUE; // Continent Control Value ;
+
     
 }
