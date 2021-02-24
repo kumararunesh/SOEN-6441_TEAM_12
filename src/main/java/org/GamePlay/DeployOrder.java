@@ -53,6 +53,16 @@ public class DeployOrder extends Order {
             playerList.put(p_p.d_name, p_p);
             showMap map = new showMap(playerList, d_cou);
          }
+         else
+         {
+//            p_p.OWNED.get(l_index).NUMOFARMIESPLACED = ARMIESTOPLACE;
+            d_cou.COUNTRIESLIST.get(d_countryId).d_numOfArmiesPlaced += p_p.d_armiesNum;
+            d_cou.COUNTRIESLIST.get(d_countryId).d_owner = p_p.d_name;
+            System.out.println(p_p.d_name +" you only own "+ p_p.d_armiesNum +" armies and all of them are now placed on "+p_p.d_owned.get(l_index).d_countryId);
+
+            p_p.d_armiesNum = 0;
+         }
+      }
 
    }
 }
