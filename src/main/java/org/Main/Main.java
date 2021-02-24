@@ -98,7 +98,7 @@ public class Main {
             try {
                 if (l_text[0].equalsIgnoreCase("edit")) {
                     String l_file = null;
-                    File l_directoryPath = new File("src\\main\\resources\\maps\\");
+                    File l_directoryPath = new File("src\\main\\resources\\maps");
                     String l_contents[] = l_directoryPath.list();
 
                     for (int l_i = 0; l_i < l_contents.length; l_i++) {
@@ -115,8 +115,8 @@ public class Main {
                     }
 
                     if (l_flag == 1) {
-                        EditMap d_edit = new EditMap();
-                        d_edit.editMap(l_file);
+                        EditMap l_edit = new EditMap();
+                        l_edit.editMap(l_file);
                     }
                     break;
                 }
@@ -137,9 +137,9 @@ public class Main {
      */
 
     public static void createMapByUser(File p_file1) throws Exception {
-        FILE = new File("src\\main\\resources\\maps\\" + p_file1);
-        MapCreate d_create = new MapCreate();
-        d_create.createMap(FILE);
+        FILE = new File("src\\main\\resources\\maps" + p_file1);
+        MapCreate l_create = new MapCreate();
+        l_create.createMap(FILE);
     }
 
     /**
@@ -147,8 +147,8 @@ public class Main {
      * @throws Exception If file does not found at the path mentioned at ShowMap file, this will throw exception.
      */
     public static void mapShow() throws Exception {
-        ShowMap d_show  = new ShowMap();
-        d_show.mapshow();
+        ShowMap l_show  = new ShowMap();
+        l_show.mapshow();
     }
 
     /**
