@@ -6,14 +6,14 @@ package org.GamePlay;
  */
 
 public class PassOrder extends Order {
-    Player P;
-    Country COU;
+    Player d_P;
+    Country d_COU;
     public PassOrder(Player p_p,Country p_cou)
     {
-        this.P = p_p;
-        this.COU = p_cou;
+        this.d_P = p_p;
+        this.d_COU = p_cou;
     }
     @Override
-    void Execute(Player p) {}
+    void Execute(Player p_p) {}
 }
 
