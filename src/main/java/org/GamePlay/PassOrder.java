@@ -8,6 +8,7 @@ package org.GamePlay;
 public class PassOrder extends Order {
     Player d_P;
     Country d_COU;
+
     public PassOrder(Player p_p,Country p_cou)
     {
         this.d_P = p_p;
