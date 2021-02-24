@@ -5,7 +5,12 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+/**
+ * Game Engine Class for Stratup Phase and all three game phases of Main game loop
+ * Phase 1 : Reinforcement Phase
+ * Phase 2 : Issue Order Phase
+ * Phase 3 : Execute Order Phase
+ */
 public class GameEngine {
     /**
      * GLobal List of Players
@@ -79,13 +84,7 @@ public class GameEngine {
         }
     }
 
-    /**
-     *Main Game loop
-     * Phase 1 : Reinforcement Phase
-     * Phase 2 : Issue Order Phase
-     * Phase 3 : Execute Order Phase
-     *
-     */
+
     public static void playGame() {
         Scanner l_sc = new Scanner(System.in);
         while (true) {
