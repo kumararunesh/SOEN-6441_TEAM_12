@@ -18,10 +18,6 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
 	
-	<properties>
-                 <project.reporting.outputDirectory>target</project.reporting.outputDirectory>
-        </properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
