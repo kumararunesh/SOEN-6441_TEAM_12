@@ -1,12 +1,14 @@
 package org.Main;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,16 +24,14 @@ public class MapTableTest {
      */
 
     @Test
-    public void testConitnentName()
-    {
+    public void testConitnentName() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            ArrayList<String> l_ans = new ArrayList<>(Arrays.asList("a","b"));
+        MapTable l_map = new MapTable();
+        try {
+            ArrayList<String> l_ans = new ArrayList<>(Arrays.asList("a", "b"));
 
-            assertEquals(l_ans,l_map.continentList(l_file));
-        }catch (Exception e)
-        {
+            assertEquals(l_ans, l_map.continentList(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -42,16 +42,14 @@ public class MapTableTest {
      */
 
     @Test
-    public void testContinentNameNot()
-    {
+    public void testContinentNameNot() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            ArrayList<String> l_ans = new ArrayList<>(Arrays.asList("b","b"));
+        MapTable l_map = new MapTable();
+        try {
+            ArrayList<String> l_ans = new ArrayList<>(Arrays.asList("b", "b"));
 
-            assertNotEquals(l_ans,l_map.continentList(l_file));
-        }catch (Exception e)
-        {
+            assertNotEquals(l_ans, l_map.continentList(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -61,16 +59,14 @@ public class MapTableTest {
      */
 
     @Test
-    public void testCountryName()
-    {
+    public void testCountryName() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            ArrayList<String> l_ans = new ArrayList<>(Arrays.asList("c","d","e","f","g","y"));
+        MapTable l_map = new MapTable();
+        try {
+            ArrayList<String> l_ans = new ArrayList<>(Arrays.asList("c", "d", "e", "f", "g", "y"));
 
-            assertEquals(l_ans,l_map.countryList(l_file));
-        }catch (Exception e)
-        {
+            assertEquals(l_ans, l_map.countryList(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -81,16 +77,14 @@ public class MapTableTest {
      */
 
     @Test
-    public void testCountryNameNot()
-    {
+    public void testCountryNameNot() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            ArrayList<String> l_ans = new ArrayList<>(Arrays.asList("d","d","e","f","g","y"));
+        MapTable l_map = new MapTable();
+        try {
+            ArrayList<String> l_ans = new ArrayList<>(Arrays.asList("d", "d", "e", "f", "g", "y"));
 
-            assertNotEquals(l_ans,l_map.countryList(l_file));
-        }catch (Exception e)
-        {
+            assertNotEquals(l_ans, l_map.countryList(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -100,18 +94,16 @@ public class MapTableTest {
      */
 
     @Test
-    public void testContinentAndValue()
-    {
+    public void testContinentAndValue() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<String,Integer> l_contval = new HashMap<>();
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<String, Integer> l_contval = new HashMap<>();
             l_contval.put("a", 5);
             l_contval.put("b", 5);
 
-            assertEquals(l_contval,l_map.continentandvalue(l_file));
-        }catch (Exception e)
-        {
+            assertEquals(l_contval, l_map.continentandvalue(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -122,18 +114,16 @@ public class MapTableTest {
      */
 
     @Test
-    public void testContinentAndValueNot()
-    {
+    public void testContinentAndValueNot() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<String,Integer> l_contval = new HashMap<>();
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<String, Integer> l_contval = new HashMap<>();
             l_contval.put("b", 5);
             l_contval.put("b", 5);
 
-            assertNotEquals(l_contval,l_map.continentandvalue(l_file));
-        }catch (Exception e)
-        {
+            assertNotEquals(l_contval, l_map.continentandvalue(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -143,22 +133,20 @@ public class MapTableTest {
      */
 
     @Test
-    public void testCountryAndItsKey()
-    {
+    public void testCountryAndItsKey() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<Integer,String> l_contkey = new HashMap<>();
-            l_contkey.put(1,"c");
-            l_contkey.put(2,"d");
-            l_contkey.put(3,"e");
-            l_contkey.put(4,"f");
-            l_contkey.put(5,"g");
-            l_contkey.put(6,"y");
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<Integer, String> l_contkey = new HashMap<>();
+            l_contkey.put(1, "c");
+            l_contkey.put(2, "d");
+            l_contkey.put(3, "e");
+            l_contkey.put(4, "f");
+            l_contkey.put(5, "g");
+            l_contkey.put(6, "y");
 
-            assertEquals(l_contkey,l_map.countryanditskey(l_file));
-        }catch (Exception e)
-        {
+            assertEquals(l_contkey, l_map.countryanditskey(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -169,22 +157,20 @@ public class MapTableTest {
      */
 
     @Test
-    public void testCountryAndItsKeyNot()
-    {
+    public void testCountryAndItsKeyNot() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<Integer,String> l_contkey = new HashMap<>();
-            l_contkey.put(2,"c");
-            l_contkey.put(2,"d");
-            l_contkey.put(3,"c");
-            l_contkey.put(4,"f");
-            l_contkey.put(5,"g");
-            l_contkey.put(6,"y");
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<Integer, String> l_contkey = new HashMap<>();
+            l_contkey.put(2, "c");
+            l_contkey.put(2, "d");
+            l_contkey.put(3, "c");
+            l_contkey.put(4, "f");
+            l_contkey.put(5, "g");
+            l_contkey.put(6, "y");
 
-            assertNotEquals(l_contkey,l_map.countryanditskey(l_file));
-        }catch (Exception e)
-        {
+            assertNotEquals(l_contkey, l_map.countryanditskey(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -194,22 +180,20 @@ public class MapTableTest {
      */
 
     @Test
-    public void testCountryAndContinent()
-    {
+    public void testCountryAndContinent() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<String,String> l_countcont = new HashMap<>();
-            l_countcont.put("c","a");
-            l_countcont.put("d","a");
-            l_countcont.put("e","b");
-            l_countcont.put("f","b");
-            l_countcont.put("g","b");
-            l_countcont.put("y","a");
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<String, String> l_countcont = new HashMap<>();
+            l_countcont.put("c", "a");
+            l_countcont.put("d", "a");
+            l_countcont.put("e", "b");
+            l_countcont.put("f", "b");
+            l_countcont.put("g", "b");
+            l_countcont.put("y", "a");
 
-            assertEquals(l_countcont,l_map.countryanditscontinent(l_file));
-        }catch (Exception e)
-        {
+            assertEquals(l_countcont, l_map.countryanditscontinent(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -220,22 +204,20 @@ public class MapTableTest {
      */
 
     @Test
-    public void testCountryAndContinentNot()
-    {
+    public void testCountryAndContinentNot() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<String,String> l_countcont = new HashMap<>();
-            l_countcont.put("a","a");
-            l_countcont.put("d","a");
-            l_countcont.put("e","c");
-            l_countcont.put("f","b");
-            l_countcont.put("g","b");
-            l_countcont.put("y","a");
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<String, String> l_countcont = new HashMap<>();
+            l_countcont.put("a", "a");
+            l_countcont.put("d", "a");
+            l_countcont.put("e", "c");
+            l_countcont.put("f", "b");
+            l_countcont.put("g", "b");
+            l_countcont.put("y", "a");
 
-            assertNotEquals(l_countcont,l_map.countryanditscontinent(l_file));
-        }catch (Exception e)
-        {
+            assertNotEquals(l_countcont, l_map.countryanditscontinent(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -245,22 +227,20 @@ public class MapTableTest {
      */
 
     @Test
-    public void testCountryAndItsNeighbors()
-    {
+    public void testCountryAndItsNeighbors() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<String,ArrayList> l_countryNeigh = new HashMap<>();
-            l_countryNeigh.put("c",new ArrayList(Arrays.asList("d","e","f","g","y")));
-            l_countryNeigh.put("d",new ArrayList(Arrays.asList("c","e")));
-            l_countryNeigh.put("e",new ArrayList(Arrays.asList("f","c","d")));
-            l_countryNeigh.put("f",new ArrayList(Arrays.asList("d","c")));
-            l_countryNeigh.put("g",new ArrayList(Arrays.asList("d","c")));
-            l_countryNeigh.put("y",new ArrayList(Arrays.asList("d","e")));
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<String, ArrayList> l_countryNeigh = new HashMap<>();
+            l_countryNeigh.put("c", new ArrayList(Arrays.asList("d", "e", "f", "g", "y")));
+            l_countryNeigh.put("d", new ArrayList(Arrays.asList("c", "e")));
+            l_countryNeigh.put("e", new ArrayList(Arrays.asList("f", "c", "d")));
+            l_countryNeigh.put("f", new ArrayList(Arrays.asList("d", "c")));
+            l_countryNeigh.put("g", new ArrayList(Arrays.asList("d", "c")));
+            l_countryNeigh.put("y", new ArrayList(Arrays.asList("d", "e")));
 
-            assertEquals(l_countryNeigh,l_map.countryanditsneighbours(l_file));
-        }catch (Exception e)
-        {
+            assertEquals(l_countryNeigh, l_map.countryanditsneighbours(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -271,22 +251,20 @@ public class MapTableTest {
      */
 
     @Test
-    public void testCountryAndItsNeighborsNot()
-    {
+    public void testCountryAndItsNeighborsNot() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<String,ArrayList> l_countryNeigh = new HashMap<>();
-            l_countryNeigh.put("c",new ArrayList(Arrays.asList("e","e","f","g","y")));
-            l_countryNeigh.put("d",new ArrayList(Arrays.asList("c","e")));
-            l_countryNeigh.put("e",new ArrayList(Arrays.asList("a","c","d")));
-            l_countryNeigh.put("f",new ArrayList(Arrays.asList("d","c")));
-            l_countryNeigh.put("g",new ArrayList(Arrays.asList("d","c")));
-            l_countryNeigh.put("y",new ArrayList(Arrays.asList("d","e")));
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<String, ArrayList> l_countryNeigh = new HashMap<>();
+            l_countryNeigh.put("c", new ArrayList(Arrays.asList("e", "e", "f", "g", "y")));
+            l_countryNeigh.put("d", new ArrayList(Arrays.asList("c", "e")));
+            l_countryNeigh.put("e", new ArrayList(Arrays.asList("a", "c", "d")));
+            l_countryNeigh.put("f", new ArrayList(Arrays.asList("d", "c")));
+            l_countryNeigh.put("g", new ArrayList(Arrays.asList("d", "c")));
+            l_countryNeigh.put("y", new ArrayList(Arrays.asList("d", "e")));
 
-            assertNotEquals(l_countryNeigh,l_map.countryanditsneighbours(l_file));
-        }catch (Exception e)
-        {
+            assertNotEquals(l_countryNeigh, l_map.countryanditsneighbours(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -296,12 +274,11 @@ public class MapTableTest {
      */
 
     @Test
-    public void testCountryAndItsUniqueContinent()
-    {
+    public void testCountryAndItsUniqueContinent() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<String,Integer> l_countcontkey = new HashMap<>();
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<String, Integer> l_countcontkey = new HashMap<>();
             l_countcontkey.put("c", 1);
             l_countcontkey.put("d", 1);
             l_countcontkey.put("e", 2);
@@ -309,9 +286,8 @@ public class MapTableTest {
             l_countcontkey.put("g", 2);
             l_countcontkey.put("y", 1);
 
-            assertEquals(l_countcontkey,l_map.countryanditsuniquecontinent(l_file));
-        }catch (Exception e)
-        {
+            assertEquals(l_countcontkey, l_map.countryanditsuniquecontinent(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -322,12 +298,11 @@ public class MapTableTest {
      */
 
     @Test
-    public void testCountryAndItsUniqueContinentNot()
-    {
+    public void testCountryAndItsUniqueContinentNot() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<String,Integer> l_countcontkey = new HashMap<>();
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<String, Integer> l_countcontkey = new HashMap<>();
             l_countcontkey.put("q", 1);
             l_countcontkey.put("d", 1);
             l_countcontkey.put("e", 2);
@@ -335,9 +310,8 @@ public class MapTableTest {
             l_countcontkey.put("g", 2);
             l_countcontkey.put("y", 1);
 
-            assertNotEquals(l_countcontkey,l_map.countryanditsuniquecontinent(l_file));
-        }catch (Exception e)
-        {
+            assertNotEquals(l_countcontkey, l_map.countryanditsuniquecontinent(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -347,12 +321,11 @@ public class MapTableTest {
      */
 
     @Test
-    public void testUniqueKeyAndItsCountry()
-    {
+    public void testUniqueKeyAndItsCountry() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<String,Integer> l_keycount = new HashMap<>();
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<String, Integer> l_keycount = new HashMap<>();
             l_keycount.put("c", 1);
             l_keycount.put("d", 2);
             l_keycount.put("e", 3);
@@ -360,9 +333,8 @@ public class MapTableTest {
             l_keycount.put("g", 5);
             l_keycount.put("y", 6);
 
-            assertEquals(l_keycount,l_map.uniqueKeyanditscountry(l_file));
-        }catch (Exception e)
-        {
+            assertEquals(l_keycount, l_map.uniqueKeyanditscountry(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -374,12 +346,11 @@ public class MapTableTest {
 
 
     @Test
-    public void testUniqueKeyAndItsCountryNot()
-    {
+    public void testUniqueKeyAndItsCountryNot() {
         File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map= new MapTable();
-        try{
-            HashMap<String,Integer> l_keycount = new HashMap<>();
+        MapTable l_map = new MapTable();
+        try {
+            HashMap<String, Integer> l_keycount = new HashMap<>();
             l_keycount.put("c", 1);
             l_keycount.put("d", 2);
             l_keycount.put("e", 3);
@@ -387,9 +358,8 @@ public class MapTableTest {
             l_keycount.put("g", 7);
             l_keycount.put("y", 6);
 
-            assertNotEquals(l_keycount,l_map.uniqueKeyanditscountry(l_file));
-        }catch (Exception e)
-        {
+            assertNotEquals(l_keycount, l_map.uniqueKeyanditscountry(l_file));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
