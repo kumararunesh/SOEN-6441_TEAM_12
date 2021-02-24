@@ -65,7 +65,7 @@ public class Assign {
         ArrayList<String> totalCountries= new ArrayList<>();
         for(String country:cou.COUNTRIESLIST.keySet())
         {
-            totalCountries.add(cou.COUNTRIESLIST.get(country).CountryId);
+            totalCountries.add(cou.COUNTRIESLIST.get(country).COUNTRYID);
         }
         int numOfCountriesPerPlayer = totalCountries.size()/playersList.size();
         int remainingCountries = totalCountries.size()%playersList.size();
