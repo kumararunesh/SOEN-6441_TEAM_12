@@ -71,4 +71,100 @@ public class playGame {
         }
         return temp;
     }
+
+    public void mainGameLoop() {
+        System.out.println("Main game loop: issue orders phase");
+        Boolean l_flag = true;
+        int l_i = 0;
+        while (l_flag) {      //Loop for iterating until all players give pass
+            l_i = 0;
+            for (String s : d_playerList.keySet()) {
+                Player p = d_playerList.get(s);
+                Boolean l_flag_1 = true;
+                while (l_flag_1) {  //loop for correct input for order until a player inputs correct order
+                    System.out.println(p.d_name + " Please issue orders from the below commands");
+                    System.out.println("*************************");
+                    System.out.println("**Deploy**\n**Pass**\n**ShowMap**");
+                    System.out.println("*************************");
+                    Scanner d_sc = new Scanner(System.in);
+                    String l_command = d_sc.nextLine();
+                    String l_commandSplit[] = l_command.split(" ");
+                    if (l_commandSplit[0].equalsIgnoreCase("deploy")) {
+                        if (l_commandSplit.length == 3) {
+                            String l_countryId = l_commandSplit[1];
+                            if (d_country.COUNTRIESLIST.containsKey(l_countryId)) {
+                                String regex = "\\d+";
+                                if (l_commandSplit[2].matches(regex)) {
+                                    int l_armiesToPlace = Integer.parseInt(l_commandSplit[2]);
+                                    if (l_armiesToPlace > 0) {
+                                        l_flag_1 = false;
+                                        Order d_newOrder = new DeployOrder(l_countryId, l_armiesToPlace, d_country);
+                                        p.issue_order(d_newOrder);
+                                    } else {
+                                        System.out.println("Negative Army count not allowed");
+                                        continue;
+                                    }
+                                } else {
+                                    System.out.println("The army number should be an integer");
+                                    continue;
+                                }
+                            } else {
+                                System.out.println("The country that you entered doesn't exist in the Map");
+                                continue;
+                            }
+                        } else {
+                            System.out.println("Your deploy command should be like 'deploy countryName armyToPlace'\n");
+                            continue;
+                        }
+                    } else if (l_commandSplit[0].equalsIgnoreCase("pass")) {
+                        PassOrder d_order = new PassOrder(p, d_country);
+                        p.issue_order(d_order);
+                        l_i++;
+                        l_flag_1 = false;
+                    } else if (l_commandSplit[0].equalsIgnoreCase("showmap")) {
+/*                        showMap map = new showMap(playersList,cou);
+                        map.mapShow()*/
+                        ;
+                        showMap d_map = new showMap(d_playerList, d_country);
+                        d_map.check();
+                    } else {
+                        System.out.println("Wrong command. Re-enter the correct one");
+                    }
+                }
+                if (l_i == d_playerList.size()) {
+                    l_flag = false; //for outer loop
+                }
+            }
+        }
+        System.out.println("Execute Order Phase\n");
+        l_flag = true;
+        int l_p1 = 0;
+        ArrayList<String> l_playersName = new ArrayList<>(d_playerList.keySet());
+        while (l_flag) {      //Loop for iterating until all players give pass
+            for (String l_player : l_playersName) {
+                Player d_player = d_playerList.get(l_player);
+
+                if (d_player.d_orders.size() == 0) {
+                    l_p1 += 1;
+                    l_playersName.remove(l_player);
+                    break;
+                }
+
+
+                int l_maxArmiesToDeploy = d_player.d_armiesNum;
+                Order d_nextOrder = d_player.next_order();
+                if (d_nextOrder instanceof DeployOrder) {
+                    System.out.println("Executing Order For Player : " + d_player.getD_name());
+                    d_nextOrder.Execute(d_player);
+                    System.out.println("");
+                } else {
+                    System.out.println("Passing order for Player: " + d_player.d_name);
+                    d_nextOrder.Execute(d_player);
+                }
+            }
+            if (l_playersName.size() == 0) {
+                l_flag = false;
+            }
+        }
+    }
 }
