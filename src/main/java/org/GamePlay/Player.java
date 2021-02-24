@@ -7,10 +7,10 @@ import java.util.Queue;
 public class Player {
 
     ArrayList<Country> OWNED = new ArrayList<Country>();
-    Queue<Order> ORDERS = new LinkedList<Order>();// Queue only
+    Queue<Order> ORDERS = new LinkedList<Order>();
     Integer ARMIESNUM;
     String NAME;
-    int CONTINENTVALUE; // Continent Control Value ;
+    int CONTINENTVALUE; 
 
     public Player(String NAME) {
         this.NAME = NAME;
@@ -35,6 +35,6 @@ public class Player {
 
    public Order next_order()
    {
-        return this.ORDERS.poll(); // FIFO for queue .
+        return this.ORDERS.poll(); 
    }
 }
