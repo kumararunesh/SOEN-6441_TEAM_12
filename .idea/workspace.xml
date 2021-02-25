@@ -7,8 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f33d124-ba81-4bf6-8440-51ed4a454c54" name="Default Changelist" comment="ReadMapTest">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Main/UserCreatedMapValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Main/UserCreatedMapValidation.java" afterDir="false" />
+    <list default="true" id="9f33d124-ba81-4bf6-8440-51ed4a454c54" name="Default Changelist" comment="MapCreate checkout if graph is connected">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Main/MapCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Main/MapCreate.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +21,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature-ReadMap-v5.0" />
+        <entry key="$PROJECT_DIR$" value="feature-UsercreatedMapValidation-v2.0" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -256,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614254849230</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="UserCreatedMapValidation repetition feature not allowed">
+      <created>1614255012833</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1614255012834</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -293,6 +300,8 @@
     <MESSAGE value="Updation to Gameengine Loadmap bugs" />
     <MESSAGE value="Updation to GameEngine with javaDoc" />
     <MESSAGE value="ReadMapTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="ReadMapTest" />
+    <MESSAGE value="UserCreatedMapValidation repetition feature not allowed" />
+    <MESSAGE value="MapCreate checkout if graph is connected" />
+    <option name="LAST_COMMIT_MESSAGE" value="MapCreate checkout if graph is connected" />
   </component>
 </project>

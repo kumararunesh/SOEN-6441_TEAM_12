@@ -250,7 +250,19 @@ public class MapCreate {
         }
     }
 
-
+    /**
+     * This method is used to create and save the validated map that user created from scratch.
+     * @param p_file This is the file name in which map is created and saved by user.
+     * @param p_continent_name This parameter is a string array which contains the list of the continents.
+     * @param p_continent This is an integer value which denotes the number of continents in a map.
+     * @param p_continent_value This parameter is a string array which contains the list of the control values of continents.
+     * @param p_country_total This is an integer value which denotes the number of countries in a map.
+     * @param p_country_names This parameter is a string array which contains the list of the countries.
+     * @param p_continent_country_value This is an integer array which contains the list of unique ID's of continent to which a country belong.
+     * @param p_adjacent_countries This a string array which contains the list of neighboring countries of a particular country.
+     * @throws Exception If file doesn't found at the directed path then this will throw exception.
+     * @return a File Object.
+     */
     public static File fileCreation(File p_file, String[] p_continent_name, int p_continent, String[] p_continent_value, int p_country_total, String[] p_country_names, int[] p_continent_country_value, String[] p_adjacent_countries) throws Exception {
         PrintWriter l_print_writer = new PrintWriter(p_file);
         l_print_writer.println("[Map]");
