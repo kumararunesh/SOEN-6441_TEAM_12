@@ -36,4 +36,41 @@ public class showMap {
         this.COU = p_cou;
         this.PLAYERS_LIST = p_players_list;
     }
+   
+    /**
+     * This method is used to add element to the adjacency matrix which is used for representing the country and its neighbours.
+     * @param p_row represents the row number of the 2D Matrix.
+     * @param p_col represents the column number of the 2D Matrix.
+     * @param p_element represents the data to be added at that specific index.
+     */
+    public void l_addElement(int p_row, int p_col, String p_element)
+    {
+        ADJACENT_NEIGHBOURS[p_row][p_col]=p_element;
+    }
+   
+   
+    /**
+     * Method which is used to print all the details of the country which includes country name, its continent,
+     * its owner, armies deployed on that country. It also shows the country and its neighbouring country by X and O.
+     * "X" means that the country on Y-axis is connected with the country on the X-axis.
+     * while the "O" (oh) represents that the country is not connected.
+     */
+    public void check() {
+        ADJACENT_NEIGHBOURS = new String[COU.COUNTRIESLIST.size()+1][COU.COUNTRIESLIST.size()+1];
+        d_details = new String[COU.COUNTRIESLIST.size()][4];
+        ArrayList<String> l_allCountries = new ArrayList<>(COU.COUNTRIESLIST.keySet());
+        int l_row=0;
+        for(String l_countries: COU.COUNTRIESLIST.keySet())
+        {
+            d_details[l_row][0]= l_countries;
+            d_details[l_row][1]= COU.COUNTRIESLIST.get(l_countries).d_owner;
+            d_details[l_row][2]= COU.COUNTRIESLIST.get(l_countries).d_continent;
+            if(COU.COUNTRIESLIST.get(l_countries).d_numOfArmiesPlaced !=null) {
+                d_details[l_row][3] = COU.COUNTRIESLIST.get(l_countries).d_numOfArmiesPlaced.toString();
+            }else
+            {
+                d_details[l_row][3] ="0";
+            }
+            l_row+=1;
+        }
   }
