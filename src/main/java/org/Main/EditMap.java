@@ -40,8 +40,8 @@ public class EditMap {
             System.out.println("");
             System.out.println("Enter you command to edit map");
 
-            String option = d_SC.nextLine();
-            String[] l_text = option.split("-");
+            String l_option = d_SC.nextLine();
+            String[] l_text = l_option.split("-");
 
             if (l_text[0].equalsIgnoreCase("editcontinent ")) {
 
@@ -125,10 +125,18 @@ public class EditMap {
                     }
                 }
                 if (l_flag_to_save == 0) {
-                    System.out.println("To save changes enter save map command");
-                    String l_out = d_SC.nextLine();
-                    String[] l_filename = l_out.split(" ");
-                    String l_address = "src\\main\\resources\\maps\\" + l_filename[1];
+                    String l_address;
+                    while(true) {
+                        System.out.println("To save changes enter save map command");
+                        String l_out = d_SC.nextLine();
+                        String[] l_filename = l_out.split(" ");
+                        if (l_filename.length < 2 || l_filename.length > 2) {
+                            continue;
+                        } else {
+                            l_address = "src\\main\\resources\\maps\\" + l_filename[1];
+                            break;
+                        }
+                    }
                     File l_file3 = new File(l_address);
                     l_flag_error = 0;
 
@@ -191,8 +199,8 @@ public class EditMap {
                             break;
                         }
                         if (l_flag1 == 1) {
-                            int size = (int) l_cont_unique_key.values().toArray()[l_cont_unique_key.size()-1];
-                            l_cont_unique_key.put(l_command[1], size + 1);
+                            int l_size = (int) l_cont_unique_key.values().toArray()[l_cont_unique_key.size()-1];
+                            l_cont_unique_key.put(l_command[1], l_size + 1);
                             l_country_cont_key.put(l_command[1], l_num);
                         }
                     }
@@ -204,8 +212,8 @@ public class EditMap {
                             l_flag_save=1;
                             break;
                         }
-                        for (int h = 0; h < l_countries.size(); h++) {
-                            if (l_command[1].equalsIgnoreCase(l_countries.get(h))) {
+                        for (int l_h = 0; l_h < l_countries.size(); l_h++) {
+                            if (l_command[1].equalsIgnoreCase(l_countries.get(l_h))) {
                                 l_flag2 = 1;
                                 break;
                             }
@@ -241,10 +249,18 @@ public class EditMap {
                     }
                 }
                 if (l_flag_save == 0 ) {
-                    System.out.println("To save changes enter save map command");
-                    String l_out = d_SC.nextLine();
-                    String[] l_filename1 = l_out.split(" ");
-                    String l_address = "src\\main\\resources\\maps\\" + l_filename1[1];
+                    String l_address;
+                    while(true) {
+                        System.out.println("To save changes enter save map command");
+                        String l_out = d_SC.nextLine();
+                        String[] l_filename = l_out.split(" ");
+                        if (l_filename.length < 2 || l_filename.length > 2) {
+                            continue;
+                        } else {
+                            l_address = "src\\main\\resources\\maps\\" + l_filename[1];
+                            break;
+                        }
+                    }
                     File l_file3 = new File(l_address);
                     l_flag_error=0;
                     while(true) {
@@ -267,7 +283,6 @@ public class EditMap {
             }
             else if (l_text[0].equalsIgnoreCase("editneighbor ")) {
                 File l_file = new File("src\\main\\resources\\maps\\" + p_file);
-
                 MapTable l_list = new MapTable();
                 ArrayList<String> l_countries = l_list.countryList(l_file);
                 ArrayList<String> l_continent = l_list.continentList(l_file);
@@ -304,8 +319,6 @@ public class EditMap {
                             }
                         } else {
                             System.out.println("The country you entered doesn't exist");
-                            l_flag_error=1;
-                            l_flag_to_save=1;
                         }
                     } else if (l_command[0].equalsIgnoreCase("remove")) {
                         if (l_countries.contains(l_command[1])) {
@@ -324,10 +337,18 @@ public class EditMap {
                     }
                 }
                 if(l_flag_to_save==0) {
-                    System.out.println("To save changes enter save map command");
-                    String l_out = d_SC.nextLine();
-                    String[] l_filename = l_out.split(" ");
-                    String l_address = "src\\main\\resources\\maps\\" + l_filename[1];
+                    String l_address;
+                    while(true) {
+                        System.out.println("To save changes enter save map command");
+                        String l_out = d_SC.nextLine();
+                        String[] l_filename = l_out.split(" ");
+                        if (l_filename.length < 2 || l_filename.length > 2) {
+                            continue;
+                        } else {
+                            l_address = "src\\main\\resources\\maps\\" + l_filename[1];
+                            break;
+                        }
+                    }
                     File l_file2 = new File(l_address);
                     l_flag_error=0;
                     while(true) {
@@ -355,10 +376,10 @@ public class EditMap {
             if(l_flag_error == 0) {
                 System.out.println("Want to continue editing or wanna see your map?");
                 System.out.println("If you want to continue editing enter command 'editing' or if you wish to see map enter 'showmap' command");
-                String l_yesorno = d_SC.next();
-                if (l_yesorno.equalsIgnoreCase("editing")) {
+                String l_yesOrNo = d_SC.next();
+                if (l_yesOrNo.equalsIgnoreCase("editing")) {
                     Main.EditMap();
-                } else if (l_yesorno.equalsIgnoreCase("showmap")) {
+                } else if (l_yesOrNo.equalsIgnoreCase("showmap")) {
                     ShowMap l_show  = new ShowMap();
                     l_show.mapshow();
                     break;
@@ -377,11 +398,10 @@ public class EditMap {
      * @param p_country_cont_key  This is also a hashmap data structure which denotes the country name as its key and the continent's unique id to which the country belong in the map.
      * @param p_country_neighbour This hashmap data structure contains a string as the key and an arraylist as the value. The String denotes the country unique id and the arraylist contains the list of country's neighboring countries unique id.
      * @param p_countrykey This hashmap denotes the unique id of the country as the key and the country name as the value.
-     * @return the Object of the File.
+     * @return the object of the class File.
      * @throws FileNotFoundException If file is not present at the provided path it will throw exception.
      */
     public File fileCreation(File p_file, HashMap<String,Integer> p_cont_unique_key, HashMap<String,Integer> p_cont_val, HashMap<String,Integer> p_country_cont_key, HashMap<String,ArrayList> p_country_neighbour, HashMap<Integer,String> p_countrykey) throws FileNotFoundException {
-
         PrintWriter l_printWriter = new PrintWriter(p_file);
         l_printWriter.println("[Map]");
         l_printWriter.println("author=");
@@ -390,7 +410,6 @@ public class EditMap {
         l_printWriter.println("scroll=horizontal");
         l_printWriter.println("warn=yes");
         l_printWriter.println(" ");
-
         l_printWriter.println("[continents]");
         for (Map.Entry<String,Integer> l_entry : p_cont_val.entrySet()) {
             l_printWriter.println(l_entry.getKey() + " " + l_entry.getValue());
@@ -412,7 +431,6 @@ public class EditMap {
                         l_index_of_country = l_index;
                         break;
                     }
-
                 }
             }
             else{
@@ -441,7 +459,7 @@ public class EditMap {
             }
             l_printWriter.println();
         }
-        System.out.println("Map Created Successfully");
+        System.out.println("Let's see if the map is connected or not");
         l_printWriter.close();
         return p_file;
     }
