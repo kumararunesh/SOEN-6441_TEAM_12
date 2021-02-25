@@ -23,6 +23,7 @@ public class UserCreatedMapValidation {
      * @param p_countries This parameter is a string array which contains the list of the countries.
      * @param p_continentcountryvalue This is an integer array which contains the list of unique ID's of continent to which a country belong.
      * @param p_adjacentcountries This a string array which contains the list of neighboring countries of a particular country.
+     * @return String array of size 1 which is helpful in unitTesting.
      * @throws Exception If file doesn't found at the directed path then this will throw exception.
      */
     public void mapValidate(File p_file, String[] p_continent, int p_continentsize, String[] p_ContVal, int p_countrytotal, String[] p_countries, int[] p_continentcountryvalue, String[] p_adjacentcountries) throws Exception {
@@ -102,15 +103,18 @@ public class UserCreatedMapValidation {
             MapCreate l_save  = new MapCreate();
             File l_file = l_save.fileCreation(p_file, p_continent, p_continentsize, p_ContVal, p_countrytotal, p_countries, p_continentcountryvalue, p_adjacentcountries);
             GraphConnected l_validate = new GraphConnected(l_file);
+            ContinentsConnected l_obj = new ContinentsConnected(l_file);
             boolean l_check = l_validate.ifGraphConnected();
-            if(l_check==true){
+            boolean l_sub = l_validate.ContinentsCheck();
+            boolean l_one = l_obj.ifContinentsConnected();
+            if(l_check==true && l_sub == true && l_one==true ){
                 System.out.println("**************************************");
                 System.out.println("Graph is Connected");
                 System.out.println("**************************************");
                 System.out.println("");
 
                 System.out.println("**************************************");
-                System.out.println("Map is validated and created successfully");
+                System.out.println("Map is validated");
                 System.out.println("**************************************");
                 Main.menu();
             }
