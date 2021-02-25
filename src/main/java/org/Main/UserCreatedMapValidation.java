@@ -1,6 +1,10 @@
 package org.Main;
 
 import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * This class will get the details of the map after user creates a map from the scratch and then this will validate the map on some conditions.
@@ -8,7 +12,6 @@ import java.io.File;
  */
 
 public class UserCreatedMapValidation {
-    String[] testing = new String[1];
     /**
      * This method will get the details of the map after user creates a map from scratch and then it will validate the map on some conditions.
      * If the map is validated, then the file will get saved else it will show that the file in not correct.
@@ -20,12 +23,10 @@ public class UserCreatedMapValidation {
      * @param p_countries This parameter is a string array which contains the list of the countries.
      * @param p_continentcountryvalue This is an integer array which contains the list of unique ID's of continent to which a country belong.
      * @param p_adjacentcountries This a string array which contains the list of neighboring countries of a particular country.
-     * @return String array of size 1 which is helpful in unitTesting.
      * @throws Exception If file doesn't found at the directed path then this will throw exception.
      */
-    public  String[] mapValidate(File p_file, String[] p_continent, int p_continentsize, String[] p_ContVal, int p_countrytotal, String[] p_countries, int[] p_continentcountryvalue, String[] p_adjacentcountries) throws Exception {
+    public void mapValidate(File p_file, String[] p_continent, int p_continentsize, String[] p_ContVal, int p_countrytotal, String[] p_countries, int[] p_continentcountryvalue, String[] p_adjacentcountries) throws Exception {
         int l_finalFlag = 0;
-
         for (int l_i = 0; l_i < p_countries.length; l_i++) {
             for(int j=l_i+1; j < p_countries.length-1;j++){
                 if(p_countries[l_i].equalsIgnoreCase(p_countries[j])){
@@ -52,8 +53,6 @@ public class UserCreatedMapValidation {
                 break;
             }
         }
-
-
         for(int l_i=0;l_i<p_adjacentcountries.length;l_i++)
         {
             String l_splitString[] = p_adjacentcountries[l_i].split(",");
@@ -95,42 +94,39 @@ public class UserCreatedMapValidation {
         }
         if(l_finalFlag==1)
         {
-            testing[0]="Map is Incorrect";
             System.out.println("Map is Incorrect");
             Main.menu();
         }
         else if(l_finalFlag==0)
         {
-            String a = "Validated";
-            String b ="Invalid Map";
-
-            MapCreate d_save  = new MapCreate();
-            File file = d_save.fileCreation(p_file, p_continent, p_continentsize, p_ContVal, p_countrytotal, p_countries, p_continentcountryvalue, p_adjacentcountries);
-            GraphConnected validate = new GraphConnected(file);
-            boolean check = validate.ifGraphConnected();
-            if(check==true){
+            MapCreate l_save  = new MapCreate();
+            File l_file = l_save.fileCreation(p_file, p_continent, p_continentsize, p_ContVal, p_countrytotal, p_countries, p_continentcountryvalue, p_adjacentcountries);
+            GraphConnected l_validate = new GraphConnected(l_file);
+            boolean l_check = l_validate.ifGraphConnected();
+            if(l_check==true){
                 System.out.println("**************************************");
                 System.out.println("Graph is Connected");
                 System.out.println("**************************************");
                 System.out.println("");
-                testing[0]=a;
+
                 System.out.println("**************************************");
-                System.out.println("Validated");
+                System.out.println("Map is validated and created successfully");
                 System.out.println("**************************************");
+                Main.menu();
             }
             else{
                 System.out.println("**************************************");
                 System.out.println("Graph is not Connected");
                 System.out.println("**************************************");
                 System.out.println("");
-                testing[0]=b;
+
                 System.out.println("");
                 System.out.println("**************************************");
                 System.out.println("Map is Incorrect");
                 System.out.println("**************************************");
-
+                Main.menu();
             }
         }
-        return testing;
+
     }
 }
