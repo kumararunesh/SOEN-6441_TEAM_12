@@ -9,7 +9,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class showMap {
     /**
-     * Global Player List
+     * PLAYERS_LIST is the Hashmap used to store all the name of the different players as the String and the
+     * Player object is stored as the value. It is basically used to store all the details about the Player
      */
     static ConcurrentHashMap <String,Player> PLAYERS_LIST = new ConcurrentHashMap<>();
 
@@ -19,10 +20,15 @@ public class showMap {
     static Country COU;
 
     /**
-     *Adjacency Matrix for Map representation of country and its countries.
+     * ADJACENTNEIGHBOURS is the 2D matrix used to store all the neighbours in the form of Adjacency Matrix.
+     * If there's the link between the countries, then it will be represented by X.
      */
     static String[][] ADJACENT_NEIGHBOURS;
 
+     /**
+     * Details is the 2D matrix used to store all the details about the various Countries. It include countries,
+     * owner,continent and number of armies placed at that country.
+     */
     String[][] d_details;
 
 
