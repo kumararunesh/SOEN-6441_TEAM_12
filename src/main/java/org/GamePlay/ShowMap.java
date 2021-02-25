@@ -88,5 +88,48 @@ public class showMap {
         }
 
         l_row=1;
+       for(String l_country:COU.COUNTRIESLIST.keySet())
+        {
+
+            for(String l_neighbour : COU.COUNTRIESLIST.get(l_country).d_neighbours)
+            {
+                int l_temp = l_allCountries.indexOf(l_neighbour);
+                l_addElement(l_row,l_temp+1,"X");
+            }
+            for(int l_index = 0; l_index< ADJACENT_NEIGHBOURS[l_row].length; l_index++)
+            {
+                if(ADJACENT_NEIGHBOURS[l_row][l_index]==null)
+                {
+                    l_addElement(l_row,l_index,"O");
+                }
+            }
+            l_addElement(l_row,l_row,"X");
+            l_row+=1;
+        }
+
+        System.out.println("The details are: ");
+        l_row=0;
+        int l_col =0;
+        System.out.println("Country\t Owner\t Continent\t Armies");
+        for(l_row=0; l_row< d_details.length; l_row++)
+        {
+            for(l_col=0;l_col<4;l_col++)
+            {
+                System.out.print(d_details[l_row][l_col]+"\t");
+            }
+            System.out.println("");
+        }
+
+        System.out.println("Adjacency matrix: ");
+        l_row=0;
+        l_col=0;
+        for(l_row=0; l_row< ADJACENT_NEIGHBOURS.length; l_row++)
+        {
+            for(l_col=0; l_col< ADJACENT_NEIGHBOURS[l_row].length; l_col++)
+            {
+                System.out.print(ADJACENT_NEIGHBOURS[l_row][l_col]+" ");
+            }
+            System.out.println(" ");
+        }
 
   }
