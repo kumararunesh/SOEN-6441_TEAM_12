@@ -29,7 +29,6 @@ public class DeployOrder extends Order {
      * Implementation of Execute in Deploy Order
      *
      * @param p_p Player
-     * @return string variable which is used for the deploy
      */
     public void Execute(Player p_p) {
 
