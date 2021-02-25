@@ -26,21 +26,7 @@ public class showMap {
      * Details is the 2D matrix used to store all the details about the various Countries. It include countries,
      * owner,continent and number of armies placed at that country.
      */
-    String[][] d_details;;
-
-    
-
-    /**
-     * This method is used to add element to the adjacency matrix which is used for representing the country and its neighbours.
-     * @param p_row represents the row number of the 2D Matrix.
-     * @param p_col represents the column number of the 2D Matrix.
-     * @param p_element represents the data to be added at that specific index.
-     */
-
-    public void l_addElement(int p_row, int p_col, String p_element)
-    {
-        ADJACENTNEIGHBOURS[p_row][p_col]=p_element;
-    }
+    String[][] d_details;
 
     /**
      * Method which is used to print all the details of the country which includes country name, its continent,
