@@ -675,7 +675,7 @@ public class MapTable {
                     int l_see = Integer.parseInt(l_input[0]);
 
 
-                    for(int l_i =0 ; l_i<countries.size() ; l_i++){
+                    for(int l_o =0 ; l_o<countries.size() ; l_o++){
                         ArrayList<Integer> l_addCountry =new ArrayList<>();
                         if(countries.contains(l_see)){
                             for(int l_j=0;l_j<l_input.length;l_j++) {
