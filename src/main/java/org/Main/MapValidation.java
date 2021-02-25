@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class MapValidation {
 
-    int d_final_flag = 0;
+    public int d_final_flag = 0;
     /**
      * This method will get the details of the map after user edit some changes in the map and then it will validate the map on some conditions.
      * If the map is validated, then the file will get saved else it will show that the file in not correct.
