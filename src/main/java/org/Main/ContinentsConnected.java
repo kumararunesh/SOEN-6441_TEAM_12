@@ -3,6 +3,8 @@ package org.Main;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class check whether the continents are connected to each other or not.
@@ -27,7 +29,7 @@ public class ContinentsConnected {
      * and each countries continent id in CountriesContinent and then is sorted and compared with continentsKey arraylist..
      * if both are equal the continents are connected and if not the not connected.
      * @return boolean value whether a particulars maps continents are connected or not.
-     * @throws Exception as it is using the MapTable class functions which are throwing exception
+     * @throws Exception
      */
     public boolean ifContinentsConnected() throws Exception {
 
@@ -46,5 +48,33 @@ public class ContinentsConnected {
 
         }
         return false;
+    }
+
+    public HashMap<Integer,ArrayList> ifContinentCountriesConnected() throws Exception {
+        MapTable l_obj = new MapTable();
+
+        ArrayList<Integer> copy = new ArrayList<>();
+        HashMap<Integer,ArrayList> nodes = new HashMap<>();
+        HashMap<Integer,Integer> l_connect = l_obj.cont(d_file);
+        ArrayList<Integer> l_ContinentAndKey = l_obj.continentsKey(d_file);
+        System.out.println(l_ContinentAndKey);
+        System.out.println(l_connect);
+
+        for(int i =0 ; i<l_ContinentAndKey.size() ; i++){
+            ArrayList<Integer> countries = new ArrayList<>();
+            for(Map.Entry<Integer, Integer> entry: l_connect.entrySet()){
+
+                if(entry.getValue()== l_ContinentAndKey.get(i)){
+                    countries.add(entry.getKey());
+                    copy = countries;
+                    nodes.put(l_ContinentAndKey.get(i),copy);
+
+                    }
+
+        }
+
+        }
+
+        return nodes;
     }
 }
