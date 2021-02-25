@@ -31,6 +31,7 @@ public class playGame {
      * Deploy: Command which is used to deploy the armies on the particular country. The country should be available in the Map.
      * Pass: This command is used to pass the turn to the next player if the player doesn't want to give any deploy order. This function will terminate if all the players give the Pass Command
      * ShowMap: Command which shows the details about the countries.
+     * @return l_armiesByCountries which is used for the testing the number of armies given to the player
      */
     public int playGameLoop() {
         int l_armiesByCountries = 0;
