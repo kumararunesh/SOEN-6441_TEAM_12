@@ -28,16 +28,7 @@ public class showMap {
      */
     String[][] d_details;;
 
-    /**
-     * Constructor used to initialize the global variables
-     * @param p_players_list is the HashMap containing all the Name of the players as the String and its value containing the Player Object
-     * @param p_cou is the object of the Country Class from where we can have complete detail of the Country.
-     */
-    public showMap(ConcurrentHashMap<String ,Player> p_players_list, Country p_cou)
-    {
-        this.COU = p_cou;
-        this.PLAYERS_LIST = p_players_list;
-    }
+    
 
     /**
      * This method is used to add element to the adjacency matrix which is used for representing the country and its neighbours.
