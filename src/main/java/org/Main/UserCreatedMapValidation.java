@@ -23,7 +23,6 @@ public class UserCreatedMapValidation {
      * @param p_countries This parameter is a string array which contains the list of the countries.
      * @param p_continentcountryvalue This is an integer array which contains the list of unique ID's of continent to which a country belong.
      * @param p_adjacentcountries This a string array which contains the list of neighboring countries of a particular country.
-     * @return String array of size 1 which is helpful in unitTesting.
      * @throws Exception If file doesn't found at the directed path then this will throw exception.
      */
     public void mapValidate(File p_file, String[] p_continent, int p_continentsize, String[] p_ContVal, int p_countrytotal, String[] p_countries, int[] p_continentcountryvalue, String[] p_adjacentcountries) throws Exception {
