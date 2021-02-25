@@ -7,9 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f33d124-ba81-4bf6-8440-51ed4a454c54" name="Default Changelist" comment="DeployOrder if with for penalty">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/GamePlay/PassOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/GamePlay/PassOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/GamePlay/PassOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/GamePlay/PassOrder.class" afterDir="false" />
+    <list default="true" id="9f33d124-ba81-4bf6-8440-51ed4a454c54" name="Default Changelist" comment="MapCreate Javadoc left for one file">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Architecture.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Soen-6441-Risk.pptx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,6 +229,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
