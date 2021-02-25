@@ -675,12 +675,12 @@ public class MapTable {
                     int l_see = Integer.parseInt(l_input[0]);
 
 
-                    for(int i =0 ; i<countries.size() ; i++){
+                    for(int l_i =0 ; l_i<countries.size() ; l_i++){
                         ArrayList<Integer> l_addCountry =new ArrayList<>();
                         if(countries.contains(l_see)){
                             for(int l_j=0;l_j<l_input.length;l_j++) {
-                                for (int k = 0; k < countries.size(); k++) {
-                                    if (Integer.parseInt(l_input[l_j]) == countries.get(k)) {
+                                for (int l_k = 0; l_k < countries.size(); l_k++) {
+                                    if (Integer.parseInt(l_input[l_j]) == countries.get(l_k)) {
 
                                         if (l_input.length == 1) {
                                             l_check.add(Integer.parseInt(l_input[l_j]));
