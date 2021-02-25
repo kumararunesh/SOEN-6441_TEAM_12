@@ -7,7 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f33d124-ba81-4bf6-8440-51ed4a454c54" name="Default Changelist" comment="Updation to GameEngine with javaDoc" />
+    <list default="true" id="9f33d124-ba81-4bf6-8440-51ed4a454c54" name="Default Changelist" comment="ReadMapTest">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Main/UserCreatedMapValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Main/UserCreatedMapValidation.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,7 +21,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature-passOrder-v1.4" />
+        <entry key="$PROJECT_DIR$" value="feature-ReadMap-v5.0" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -247,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614200646367</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="ReadMapTest">
+      <created>1614254849230</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1614254849230</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -260,6 +269,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -282,6 +292,7 @@
     <MESSAGE value="Updation to Gameengine bugs fix" />
     <MESSAGE value="Updation to Gameengine Loadmap bugs" />
     <MESSAGE value="Updation to GameEngine with javaDoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updation to GameEngine with javaDoc" />
+    <MESSAGE value="ReadMapTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="ReadMapTest" />
   </component>
 </project>
