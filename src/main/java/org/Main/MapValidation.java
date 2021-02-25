@@ -9,7 +9,10 @@ import java.util.Map;
  * If the map is validated, then the file will get saved else it will show that the file in not correct.
  */
 public class MapValidation {
-
+    /**
+     * Flag to check whether map is valid or not.
+     */
+    public int d_final_flag = 0;
     /**
      * This method will get the details of the map after user edit some changes in the map and then it will validate the map on some conditions.
      * If the map is validated, then the file will get saved else it will show that the file in not correct.
@@ -24,14 +27,14 @@ public class MapValidation {
      * @param p_cont_unique_key This hashmap contains the name of the country as it's key and the country's unique ID as the value of the hashmap.
      * @throws Exception If file doesn't found at the directed path then this will throw exception.
      */
-    String[] l_arr = new String[1];
-    public  String[] mapValidate(File p_file,ArrayList<String> p_countries,ArrayList<String> p_continent,HashMap<String, Integer> p_cont_val, HashMap<Integer, String> p_country_key,HashMap<String, String> p_country_cont,HashMap<String, ArrayList> p_country_neighbour,HashMap<String, Integer> p_country_cont_key,HashMap<String, Integer> p_cont_unique_key) throws Exception {
-        int l_final_flag = 0;
+
+    public void mapValidate(File p_file,ArrayList<String> p_countries,ArrayList<String> p_continent,HashMap<String, Integer> p_cont_val, HashMap<Integer, String> p_country_key,HashMap<String, String> p_country_cont,HashMap<String, ArrayList> p_country_neighbour,HashMap<String, Integer> p_country_cont_key,HashMap<String, Integer> p_cont_unique_key) throws Exception {
+
         for (int l_i = 0; l_i < p_countries.size(); l_i++) {
             for(int l_j=l_i+1; l_j < p_countries.size()-1;l_j++){
                 if(p_countries.get(l_i).equalsIgnoreCase(p_countries.get(l_j))){
                     System.out.println("Countries cannot be of same name");
-                    l_final_flag = 1;
+                    d_final_flag = 1;
                     break;
                 }
             }
@@ -39,14 +42,14 @@ public class MapValidation {
         for (Map.Entry<Integer, String> l_entry : p_country_key.entrySet()) {
             if(l_entry.getKey() <= 0){
                 System.out.println("Country's unique key cannot be negaive");
-                l_final_flag = 1;
+                d_final_flag = 1;
             }
         }
         for (int l_i = 0; l_i < p_continent.size(); l_i++) {
             for(int l_j=l_i+1; l_j < p_continent.size()-1;l_j++){
                 if(p_continent.get(l_i).equalsIgnoreCase(p_continent.get(l_j))){
                     System.out.println(" Continents cannot be of same name ");
-                    l_final_flag = 1;
+                    d_final_flag = 1;
                     break;
                 }
             }
@@ -54,7 +57,7 @@ public class MapValidation {
         for (Map.Entry<String, Integer> l_entry : p_cont_val.entrySet()) {
             if(l_entry.getValue() < 0){
                 System.out.println("Continent's Control value cannot be negative");
-                l_final_flag = 1;
+                d_final_flag = 1;
                 break;
             }
         }
@@ -63,7 +66,7 @@ public class MapValidation {
             ArrayList l_value = l_map_element.getValue();
             for(int l_i=0;l_i<l_value.size();l_i++){
                 if(l_value.get(l_i).equals("DNE")){
-                    l_final_flag = 1;
+                    d_final_flag = 1;
                 }
             }
         }
@@ -98,33 +101,29 @@ public class MapValidation {
                 continue;
             }
             else{
-                l_final_flag=1;
+                d_final_flag =1;
                 break;
             }
         }
-        if(l_final_flag==1)
+        if(d_final_flag ==1)
         {
-            String a = "Map is Incorrect";
+            String l_a = "Map is Incorrect";
             System.out.println("Map is Incorrect");
-            l_arr[0]=a;
         }
-        else if(l_final_flag==0)
+        else if(d_final_flag ==0)
         {
-            String l_a = "Validated";
-            String l_b ="Invalid Map";
-
-            EditMap d_save  = new EditMap();
-            File p_File = d_save.fileCreation(p_file, p_cont_unique_key, p_cont_val, p_country_cont_key, p_country_neighbour, p_country_key);
-            GraphConnected l_validate = new GraphConnected(p_File);
+            EditMap l_save  = new EditMap();
+            File l_file = l_save.fileCreation(p_file, p_cont_unique_key, p_cont_val, p_country_cont_key, p_country_neighbour, p_country_key);
+            GraphConnected l_validate = new GraphConnected(l_file);
             boolean l_check = l_validate.ifGraphConnected();
             if(l_check==true){
                 System.out.println("**************************************");
                 System.out.println("Graph is Connected");
                 System.out.println("**************************************");
                 System.out.println("");
-                l_arr[0]=l_a;
+
                 System.out.println("**************************************");
-                System.out.println("Validated");
+                System.out.println("Map is validated");
                 System.out.println("**************************************");
             }
             else{
@@ -132,14 +131,13 @@ public class MapValidation {
                 System.out.println("Graph is not Connected");
                 System.out.println("**************************************");
                 System.out.println("");
-                l_arr[0]=l_b;
+
                 System.out.println("");
                 System.out.println("**************************************");
                 System.out.println("Map is Incorrect");
                 System.out.println("**************************************");
-
+                Main.menu();
             }
         }
-    return l_arr;
     }
 }
