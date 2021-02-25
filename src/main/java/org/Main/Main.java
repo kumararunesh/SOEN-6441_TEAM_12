@@ -99,36 +99,41 @@ public class Main {
             SC = new Scanner(System.in);
             String l_filename = SC.nextLine();
             String[] l_text = l_filename.split(" ");
-            try {
-                if (l_text[0].equalsIgnoreCase("edit")) {
-                    String l_file = null;
-                    File l_directoryPath = new File("src\\main\\resources\\maps");
-                    String l_contents[] = l_directoryPath.list();
-
-                    for (int l_i = 0; l_i < l_contents.length; l_i++) {
-                        if (l_text[1].equals(l_contents[l_i])) {
-                            l_file = l_text[1];
-                            l_flag = 1;
+            if(l_filename.endsWith(".map")){
+                try {
+                    if (l_text[0].equalsIgnoreCase("edit")) {
+                        String l_file = null;
+                        File l_directoryPath = new File("src\\main\\resources\\maps");
+                        String l_contents[] = l_directoryPath.list();
+                        for (int l_i = 0; l_i < l_contents.length; l_i++) {
+                            if (l_text[1].equals(l_contents[l_i])) {
+                                l_file = l_text[1];
+                                l_flag = 1;
+                            }
                         }
-                    }
 
-                    if (l_flag == 0 || l_contents == null) {
-                        System.out.println("File does not exits! Let's build a new map");
-                        File l_file1 = new File(l_text[1]);
-                        createMapByUser(l_file1);
-                    }
+                        if (l_flag == 0 || l_contents == null) {
+                            System.out.println("File does not exits! Let's build a new map");
+                            File l_file1 = new File(l_text[1]);
+                            createMapByUser(l_file1);
+                        }
 
-                    if (l_flag == 1) {
-                        EditMap l_edit = new EditMap();
-                        l_edit.editMap(l_file);
+                        if (l_flag == 1) {
+                            EditMap l_edit = new EditMap();
+                            l_edit.editMap(l_file);
+                        }
+                        break;
+                    } else {
+                        System.out.println("Enter correct command\n");
                     }
-                    break;
+                } catch (Exception p_e) {
+                    p_e.printStackTrace();
                 }
-                else{
-                    System.out.println("Enter correct command\n");
-                }
-            } catch (Exception p_e) {
-                p_e.printStackTrace();
+            }
+            else
+            {
+                System.out.println("Enter the editmap command with .map extension");
+                continue;
             }
         }
     }
