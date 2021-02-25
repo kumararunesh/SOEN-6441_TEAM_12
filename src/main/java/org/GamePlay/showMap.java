@@ -26,7 +26,7 @@ public class showMap {
      * Details is the 2D matrix used to store all the details about the various Countries. It include countries,
      * owner,continent and number of armies placed at that country.
      */
-    String[][] DETAILS;
+    String[][] d_details;;
 
     /**
      * Constructor used to initialize the global variables
