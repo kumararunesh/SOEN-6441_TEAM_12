@@ -22,7 +22,6 @@ public class GraphConnected{
 
     /**
      * Simple Constructor throwing exception.
-     * @param p_file is the object of the file.
      * @throws Exception whether the file exists or not.
      */
     public GraphConnected(File p_file) throws Exception {
@@ -35,6 +34,7 @@ public class GraphConnected{
         d_max = Collections.max(d_realNodes,null);
         d_visited = new boolean[d_max +1];
         d_scan = new boolean[d_max + 1];
+
     }
 
     /**
@@ -59,6 +59,8 @@ public class GraphConnected{
         return  d_countryNeigh;
 
     }
+
+
 
     /**
      * This method implements Depth First Search Algorithm in order to traverse the given graph.
@@ -107,4 +109,55 @@ public class GraphConnected{
             }
         return true;
         }
+
+
+    /**
+     * This function checks if each country is a connected sub graph.
+     * @return boolean whether the individual continent is connected or not.
+     * @throws Exception as we are using ConnectedContinent class Functions
+     */
+    public boolean ContinentsCheck() throws Exception {
+        ContinentsConnected d_obj = new ContinentsConnected(FILE);
+        HashMap<Integer,ArrayList> l_list = d_obj.ifContinentCountriesConnected();
+        for(Map.Entry<Integer, ArrayList> l_entry: l_list.entrySet()) {
+            HashMap<Integer,ArrayList> l_check = d_borders.CountryNeighbours(FILE,l_entry.getValue());
+            List<Integer> l_nodes = l_entry.getValue();
+            int l_max = Collections.max(l_nodes);
+            boolean [] l_traversed = new boolean[l_max +1];
+            int l_key_1 = l_check.keySet().stream().findFirst().get();
+            int p_start = l_key_1;
+            d_stack.push(p_start);
+            l_traversed[p_start] = true;
+            int l_count = 0;
+            while (true) {
+                if (d_stack.isEmpty() == true) {
+                    break;
+                }
+                Integer l_node = d_stack.pop();
+                d_connections = l_check.get(l_node);
+                if (!d_connections.isEmpty()) {
+                    for (Integer l_neighbour : d_connections) {
+                        if (!l_traversed[l_neighbour]) {
+                            d_stack.push(l_neighbour);
+                            l_traversed[l_neighbour] = true;
+                        }
+                    }
+                }
+                l_count++;
+            }
+
+            l_traversed[0] = true;
+            for (int l_i = 0; l_i < l_nodes.size(); l_i++) {
+                int l_see = l_nodes.get(l_i);
+                boolean l_comp = l_traversed[l_see];
+                if(l_comp == false){
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
+    }
 }
+
