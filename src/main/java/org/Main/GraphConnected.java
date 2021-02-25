@@ -20,6 +20,7 @@ public class GraphConnected{
 
     /**
      * Simple Constructor throwing exception.
+     * @param p_file is the File path
      * @throws Exception whether the file exists or not.
      */
     public GraphConnected(File p_file) throws Exception {
