@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+
 /**
  * This class is used for reading the map and saving it to the variables which will be required while playing the game.
  */
@@ -20,27 +21,27 @@ public class MapTable {
      */
     public ArrayList<String> countryList(File p_file) throws Exception {
 
-        ReadLines d_line = new ReadLines();
-        int l_n =d_line.countryandborderline(p_file);
+        ReadLines l_line = new ReadLines();
+        int l_n =l_line.countryandborderline(p_file);
 
         ArrayList<String> l_list = new ArrayList<>();
 
-        Scanner d_sc = new Scanner(p_file);
+        Scanner l_sc = new Scanner(p_file);
         int l_count = 0;
         int l_i;
         int l_a=0;
-        while(d_sc.hasNextLine()){
+        while(l_sc.hasNextLine()){
             if(l_count==1){
                 break;
             }
-            if(d_sc.next().equals("[countries]")){
+            if(l_sc.next().equals("[countries]")){
                 for(l_i=0;l_i<l_n-1;l_i++){
-                    if(!d_sc.hasNext()){
+                    if(!l_sc.hasNext()){
                         break;
                     }
-                    String l_text = d_sc.nextLine();
+                    String l_text = l_sc.nextLine();
                     if(l_a == 0) {
-                        l_text = d_sc.nextLine();
+                        l_text = l_sc.nextLine();
                         l_a=1;
                     }
                     String[] l_input = l_text.split(" ");
@@ -63,31 +64,30 @@ public class MapTable {
      */
     public ArrayList<String> continentList(File p_file) throws Exception {
 
-        ReadLines d_line = new ReadLines();
-        int n = d_line.continentline(p_file);
+        ReadLines l_line = new ReadLines();
+        int l_num = l_line.continentline(p_file);
 
         ArrayList<String> l_list1 = new ArrayList<>();
 
-        Scanner d_sc = new Scanner(p_file);
+        Scanner l_sc = new Scanner(p_file);
         int l_count = 0;
         int l_i;
         int l_a=0;
-        while(d_sc.hasNextLine()){
+        while(l_sc.hasNextLine()){
             if(l_count==1){
                 break;
             }
-            if(d_sc.next().equals("[continents]")){
-                for(l_i=0;l_i<n-1;l_i++){
-                    if(!d_sc.hasNext()){
+            if(l_sc.next().equals("[continents]")){
+                for(l_i=0;l_i<l_num-1;l_i++){
+                    if(!l_sc.hasNext()){
                         break;
                     }
-                    String l_text = d_sc.nextLine();
+                    String l_text = l_sc.nextLine();
                     if(l_a == 0) {
-                        l_text = d_sc.nextLine();
+                        l_text = l_sc.nextLine();
                         l_a=1;
                     }
                     String[] l_input = l_text.split(" ");
-                    //System.out.println("-----------Continents----------"+ l_input[0]);
                     l_list1.add(l_input[0]);
                 }
                 l_count=1 ;
@@ -105,27 +105,27 @@ public class MapTable {
      */
     public HashMap<String,Integer> continentandvalue(File p_file) throws Exception{
 
-        ReadLines d_line = new ReadLines();
-        int l_n = d_line.continentline(p_file);
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.continentline(p_file);
 
         HashMap<String,Integer> l_contval = new HashMap<>();
 
-        Scanner d_sc = new Scanner(p_file);
+        Scanner l_sc = new Scanner(p_file);
         int l_count=0;
         int l_i;
         int l_a=0;
-        while(d_sc.hasNextLine()){
+        while(l_sc.hasNextLine()){
             if(l_count==1){
                 break;
             }
-            if(d_sc.next().equals("[continents]")){
+            if(l_sc.next().equals("[continents]")){
                 for(l_i=0;l_i<l_n-1;l_i++){
-                    if(!d_sc.hasNext()){
+                    if(!l_sc.hasNext()){
                         break;
                     }
-                    String l_text = d_sc.nextLine();
+                    String l_text = l_sc.nextLine();
                     if(l_a == 0) {
-                        l_text = d_sc.nextLine();
+                        l_text = l_sc.nextLine();
                         l_a=1;
                     }
                     String[] l_input = l_text.split(" ");
@@ -147,27 +147,27 @@ public class MapTable {
      */
     public HashMap<Integer,String> countryanditskey(File p_file) throws Exception{
 
-        ReadLines d_line = new ReadLines();
-        int l_n = d_line.countryandborderline(p_file);
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.countryandborderline(p_file);
 
         HashMap<Integer,String> l_countryval = new HashMap<>();
 
-        Scanner d_sc = new Scanner(p_file);
+        Scanner l_sc = new Scanner(p_file);
         int l_count=0;
         int l_i;
         int l_a=0;
-        while(d_sc.hasNextLine()){
+        while(l_sc.hasNextLine()){
             if(l_count==1){
                 break;
             }
-            if(d_sc.next().equals("[countries]")){
+            if(l_sc.next().equals("[countries]")){
                 for(l_i=0;l_i<l_n-1;l_i++){
-                    if(!d_sc.hasNext()){
+                    if(!l_sc.hasNext()){
                         break;
                     }
-                    String l_text = d_sc.nextLine();
+                    String l_text = l_sc.nextLine();
                     if(l_a == 0) {
-                        l_text = d_sc.nextLine();
+                        l_text = l_sc.nextLine();
                         l_a=1;
                     }
                     String[] l_input = l_text.split(" ");
@@ -190,27 +190,27 @@ public class MapTable {
 
     public HashMap<String,String> countryanditscontinent(File p_file) throws Exception{
 
-        ReadLines d_line = new ReadLines();
-        int l_n = d_line.countryandborderline(p_file);
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.countryandborderline(p_file);
         ArrayList<String> l_continent = continentList(p_file);
         HashMap<String,String> l_countrycont = new HashMap<>();
 
-        Scanner d_sc = new Scanner(p_file);
+        Scanner l_sc = new Scanner(p_file);
         int l_count=0;
         int l_i;
         int l_a=0;
-        while(d_sc.hasNextLine()){
+        while(l_sc.hasNextLine()){
             if(l_count==1){
                 break;
             }
-            if(d_sc.next().equals("[countries]")){
+            if(l_sc.next().equals("[countries]")){
                 for(l_i=0;l_i<l_n-1;l_i++){
-                    if(!d_sc.hasNext()){
+                    if(!l_sc.hasNext()){
                         break;
                     }
-                    String l_text = d_sc.nextLine();
+                    String l_text = l_sc.nextLine();
                     if(l_a == 0) {
-                        l_text = d_sc.nextLine();
+                        l_text = l_sc.nextLine();
                         l_a=1;
                     }
                     String[] l_input = l_text.split(" ");
@@ -237,17 +237,17 @@ public class MapTable {
         HashMap<String,ArrayList> l_countryNeigh= new HashMap<>();
         HashMap <Integer,String> l_countryIndex= new HashMap<>();
         File l_file1 = new File(String.valueOf(p_file));
-        Scanner d_sc = new Scanner(l_file1);
-        while(d_sc.hasNextLine()) {
-            String l_line = d_sc.nextLine();
+        Scanner l_sc = new Scanner(l_file1);
+        while(l_sc.hasNextLine()) {
+            String l_line = l_sc.nextLine();
             if(l_line.equalsIgnoreCase("[countries]"))
             {
                 break;
             }
         }
-        while(d_sc.hasNextLine())
+        while(l_sc.hasNextLine())
         {
-            String l_line = d_sc.nextLine();
+            String l_line = l_sc.nextLine();
             if(l_line.equals(""))
             {
                 break;
@@ -256,20 +256,19 @@ public class MapTable {
 
         }
         System.out.println(l_countryIndex);
-        while(d_sc.hasNextLine()) {
-            String l_line = d_sc.nextLine();
+        while(l_sc.hasNextLine()) {
+            String l_line = l_sc.nextLine();
             if(l_line.equalsIgnoreCase("[borders]"))
             {
                 break;
             }
         }
-        while(d_sc.hasNextLine())
+        while(l_sc.hasNextLine())
         {
-            String l_line= d_sc.nextLine();
+            String l_line= l_sc.nextLine();
             String l_name;
             String l_lineSplit[] = l_line.split(" ");
             ArrayList<String> l_nameOfNeighCountries = new ArrayList();
-            Integer countryName;
             for(int l_i=1;l_i<l_lineSplit.length;l_i++)
             {
                 if(l_countryIndex.containsKey(Integer.parseInt(l_lineSplit[l_i])))
@@ -295,27 +294,26 @@ public class MapTable {
      * @throws Exception as this method is using the countryandborderline method that is throwing exception
      */
     public HashMap<String,Integer> countryanditsuniquecontinent(File p_file) throws Exception{
-
-        ReadLines d_line = new ReadLines();
-        int l_n = d_line.countryandborderline(p_file);
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.countryandborderline(p_file);
         HashMap<String, Integer> l_countrycontkey = new HashMap<>();
 
-        Scanner d_sc = new Scanner(p_file);
+        Scanner l_sc = new Scanner(p_file);
         int l_count=0;
         int l_i;
         int l_a=0;
-        while(d_sc.hasNextLine()){
+        while(l_sc.hasNextLine()){
             if(l_count==1){
                 break;
             }
-            if(d_sc.next().equals("[countries]")){
+            if(l_sc.next().equals("[countries]")){
                 for(l_i=0;l_i<l_n-1;l_i++){
-                    if(!d_sc.hasNext()){
+                    if(!l_sc.hasNext()){
                         break;
                     }
-                    String l_text = d_sc.nextLine();
+                    String l_text = l_sc.nextLine();
                     if(l_a == 0) {
-                        l_text = d_sc.nextLine();
+                        l_text = l_sc.nextLine();
                         l_a=1;
                     }
                     String[] l_input = l_text.split(" ");
@@ -335,26 +333,26 @@ public class MapTable {
      * @throws Exception as it is using the countryandborderline method which is throwing the exception
      */
     public HashMap<String,Integer> uniqueKeyanditscountry(File p_file) throws Exception{
-        ReadLines d_line = new ReadLines();
-        int l_n = d_line.countryandborderline(p_file);
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.countryandborderline(p_file);
         HashMap<String, Integer> l_countrykey = new HashMap<>();
 
-        Scanner d_sc = new Scanner(p_file);
+        Scanner l_sc = new Scanner(p_file);
         int l_count=0;
         int l_i;
         int l_a=0;
-        while(d_sc.hasNextLine()){
+        while(l_sc.hasNextLine()){
             if(l_count==1){
                 break;
             }
-            if(d_sc.next().equals("[countries]")){
+            if(l_sc.next().equals("[countries]")){
                 for(l_i=0;l_i<l_n-1;l_i++){
-                    if(!d_sc.hasNext()){
+                    if(!l_sc.hasNext()){
                         break;
                     }
-                    String l_text = d_sc.nextLine();
+                    String l_text = l_sc.nextLine();
                     if(l_a == 0) {
-                        l_text = d_sc.nextLine();
+                        l_text = l_sc.nextLine();
                         l_a=1;
                     }
                     String[] l_input = l_text.split(" ");
@@ -369,42 +367,37 @@ public class MapTable {
 
 
     /**
-     * This method will read the file and fetch countries unique id and its neighbours unique id.
-     * @param p_file This is the parameter which contains the actual .map file from which we fetch relevant data.
-     * @return This returns Hashmap whose key contains particular countries unique id.
-     * And corresponding value contains the Arraylist of neighbor countries.
-     * @throws Exception As countryandborderline method throws exception.
+     * Method which will keep a track of the particular country and its neighbouring countries. The country's Unique ID will be used as the key
+     * and the unique Id of the neighbouring countries are stored in the ArrayList. 
+     * @param file is the Object of the file which has to be read.
+     * @return the HashMap containing the Integer as the Key and the ArrayList as the value.
+     * @throws Exception because it is using the countryandborderline method which is throwing the exception
      */
-    public HashMap<Integer,ArrayList> CountryAndItsNeighbours(File p_file) throws Exception{
-        ReadLines d_line = new ReadLines();
-        int l_n = d_line.countryandborderline(p_file);
+    public HashMap<Integer,ArrayList> CountryAndItsNeighbours(File file) throws Exception{
+        ReadLines l_line = new ReadLines();
+        int l_num = l_line.countryandborderline(file);
         HashMap<Integer,ArrayList> l_intNeigh = new HashMap<>();
         List<Integer> l_check = new ArrayList<>();
-
-
-        Scanner d_sc = new Scanner(p_file);
+        Scanner l_sc = new Scanner(file);
         int l_count=0;
         int l_i;
         int l_a=0;
-        while(d_sc.hasNextLine()){
+        while(l_sc.hasNextLine()){
             if(l_count==1){
                 break;
             }
-            if(d_sc.next().equals("[borders]")){
-                for(l_i=0;l_i<l_n;l_i++){
-                    if(!d_sc.hasNext()){
+            if(l_sc.next().equals("[borders]")){
+                for(l_i=0;l_i<l_num;l_i++){
+                    if(!l_sc.hasNext()){
                         break;
                     }
-                    String l_text = d_sc.nextLine();
+                    String l_text = l_sc.nextLine();
                     if(l_a == 0) {
-                        l_text = d_sc.nextLine();
+                        l_text = l_sc.nextLine();
                         l_a=1;
                     }
                     String[] l_input = l_text.split(" ");
-
                     List<Integer> l_list = new ArrayList<>();
-
-
                     int [] l_arr = new int [l_input.length];
                     ArrayList<Integer> l_brd = new ArrayList<>();
 
@@ -422,66 +415,188 @@ public class MapTable {
                         else{
                             l_brd.add(Integer.parseInt(l_input[l_j]));
                         }
-
-
-
                     }
-
                     int l_val = l_list.get(0);
                     l_list.remove(0);
-
                     l_intNeigh.put(l_val,l_brd);
-
-
                 }
                 l_count = 1 ;
-
             }
         }
-
         return l_intNeigh;
     }
 
     /**
-     * This function fetches the first country present in each line under borders section in .map file.
-     * @param p_file This is the actual .map file from where the data is fetched.
-     * @return The list which contains the countries unique id.
-     * @throws Exception As countryandborderline method throws exception.
+     * Method which will read the .map file after the borders and will pick the country's unique ID only and will store it in the list.
+     * @param p_file is the Object of the File.
+     * @return the List which contains the unique id of all the countries mentioned after [borders] line in the map file.
+     * @throws Exception as it is using the countryandborderline method from the ReadLines.java file.
      */
     public List max(File p_file) throws Exception{
-        ReadLines d_line = new ReadLines();
-        int l_n = d_line.countryandborderline(p_file);
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.countryandborderline(p_file);
         List<Integer> l_check = new ArrayList<>();
-
-
-        Scanner d_sc = new Scanner(p_file);
+        Scanner l_sc = new Scanner(p_file);
         int l_count=0;
         int l_i;
         int l_a=0;
-        while(d_sc.hasNextLine()){
+        while(l_sc.hasNextLine()){
             if(l_count==1){
                 break;
             }
-            if(d_sc.next().equals("[countries]")){
+            if(l_sc.next().equals("[countries]")){
                 for(l_i=0;l_i<l_n-1;l_i++){
-                    if(!d_sc.hasNext()){
+                    if(!l_sc.hasNext()){
                         break;
                     }
-                    String l_text = d_sc.nextLine();
+                    String l_text = l_sc.nextLine();
                     if(l_a == 0) {
-                        l_text = d_sc.nextLine();
+                        l_text = l_sc.nextLine();
                         l_a=1;
                     }
                     String[] l_input = l_text.split(" ");
                     l_check.add(Integer.parseInt(l_input[0]));
+                }
+                l_count = 1 ;
+            }
+        }
+        return l_check;
+    }
+
+
+    /**
+     * Method which will read the .map file after the borders and will pick the country's unique ID which is ath the first place in each line.
+     * @param p_file is the Object of the File.
+     * @return the List which contains the unique id of all the countries mentioned after [borders] line in the map file.
+     * @throws Exception as it is using the countryandborderline method from the ReadLines.java file.
+     */
+    public List list(File p_file) throws Exception{
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.countryandborderline(p_file);
+        List<Integer> l_check = new ArrayList<>();
+        Scanner l_sc = new Scanner(p_file);
+        int l_count=0;
+        int l_i;
+        int l_a=0;
+        while(l_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(l_sc.next().equals("[borders]")){
+                for(l_i=0;l_i<l_n-1;l_i++){
+                    if(!l_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = l_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = l_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split(" ");
+                    l_check.add(Integer.parseInt(l_input[0]));
+                }
+                l_count = 1 ;
+            }
+        }
+        return l_check;
+    }
+
+
+    /**
+     * This method will get the continents unique id and stores them in arraylist.
+     * @param p_file is the filename which needs to be read in order to fetch these details.
+     * @return Arraylist of continents unique id.
+     * @throws Exception continentline is being used which is throwing exception and thus it needs to be handled.
+     */
+    public ArrayList<Integer> continentsKey(File p_file) throws Exception{
+
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.continentline(p_file);
+
+        ArrayList<Integer> l_contId = new ArrayList<>();
+
+        Scanner l_sc = new Scanner(p_file);
+        int l_count=0;
+        int l_i;
+        int l_a=0;
+        while(l_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(l_sc.next().equals("[continents]")){
+                for(l_i=1;l_i<l_n;l_i++){
+                    if(!l_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = l_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = l_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split(" ");
+                    int l_val = l_i;
+                    l_contId.add(l_val);
 
                 }
                 l_count = 1 ;
-
             }
+        }
+        return l_contId;
+    }
 
+
+    /**
+     * This method will particularly look for the [countries]  continent unique value and put them in a arraylist..
+     * for each country.
+     * @param p_file contains the name of the file that has to be read.
+     * @return Arraylist which contains each countries continent.
+     * @throws Exception as countryandborderline is being used by this method which throws the exception and it needs to be handled.
+     */
+
+    public ArrayList<Integer> CountriesContinent(File p_file) throws Exception{
+
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.countryandborderline(p_file);
+        ArrayList<Integer> l_cont = new ArrayList<>();
+
+        Scanner l_sc = new Scanner(p_file);
+        int l_count=0;
+        int l_i;
+        int l_a=0;
+        while(l_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(l_sc.next().equals("[countries]")){
+                for(l_i=0;l_i<l_n-1;l_i++){
+                    if(!l_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = l_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = l_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split(" ");
+                    int l_continent = Integer.parseInt(l_input[2]);
+
+                    l_cont.add(l_continent);
+
+                }
+                l_count = 1 ;
+            }
+        }
+        ArrayList<Integer> l_newList = new ArrayList<>();
+
+        for (Integer l_element : l_cont) {
+
+            if (!l_newList.contains(l_element)) {
+
+                l_newList.add(l_element);
+            }
         }
 
-        return l_check;
+        return l_newList;
     }
 }
+
