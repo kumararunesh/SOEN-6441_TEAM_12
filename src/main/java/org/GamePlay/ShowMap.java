@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * armies deployed on that particular country, the owner of that country and the adjacency matrix for the neighbouring countries.
  */
 public class showMap {
-   /**
+    /**
      * Global Player List
      */
     static ConcurrentHashMap <String,Player> PLAYERS_LIST = new ConcurrentHashMap<>();
@@ -24,8 +24,8 @@ public class showMap {
     static String[][] ADJACENT_NEIGHBOURS;
 
     String[][] d_details;
-   
-   
+
+
     /**
      * Constructor used to initialize the global variables
      * @param p_players_list is the HashMap containing all the Name of the players as the String and its value containing the Player Object
@@ -36,7 +36,7 @@ public class showMap {
         this.COU = p_cou;
         this.PLAYERS_LIST = p_players_list;
     }
-   
+
     /**
      * This method is used to add element to the adjacency matrix which is used for representing the country and its neighbours.
      * @param p_row represents the row number of the 2D Matrix.
@@ -47,8 +47,7 @@ public class showMap {
     {
         ADJACENT_NEIGHBOURS[p_row][p_col]=p_element;
     }
-   
-   
+
     /**
      * Method which is used to print all the details of the country which includes country name, its continent,
      * its owner, armies deployed on that country. It also shows the country and its neighbouring country by X and O.
@@ -73,7 +72,8 @@ public class showMap {
             }
             l_row+=1;
         }
-       ADJACENT_NEIGHBOURS[0][0]=" ";
+
+        ADJACENT_NEIGHBOURS[0][0]=" ";
         l_row=1;
         for(String l_country: COU.COUNTRIESLIST.keySet())
         {
@@ -88,7 +88,8 @@ public class showMap {
         }
 
         l_row=1;
-       for(String l_country:COU.COUNTRIESLIST.keySet())
+
+        for(String l_country:COU.COUNTRIESLIST.keySet())
         {
 
             for(String l_neighbour : COU.COUNTRIESLIST.get(l_country).d_neighbours)
@@ -131,5 +132,5 @@ public class showMap {
             }
             System.out.println(" ");
         }
-
-  }
+    }
+}
