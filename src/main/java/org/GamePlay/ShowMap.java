@@ -8,4 +8,20 @@ import java.util.concurrent.ConcurrentHashMap;
  * armies deployed on that particular country, the owner of that country and the adjacency matrix for the neighbouring countries.
  */
 public class showMap {
+   /**
+     * Global Player List
+     */
+    static ConcurrentHashMap <String,Player> PLAYERS_LIST = new ConcurrentHashMap<>();
+
+    /**
+     * Country Object
+     */
+    static Country COU;
+
+    /**
+     *Adjacency Matrix for Map representation of country and its countries.
+     */
+    static String[][] ADJACENT_NEIGHBOURS;
+
+    String[][] d_details;
   }
