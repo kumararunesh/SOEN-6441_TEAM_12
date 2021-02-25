@@ -41,26 +41,37 @@ public class MapCreate {
 
         int l_c = 0;
         String l_x;
-        for (int l_i = 0; l_i < l_continent; l_i++) {
-            System.out.println("Enter " + (l_i + 1) + " l_continent name");
+        int l_i1=0;
+        while(l_i1<l_continent)
+        {
+            System.out.println("Enter " + (l_i1 + 1) + " continent name");
             Scanner l_sc = new Scanner(System.in);
             l_x = l_sc.nextLine();
-            for (int l_k = 0; l_k < l_c; l_k++) {
-                while (true) {
-                    if (!l_x.equals(l_cont_name[l_k])) {
-                        l_cont_name[l_i] = l_x;
-                        break;
-                    } else {
-                        System.out.println("Continent Already Exists\n");
-                        System.out.println("Enter another Continent name");
-                        l_x = l_sc.nextLine();
+            if(l_x.isEmpty())
+            {
+                System.out.println("Input can not be blank");
+                System.out.println("");
+                continue;
+            }
+            else{
+                for (int l_k = 0; l_k < l_c; l_k++) {
+                    while (true) {
+                        if (!l_x.equals(l_cont_name[l_k])) {
+                            l_cont_name[l_i1] = l_x;
+                            break;
+                        } else {
+                            System.out.println("Continent Already Exists\n");
+                            System.out.println("Enter another Continent name");
+                            l_x = l_sc.nextLine();
+                        }
                     }
                 }
+                if (l_c == 0 && !l_x.isEmpty()) {
+                    l_cont_name[l_i1] = l_x;
+                    l_c++;
+                }
+                l_i1+=1;
             }
-            if (l_c == 0) {
-                l_cont_name[l_i] = l_x;
-            }
-            l_c++;
         }
 
         String[] l_cont_val = new String[l_continent];
@@ -80,7 +91,6 @@ public class MapCreate {
                     System.out.println("Enter Integer Value");
                 }
             }
-
         }
 
         int l_country_total;
@@ -128,81 +138,93 @@ public class MapCreate {
             l_adj.put(l_cont_name[l_j], l_country_num[l_j]);
         }
 
-
+        int l_i=0;
         int l_ct = 0;
         String l_y;
-        for (int l_i = 0; l_i < l_country_total; l_i++) {
+        while(l_i<l_country_total) {
             System.out.println("Enter " + (l_i + 1) + " country name");
             Scanner l_sc = new Scanner(System.in);
             l_y = l_sc.nextLine();
-            for (int l_j = 0; l_j < l_continent; l_j++) {
-                while (true) {
-                    if (!l_y.equals(l_cont_name[l_j])) {
-                        break;
-                    } else {
-                        System.out.println("Country and Continent name cannot be same\n");
-                        System.out.println("Enter another " + (l_i + 1) + " Country name");
-                        l_y = l_sc.nextLine();
-                    }
-                }
+            if (l_y.isEmpty())
+            {
+                System.out.println("Input can not be blank");
+                continue;
             }
-            for (int l_k = 0; l_k < l_ct; l_k++) {
-                while (true) {
-                    if (!l_y.equals(l_country_names[l_k])) {
-                        l_country_names[l_i] = l_y;
-                        break;
-                    } else {
-                        System.out.println("Country Already Exists\n");
-                        System.out.println("Enter another Country name");
-                        l_y = l_sc.nextLine();
-                    }
-                }
-            }
-            if (l_ct == 0) {
-                l_country_names[l_i] = l_y;
-            }
-            l_ct++;
+            else
+            {
 
-            System.out.println("");
-            for (int k = 0; k < l_continent; k++) {
-                System.out.println(k + 1 + " " + l_cont_name[k]);
-            }
-
-            System.out.println("");
-
-            while (true) {
-                Scanner l_sc1 = new Scanner(System.in);
-                System.out.println("Enter the l_continent unique value in which you want to add country");
-                try {
-                    int l_value = l_sc1.nextInt();
-                    if (l_value > 0) {
-                        int l_val = (int) l_adj.values().toArray()[l_value - 1];
-                        int l_num = l_val - 1;
-
-                        if ((int) l_adj.values().toArray()[l_value - 1] <= 0) {
-                            System.out.println("Continent is full");
-                            System.out.println("Enter another l_continent unique number");
-
-                        } else if ((int) l_adj.values().toArray()[l_value - 1] > 0) {
-                            l_adj.put((String) l_adj.keySet().toArray()[l_value - 1], l_num);
-                            l_continent_country_value[l_i] = l_value;
+                for (int l_j = 0; l_j < l_continent; l_j++) {
+                    while (true) {
+                        if (!l_y.equals(l_cont_name[l_j])) {
                             break;
+                        } else {
+                            System.out.println("Country and Continent name cannot be same\n");
+                            System.out.println("Enter another " + (l_i + 1) + " Country name");
+                            l_y = l_sc.nextLine();
                         }
-                    } else {
-                        System.out.println("Unique number cannot be zero or -ve");
                     }
-                } catch (Exception p_e) {
-                    System.out.println("Enter unique number from the above given list");
                 }
+                for (int l_k = 0; l_k < l_ct; l_k++) {
+                    while (true) {
+                        if (!l_y.equals(l_country_names[l_k])) {
+                            l_country_names[l_i] = l_y;
+                            break;
+                        } else {
+                            System.out.println("Country Already Exists\n");
+                            System.out.println("Enter another Country name");
+                            l_y = l_sc.nextLine();
+                        }
+                    }
+                }
+                if (l_ct == 0) {
+                    l_country_names[l_i] = l_y;
+                }
+                l_ct++;
+
+                System.out.println("");
+                for (int k = 0; k < l_continent; k++) {
+                    System.out.println(k + 1 + " " + l_cont_name[k]);
+                }
+
+                System.out.println("");
+
+                while (true) {
+                    Scanner l_sc1 = new Scanner(System.in);
+                    System.out.println("Enter the continent unique value in which you want to add country");
+                    try {
+                        int l_value = l_sc1.nextInt();
+                        if (l_value > 0) {
+                            int l_val = (int) l_adj.values().toArray()[l_value - 1];
+                            int l_num = l_val - 1;
+
+                            if ((int) l_adj.values().toArray()[l_value - 1] <= 0) {
+                                System.out.println("Continent is full");
+                                System.out.println("Enter another continent unique number");
+
+                            } else if ((int) l_adj.values().toArray()[l_value - 1] > 0) {
+                                l_adj.put((String) l_adj.keySet().toArray()[l_value - 1], l_num);
+                                l_continent_country_value[l_i] = l_value;
+                                break;
+                            }
+                        } else {
+                            System.out.println("Unique number cannot be zero or -ve");
+                        }
+                    } catch (Exception p_e) {
+                        System.out.println("Enter unique number from the above given list");
+                    }
+                }
+                System.out.println("");
+                l_i+=1;
             }
-            System.out.println("");
+
         }
+
         System.out.println("Now here are the list of countries");
         for (int l_k = 0; l_k < l_country_total; l_k++) {
             System.out.println((l_k + 1) + " " + l_country_names[l_k]);
         }
         System.out.println("");
-        int l_i = 0;
+        l_i = 0;
         while (l_i < l_country_total) {
             System.out.println("Enter the unique keys of adjacent countries of " + (l_i + 1) + " country");
             Scanner l_sc3 = new Scanner(System.in);
@@ -227,6 +249,7 @@ public class MapCreate {
             }
         }
     }
+
     /**
      * This method is used to create and save the validated map that user created from scratch.
      * @param p_file This is the file name in which map is created and saved by user.
@@ -238,9 +261,8 @@ public class MapCreate {
      * @param p_continent_country_value This is an integer array which contains the list of unique ID's of continent to which a country belong.
      * @param p_adjacent_countries This a string array which contains the list of neighboring countries of a particular country.
      * @throws Exception If file doesn't found at the directed path then this will throw exception.
-     * @return Return a file Object
+     * @return a File Object.
      */
-
     public static File fileCreation(File p_file, String[] p_continent_name, int p_continent, String[] p_continent_value, int p_country_total, String[] p_country_names, int[] p_continent_country_value, String[] p_adjacent_countries) throws Exception {
         PrintWriter l_print_writer = new PrintWriter(p_file);
         l_print_writer.println("[Map]");
@@ -270,12 +292,8 @@ public class MapCreate {
             }
             l_print_writer.println();
         }
-        System.out.println("Map Created Successfully");
+        System.out.println("Let's checkout if graph is connected or not");
         l_print_writer.close();
-        Main.menu();
         return p_file;
     }
 }
-
-
-

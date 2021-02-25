@@ -21,7 +21,7 @@ public class ReadMapTest {
     @Test
     public void testTotalLines()
     {
-        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        File l_file = new File(".\\src\\test\\resources\\maps\\h.map");
         ReadMap l_map= new ReadMap();
         try{
             assertEquals(26,l_map.totallines(l_file));
@@ -39,7 +39,7 @@ public class ReadMapTest {
     @Test
     public void testTotalLinesNot()
     {
-        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        File l_file = new File(".\\src\\test\\resources\\maps\\h.map");
         ReadMap l_map= new ReadMap();
         try{
             assertNotEquals(2,l_map.totallines(l_file));
@@ -55,10 +55,10 @@ public class ReadMapTest {
      */
 
     @Test
-    public  void testCountryLines()
+    public void testCountryLines()
     {
         ReadMap l_map = new ReadMap();
-        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        File l_file = new File(".\\src\\test\\resources\\maps\\h.map");
         try {
             assertEquals(6,l_map.continentlines(l_file));
         }catch (Exception e)
@@ -76,7 +76,7 @@ public class ReadMapTest {
     public void testCountryLinesNot()
     {
         ReadMap l_map = new ReadMap();
-        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        File l_file = new File(".\\src\\test\\resources\\maps\\h.map");
         try {
             assertNotEquals(16,l_map.continentlines(l_file));
         }catch (Exception e)
@@ -94,7 +94,7 @@ public class ReadMapTest {
     public void testBorderLines()
     {
         ReadMap l_map = new ReadMap();
-        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        File l_file = new File(".\\src\\test\\resources\\maps\\h.map");
         try {
             assertEquals(16,l_map.borderlines(l_file));
         }catch (Exception e)
@@ -112,7 +112,7 @@ public class ReadMapTest {
     public void testBorderLinesNot()
     {
         ReadMap l_map = new ReadMap();
-        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        File l_file = new File(".\\src\\test\\resources\\maps\\h.map");
         try {
             assertNotEquals(296,l_map.borderlines(l_file));
         }catch (Exception e)
@@ -130,7 +130,7 @@ public class ReadMapTest {
     public void testContinentLines()
     {
         ReadMap l_map = new ReadMap();
-        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        File l_file = new File(".\\src\\test\\resources\\maps\\h.map");
         try {
             assertEquals(6,l_map.continentlines(l_file));
         }catch (Exception e)
@@ -148,7 +148,7 @@ public class ReadMapTest {
     public void testContinentLinesNot()
     {
         ReadMap l_map = new ReadMap();
-        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
+        File l_file = new File(".\\src\\test\\resources\\maps\\h.map");
         try {
             assertNotEquals(296,l_map.continentlines(l_file));
         }catch (Exception e)

@@ -7,12 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f33d124-ba81-4bf6-8440-51ed4a454c54" name="Default Changelist" comment="MapCreate Javadoc left for one file">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Architecture.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Soen-6441-Risk.pptx" beforeDir="false" />
+    <list default="true" id="9f33d124-ba81-4bf6-8440-51ed4a454c54" name="Default Changelist" comment="MapCreate checkout if graph is connected">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Main/MapCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Main/MapCreate.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +21,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature-DeployOrder-v4.0" />
+        <entry key="$PROJECT_DIR$" value="feature-UsercreatedMapValidation-v2.0" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,8 +39,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
@@ -216,7 +214,56 @@
       <option name="project" value="LOCAL" />
       <updated>1614199850173</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Updation to GamePlay">
+      <created>1614200248625</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1614200248625</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Updation to GamePlay with Execute()">
+      <created>1614200293052</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1614200293052</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Updation to Gameengine bugs fix">
+      <created>1614200543661</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1614200543661</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Updation to Gameengine Loadmap bugs">
+      <created>1614200603813</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1614200603813</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Updation to GameEngine with javaDoc">
+      <created>1614200646367</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1614200646367</updated>
+    </task>
+    <task id="LOCAL-00026" summary="ReadMapTest">
+      <created>1614254849230</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1614254849230</updated>
+    </task>
+    <task id="LOCAL-00027" summary="UserCreatedMapValidation repetition feature not allowed">
+      <created>1614255012833</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1614255012834</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -246,6 +293,15 @@
     <MESSAGE value="DeployOrder if armies to place is less than armies" />
     <MESSAGE value="DeployOrder if armies to place is equal to number of armies" />
     <MESSAGE value="DeployOrder if with for penalty" />
-    <option name="LAST_COMMIT_MESSAGE" value="DeployOrder if with for penalty" />
+    <MESSAGE value="Updation to GamePlay" />
+    <MESSAGE value="Updation to GamePlay with Execute()" />
+    <MESSAGE value="Updation to Gameengine bugs fix with Execute()" />
+    <MESSAGE value="Updation to Gameengine bugs fix" />
+    <MESSAGE value="Updation to Gameengine Loadmap bugs" />
+    <MESSAGE value="Updation to GameEngine with javaDoc" />
+    <MESSAGE value="ReadMapTest" />
+    <MESSAGE value="UserCreatedMapValidation repetition feature not allowed" />
+    <MESSAGE value="MapCreate checkout if graph is connected" />
+    <option name="LAST_COMMIT_MESSAGE" value="MapCreate checkout if graph is connected" />
   </component>
 </project>
