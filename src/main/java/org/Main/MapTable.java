@@ -598,5 +598,118 @@ public class MapTable {
 
         return l_newList;
     }
+
+    /**
+     * Method which will read the .map file after the countries and will generate the hashmap pf countries and its continents
+     * @param p_file is the Object of the File.
+     * @return the hashmap whose key is country and value is continent.
+     * @throws Exception as it is using the countryandborderline method from the ReadLines.java file.
+     */
+    public HashMap<Integer, Integer> cont  (File p_file) throws Exception{
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.countryandborderline(p_file);
+        HashMap<Integer,Integer> l_connect = new HashMap<>();
+        Scanner l_sc = new Scanner(p_file);
+        int l_count=0;
+        int l_i;
+        int l_a=0;
+        while(l_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(l_sc.next().equals("[countries]")){
+                for(l_i=0;l_i<l_n-1;l_i++){
+                    if(!l_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = l_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = l_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split(" ");
+                    int l_country = Integer.parseInt(l_input[0]);
+                    int l_continent = Integer.parseInt(l_input[2]);
+                    l_connect.put(l_country,l_continent);
+
+                }
+                l_count = 1 ;
+            }
+        }
+        return l_connect;
+    }
+    /**
+     * Method which will keep a track of the particular country and its neighbouring countries. The country's Unique ID will be used as the key
+     * and the unique Id of the neighbouring countries are stored in the ArrayList.
+     * @param p_file is the Object of the p_file which has to be read.
+     * @param p_list is the p_list of countries for particular continent.
+     * @return the HashMap containing the Integer as the Key and the ArrayList as the value.
+     * @throws Exception because it is using the countryandborderline method which is throwing the exception
+     */
+    public HashMap<Integer,ArrayList> CountryNeighbours(File p_file, ArrayList<Integer> p_list) throws Exception{
+        ReadLines l_line = new ReadLines();
+        int l_num = l_line.countryandborderline(p_file);
+        ArrayList<Integer> countries = p_list;
+
+        HashMap<Integer,ArrayList> l_intNeigh = new HashMap<>();
+        List<Integer> l_check = new ArrayList<>();
+        Scanner l_sc = new Scanner(p_file);
+        int l_count=0;
+        int l_i;
+        int l_a=0;
+        while(l_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(l_sc.next().equals("[borders]")){
+                for(l_i=0;l_i<l_num;l_i++){
+                    if(!l_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = l_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = l_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split(" ");
+                    int l_see = Integer.parseInt(l_input[0]);
+
+
+                    for(int i =0 ; i<countries.size() ; i++){
+                        ArrayList<Integer> l_addCountry =new ArrayList<>();
+                        if(countries.contains(l_see)){
+                            for(int l_j=0;l_j<l_input.length;l_j++) {
+                                for (int k = 0; k < countries.size(); k++) {
+                                    if (Integer.parseInt(l_input[l_j]) == countries.get(k)) {
+
+                                        if (l_input.length == 1) {
+                                            l_check.add(Integer.parseInt(l_input[l_j]));
+                                        } else if (l_j == 0) {
+                                            l_check.add(Integer.parseInt((l_input[l_j])));
+                                        } else {
+                                            l_addCountry.add(Integer.parseInt(l_input[l_j]));
+
+                                        }
+
+                                    }
+                                }
+                            }
+                            int l_val = l_check.get(0);
+                            l_check.remove(0);
+                            l_intNeigh.put(l_val,l_addCountry);
+
+                        }
+
+                    }
+
+                }
+                l_count = 1 ;
+            }
+
+        }
+        return l_intNeigh;
+    }
+
+
 }
 
