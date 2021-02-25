@@ -73,4 +73,20 @@ public class showMap {
             }
             l_row+=1;
         }
+       ADJACENT_NEIGHBOURS[0][0]=" ";
+        l_row=1;
+        for(String l_country: COU.COUNTRIESLIST.keySet())
+        {
+            ADJACENT_NEIGHBOURS[0][l_row] = l_country;
+            l_row+=1;
+        }
+        l_row=1;
+        for(String l_country:COU.COUNTRIESLIST.keySet())
+        {
+            ADJACENT_NEIGHBOURS[l_row][0]=l_country;
+            l_row+=1;
+        }
+
+        l_row=1;
+
   }
