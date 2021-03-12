@@ -41,7 +41,7 @@ public class GameEngine {
             System.out.println("*************************");
             String l_command = l_sc.nextLine();
             String[] l_command_split = l_command.split("-");
-            if (l_command_split[0].equalsIgnoreCase("gameplayer ")) {
+            if (l_command_split[0].equalsIgnoreCase("gameplayer ")&&l_command_split.length>1) {
                 for (int l_i = 1; l_i < l_command_split.length; l_i++) {
                     String l_command_split1[] = l_command_split[l_i].split(" ");
                     if (l_command_split1[0].equalsIgnoreCase("add")) {
@@ -95,7 +95,7 @@ public class GameEngine {
                 if (l_com.length == 2) {
                     if (l_com[1].endsWith(".map")) {
                         String filename = l_com[1];
-                        l_file = new File("src//main//resources//maps//" + filename);
+                        l_file = new File("SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\" + filename);
                         if (l_file.exists()) {
                             MapValidation validation = new MapValidation();
 
@@ -119,11 +119,8 @@ public class GameEngine {
                                 l_country_cont_key= l_list.countryanditsuniquecontinent(l_file);
                                 l_cont_unique_key = l_list.uniqueKeyanditscountry(l_file);
                                 validation.mapValidate(l_file,l_countries,l_continent,l_contval,l_countrykey,l_countrycont,l_countryneigh,l_country_cont_key,l_cont_unique_key);
-
                             }catch(Exception e)
                             {}
-
-
 
                             if(validation.d_final_flag ==0)
                             {
