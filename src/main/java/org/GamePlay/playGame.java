@@ -73,6 +73,13 @@ public class playGame {
         return temp;
     }
 
+    /**
+     * Method to run the Main Game Loop. Various orders that a player can use are:
+     * Deploy Order deploys the player's armies at the certain country.
+     * Pass is the order to pass the turn from one player to another player.
+     * Showmap is the command to display all the contents of the map file along with owner of the country and the armies allocated to the certain player.
+     */
+
     public void mainGameLoop() {
         System.out.println("Main game loop: issue orders phase");
         Boolean l_flag = true;
@@ -150,8 +157,6 @@ public class playGame {
                     l_playersName.remove(l_player);
                     break;
                 }
-
-
                 int l_maxArmiesToDeploy = d_player.d_armiesNum;
                 Order d_nextOrder = d_player.next_order();
                 if (d_nextOrder instanceof DeployOrder) {
