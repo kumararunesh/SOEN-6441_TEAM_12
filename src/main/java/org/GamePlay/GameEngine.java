@@ -16,12 +16,13 @@ public class GameEngine {
     /**
      * GLobal List of Players
      */
-    static ConcurrentHashMap<String, Player> PLAYERS_LIST = new ConcurrentHashMap<String, Player>(); // concurrent only - thread safe .
+    public static ConcurrentHashMap<String, Player> PLAYERS_LIST = new ConcurrentHashMap<String, Player>(); // concurrent only - thread safe .
 
     /**
      * Global Country Object
      */
-    static Country COUNTRY;
+    public static Country COUNTRY;
+    public static File FILE;
 
     /**
      * Game Startup Phase Implementation
@@ -37,7 +38,7 @@ public class GameEngine {
         while (l_flag) {
             System.out.println("");
             System.out.println("*************************");
-            System.out.println("1.Add/Remove Player \n2.Assign countries");
+            System.out.println("1.Add/Remove Player");
             System.out.println("*************************");
             String l_command = l_sc.nextLine();
             String[] l_command_split = l_command.split("-");
@@ -50,19 +51,11 @@ public class GameEngine {
                             break;
                         }
                         PLAYERS_LIST.put(l_command_split1[1], new Player(l_command_split1[1]));
+                        l_flag=false;
                     } else if (l_command_split1[0].equalsIgnoreCase("remove")) {
                         PLAYERS_LIST.remove(l_command_split1[1]);
+                        l_flag=false;
                     }
-                }
-            } else if (l_command_split[0].equalsIgnoreCase("assigncountries")) {
-                if (PLAYERS_LIST.size() < 2) {
-                    System.out.println("Minimum 2 players are required to play the game");
-                    continue;
-                } else {
-                    l_flag = false;
-                    Assign l_assign = new Assign(PLAYERS_LIST, COUNTRY);
-                    l_assign.assignCountries(p_file);
-                    break;
                 }
             } else {
                 System.out.println("Wrong command. Please re-check");
@@ -89,16 +82,16 @@ public class GameEngine {
             System.out.println("**************************************");
             String l_command = l_sc.nextLine();
             String[] l_com = l_command.split(" ");
-            File l_file;
+
             GameEngine l_game = new GameEngine();
             if (l_com[0].equalsIgnoreCase("loadmap")) {
                 if (l_com.length == 2) {
                     if (l_com[1].endsWith(".map")) {
-                        String filename = l_com[1];
-                        l_file = new File("SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\" + filename);
-                        if (l_file.exists()) {
-                            MapValidation validation = new MapValidation();
+                        String l_filename = l_com[1];
 
+                        FILE = new File("src/main/resources/maps/" + l_filename);
+                        if (FILE.exists()) {
+                            MapValidation l_validation = new MapValidation();
 
                             MapTable l_list = new MapTable();
                             ArrayList<String> l_countries;
@@ -110,28 +103,20 @@ public class GameEngine {
                             HashMap<String,Integer>l_country_cont_key;
                             HashMap<String,Integer>l_cont_unique_key;
                             try{
-                                l_countries = l_list.countryList(l_file);
-                                l_continent = l_list.continentList(l_file);
-                                l_contval = l_list.continentandvalue(l_file);
-                                l_countrykey= l_list.countryanditskey(l_file);
-                                l_countrycont= l_list.countryanditscontinent(l_file);
-                                l_countryneigh= l_list.countryanditsneighbours(l_file);
-                                l_country_cont_key= l_list.countryanditsuniquecontinent(l_file);
-                                l_cont_unique_key = l_list.uniqueKeyanditscountry(l_file);
-                                validation.mapValidate(l_file,l_countries,l_continent,l_contval,l_countrykey,l_countrycont,l_countryneigh,l_country_cont_key,l_cont_unique_key);
+                                l_countries = l_list.countryList(FILE);
+                                l_continent = l_list.continentList(FILE);
+                                l_contval = l_list.continentandvalue(FILE);
+                                l_countrykey= l_list.countryanditskey(FILE);
+                                l_countrycont= l_list.countryanditscontinent(FILE);
+                                l_countryneigh= l_list.countryanditsneighbours(FILE);
+                                l_country_cont_key= l_list.countryanditsuniquecontinent(FILE);
+                                l_cont_unique_key = l_list.uniqueKeyanditscountry(FILE);
+                                l_validation.mapValidate(FILE,l_countries,l_continent,l_contval,l_countrykey,l_countrycont,l_countryneigh,l_country_cont_key,l_cont_unique_key);
                             }catch(Exception e)
                             {}
 
-                            if(validation.d_final_flag ==0)
+                            if(l_validation.d_final_flag ==0)
                             {
-                                l_game.startGameEngine(l_file);
-                                playGame l_playgame = new playGame(PLAYERS_LIST, COUNTRY);
-                                l_playgame.playGameLoop();
-                                l_playgame.mainGameLoop();
-                                System.out.println("Deployment Phase Over!!!!!!!!");
-                                System.out.println("");
-                                System.out.println("");
-                                System.out.println("");
                                 break;
                             }
                             else
@@ -156,28 +141,6 @@ public class GameEngine {
             } else {
                 System.out.println("Wrong command. Please retry");
             }
-        }
-        String l_command;
-        while (true) {
-            System.out.println("In order to see the map Command is Showmap\nElse type continue");
-            l_command = l_sc.nextLine();
-            if (l_command.equalsIgnoreCase("showmap")) {
-                showMap l_map = new showMap(PLAYERS_LIST, COUNTRY);
-                l_map.check();
-                break;
-            } else if (l_command.equalsIgnoreCase("continue")) {
-                break;
-            } else {
-                System.out.println("You misspelled showmap ");
-                continue;
-            }
-        }
-        try {
-            for (String l_player : PLAYERS_LIST.keySet()) {
-                PLAYERS_LIST.remove(l_player);
-            }
-            Main.menu();
-        } catch (Exception e) {
         }
     }
 }
