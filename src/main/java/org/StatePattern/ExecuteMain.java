@@ -1,0 +1,67 @@
+package org.StatePattern;
+
+import org.GamePlay.*;
+import org.ObserverBasedLogging.LogEntryBuffer;
+import org.ObserverBasedLogging.LogFile;
+
+import java.util.concurrent.ConcurrentHashMap;
+
+public class ExecuteMain extends ExecuteAbstract{
+
+    ConcurrentHashMap<String, Player> d_playerList;
+    GameEngine1 d_ge1;
+    Country d_country;
+    ExecuteMain(GameEngine1 p_ge, ConcurrentHashMap<String, Player> p_playerList, Country p_country)
+    {
+        super(p_ge);
+        this.d_ge1 = p_ge;
+        this.d_playerList = p_playerList;
+        this.d_country = p_country;
+    }
+
+    @Override
+    public void mapshow() {
+        showMap l_showmap = new showMap(d_playerList, d_country);
+        l_showmap.check();
+    }
+
+    @Override
+    public void execute() {
+        Execute l_ex = new Execute(d_playerList);
+        l_ex.execute();
+    }
+
+    @Override
+    public void next() {
+
+        LogEntryBuffer l_observable = new LogEntryBuffer();
+        LogFile l_observer = new LogFile();
+        l_observable.addObserver(l_observer);
+        String l_message;
+
+        for(String l_player: d_playerList.keySet())
+        {
+            if (d_playerList.get(l_player).d_owned.size()==0)
+            {
+                d_playerList.remove(l_player);
+                l_message = l_player+" you have lost the game. So you're out of the game!!!";
+                System.out.println(l_message);
+                l_observable.setMsg(l_message);
+                break;
+            }
+        }
+        if(d_playerList.size()==1)
+        {
+            for(String player: d_playerList.keySet()) {
+                l_message = player + " is the winner of the game!!!!!!!!";
+                System.out.println(l_message);
+                l_observable.setMsg(l_message);
+            }
+            d_ge1.setPhase(new End(d_ge1));
+        }
+        else
+        {
+            d_ge1.setPhase(new OrderIssuePhase(d_playerList, d_country, d_ge1));
+        }
+    }
+}
