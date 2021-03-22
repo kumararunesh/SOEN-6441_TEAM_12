@@ -38,14 +38,14 @@ public class EditMap {
             System.out.println("*************************\n");
 
             System.out.println("");
-            System.out.println("Enter you command to edit map");
+            System.out.println("Enter your command to edit map");
 
             String l_option = d_SC.nextLine();
             String[] l_text = l_option.split("-");
 
             if (l_text[0].equalsIgnoreCase("editcontinent ")) {
 
-                File l_file = new File("src\\main\\resources\\maps\\" + p_file);
+                File l_file = new File("SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\" + p_file);
 
                 MapTable l_list = new MapTable();
                 ArrayList<String> l_countries = l_list.countryList(l_file);
@@ -130,11 +130,18 @@ public class EditMap {
                         System.out.println("To save changes enter save map command");
                         String l_out = d_SC.nextLine();
                         String[] l_filename = l_out.split(" ");
-                        if (l_filename.length < 2 || l_filename.length > 2) {
+                        if (l_filename[0].equalsIgnoreCase("savemap")) {
+                            if ((l_filename.length < 2 || l_filename.length > 2) || !l_filename[1].endsWith(".map")) {
+                                System.out.println("Your command should be like savemap filename.map");
+                                continue;
+                            } else {
+                                l_address = "SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\" + l_filename[1];
+                                break;
+                            }
+                        }
+                        else{
+                            System.out.println("Enter valid command");
                             continue;
-                        } else {
-                            l_address = "src\\main\\resources\\maps\\" + l_filename[1];
-                            break;
                         }
                     }
                     File l_file3 = new File(l_address);
@@ -161,7 +168,7 @@ public class EditMap {
             else if (l_text[0].equalsIgnoreCase("editcountry ")) {
                 int l_flag1 = 0;
                 int l_flag2 = 0;
-                File l_file1 = new File("src\\main\\resources\\maps\\" + p_file);
+                File l_file1 = new File("SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\" + p_file);
 
                 MapTable l_list = new MapTable();
                 ArrayList<String> l_countries = l_list.countryList(l_file1);
@@ -254,11 +261,18 @@ public class EditMap {
                         System.out.println("To save changes enter save map command");
                         String l_out = d_SC.nextLine();
                         String[] l_filename = l_out.split(" ");
-                        if (l_filename.length < 2 || l_filename.length > 2) {
+                        if (l_filename[0].equalsIgnoreCase("savemap")) {
+                            if ((l_filename.length < 2 || l_filename.length > 2) || !l_filename[1].endsWith(".map")) {
+                                System.out.println("Your command should be like savemap filename.map");
+                                continue;
+                            } else {
+                                l_address = "SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\" + l_filename[1];
+                                break;
+                            }
+                        }
+                        else{
+                            System.out.println("Enter valid command");
                             continue;
-                        } else {
-                            l_address = "src\\main\\resources\\maps\\" + l_filename[1];
-                            break;
                         }
                     }
                     File l_file3 = new File(l_address);
@@ -282,7 +296,7 @@ public class EditMap {
                 }
             }
             else if (l_text[0].equalsIgnoreCase("editneighbor ")) {
-                File l_file = new File("src\\main\\resources\\maps\\" + p_file);
+                File l_file = new File("SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\" + p_file);
                 MapTable l_list = new MapTable();
                 ArrayList<String> l_countries = l_list.countryList(l_file);
                 ArrayList<String> l_continent = l_list.continentList(l_file);
@@ -319,6 +333,8 @@ public class EditMap {
                             }
                         } else {
                             System.out.println("The country you entered doesn't exist");
+                            l_flag_error=1;
+                            l_flag_to_save=1;
                         }
                     } else if (l_command[0].equalsIgnoreCase("remove")) {
                         if (l_countries.contains(l_command[1])) {
@@ -342,11 +358,18 @@ public class EditMap {
                         System.out.println("To save changes enter save map command");
                         String l_out = d_SC.nextLine();
                         String[] l_filename = l_out.split(" ");
-                        if (l_filename.length < 2 || l_filename.length > 2) {
+                        if (l_filename[0].equalsIgnoreCase("savemap")) {
+                            if ((l_filename.length < 2 || l_filename.length > 2) || !l_filename[1].endsWith(".map")) {
+                                System.out.println("Your command should be like savemap filename.map");
+                                continue;
+                            } else {
+                                l_address = "SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\" + l_filename[1];
+                                break;
+                            }
+                        }
+                        else{
+                            System.out.println("Enter valid command");
                             continue;
-                        } else {
-                            l_address = "src\\main\\resources\\maps\\" + l_filename[1];
-                            break;
                         }
                     }
                     File l_file2 = new File(l_address);
@@ -374,19 +397,28 @@ public class EditMap {
             }
 
             if(l_flag_error == 0) {
-                System.out.println("Want to continue editing or wanna see your map?");
-                System.out.println("If you want to continue editing enter command 'editing' or if you wish to see map enter 'showmap' command");
-                String l_yesOrNo = d_SC.next();
-                if (l_yesOrNo.equalsIgnoreCase("editing")) {
-                    Main.EditMap();
-                } else if (l_yesOrNo.equalsIgnoreCase("showmap")) {
-                    ShowMap l_show  = new ShowMap();
-                    l_show.mapshow();
-                    break;
+                while(true) {
+                    System.out.println("");
+                    System.out.println("Want to continue editing or wanna see your map?");
+                    System.out.println("If you want to continue editing enter command 'editing' or if you wish to see map enter 'showmap' command");
+                    String l_yesOrNo = d_SC.nextLine();
+                    String[] l_ans = l_yesOrNo.split(" ");
+                    if (l_ans[0].equalsIgnoreCase("editing") && l_ans.length == 1) {
+                        Main.EditMap();
+                        break;
+                    } else if (l_yesOrNo.equalsIgnoreCase("showmap") && l_ans.length == 1) {
+                        ShowMap l_show = new ShowMap();
+                        l_show.mapshow();
+                        break;
+                    }else {
+                        System.out.println("Enter correct command");
+                        continue;
+                    }
                 }
+                break;
             }
         }
-        Main.menu();
+        //Main.menu();
     }
 
     /**
