@@ -95,7 +95,7 @@ public class UserCreatedMapValidation {
         if(l_finalFlag==1)
         {
             System.out.println("Map is Incorrect");
-            Main.menu();
+           // Main.menu();
         }
         else if(l_finalFlag==0)
         {
@@ -115,7 +115,7 @@ public class UserCreatedMapValidation {
                 System.out.println("**************************************");
                 System.out.println("Map is validated");
                 System.out.println("**************************************");
-                Main.menu();
+               // Main.menu();
             }
             else{
                 System.out.println("**************************************");
@@ -127,7 +127,6 @@ public class UserCreatedMapValidation {
                 System.out.println("**************************************");
                 System.out.println("Map is Incorrect");
                 System.out.println("**************************************");
-                Main.menu();
             }
         }
 
