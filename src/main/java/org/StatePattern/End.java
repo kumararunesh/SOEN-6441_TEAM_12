@@ -3,7 +3,9 @@ package org.StatePattern;
 
 public class End extends Phase {
 
-    
+    End(GameEngine1 p_ge) {
+        super(p_ge);
+    }
 
     @Override
     public void playGame() {
