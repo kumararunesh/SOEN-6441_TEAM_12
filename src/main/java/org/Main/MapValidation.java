@@ -14,6 +14,10 @@ import java.util.Map;
  */
 public class MapValidation {
 
+    /**
+     * This Flag is set to 1 if the graph is not validated or incorrect else it's value will be equal to 0.
+     */
+
     public int d_final_flag = 0;
     /**
      * This method will get the details of the map after user edit some changes in the map and then it will validate the map on some conditions.
@@ -131,7 +135,7 @@ public class MapValidation {
                 System.out.println("");
 
                 System.out.println("**************************************");
-                System.out.println("Map is validated and created successfully");
+                System.out.println("Map is validated");
                 System.out.println("**************************************");
             }
             else{
@@ -144,12 +148,8 @@ public class MapValidation {
                 System.out.println("**************************************");
                 System.out.println("Map is Incorrect");
                 System.out.println("**************************************");
-
-                Main.menu();
+                d_final_flag = 1;
             }
-
         }
-
-
     }
 }
