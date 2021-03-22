@@ -11,7 +11,6 @@ import java.util.Scanner;
  */
 
 public class ShowMap {
-
     File d_FILE;
 
     /**
@@ -25,7 +24,7 @@ public class ShowMap {
         while (true) {
             try {
                 Scanner l_sc = new Scanner(System.in);
-                File l_directoryPath = new File("src\\main\\resources\\maps\\");
+                File l_directoryPath = new File("SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\");
                 String l_contents[] = l_directoryPath.list();
                 if(l_contents.length == 0){
                     System.out.println("There are no predefined maps");
@@ -43,7 +42,7 @@ public class ShowMap {
                 System.out.println("");
                 System.out.println("Enter the name of the map you want to select (Don't use extension)");
                 String l_x = l_sc.nextLine();
-                d_FILE = new File("src\\main\\resources\\maps\\" + l_x + ".map");
+                d_FILE = new File("SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\" + l_x + ".map");
 
                 MapTable l_list = new MapTable();
                 ArrayList<String> l_countries = l_list.countryList(d_FILE);
@@ -109,6 +108,5 @@ public class ShowMap {
             }
         }
         System.out.println("");
-        Main.menu();
     }
 }
