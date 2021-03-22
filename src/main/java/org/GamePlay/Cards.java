@@ -53,7 +53,7 @@ public class Cards extends Order{
         String l_decide= "No";
         switch (d_card) {
             case "bomb":
-                if (p_p.d_cards.contains("BOMB")) {
+                if (p_p.d_cards.contains("BOMB") && !p_p.d_owned.contains(d_country.COUNTRIESLIST.get(d_CountryID))) {
                     if (!p_p.d_negotiate.contains(d_country.COUNTRIESLIST.get(d_CountryID).d_owner)) {
                         for (int l_i = 0; l_i <= p_p.d_owned.size(); l_i++) {
                             if (d_country.COUNTRIESLIST.get(p_p.d_owned.get(l_i).d_countryId).d_neighbours.contains(d_CountryID)) {
@@ -90,7 +90,7 @@ public class Cards extends Order{
                 }
                 break;
             case "blockade":
-                if(p_p.d_cards.contains("BLOCKADE")) {
+                if(p_p.d_cards.contains("BLOCKADE") && p_p.d_owned.contains(d_country.COUNTRIESLIST.get(d_CountryID))) {
                     d_country.COUNTRIESLIST.get(d_CountryID).d_numOfArmiesPlaced *= 3;
                     p_p.d_owned.remove(d_country.COUNTRIESLIST.get(d_CountryID));
                     d_country.COUNTRIESLIST.get(d_CountryID).d_owner = "Neutral";
