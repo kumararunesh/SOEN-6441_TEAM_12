@@ -6,6 +6,10 @@ import org.ObserverBasedLogging.LogFile;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
+
+/**
+ * Child class extending the Order Class , it deals with advance Order and airlift order command
+ */
 public class AdvanceArmies extends Order{
 
     String d_FromCountry;
@@ -18,6 +22,15 @@ public class AdvanceArmies extends Order{
     public static ConcurrentHashMap<String, Player> PLAYER_LIST = new ConcurrentHashMap<String, Player>();
     ArrayList<String> d_cards = new ArrayList<>();
 
+    /**
+     * Constructor to initialise Advance/Airlift order objects
+     * @param p_FromCountry Country from where we want to move armies
+     * @param p_ToCountry  Country to which we want to move armies
+     * @param p_armies  No. of armies we want to move
+     * @param p_card It checks whether the command is airlift or advance
+     * @param p_cou  It is the country class object
+     * @param p_playerList It is the list of players currently in the game
+     */
     public AdvanceArmies(String p_FromCountry, String p_ToCountry, Integer p_armies, String p_card, Country p_cou , ConcurrentHashMap<String, Player> p_playerList){
         this.d_FromCountry = p_FromCountry;
         this.d_ToCountry = p_ToCountry;
@@ -26,6 +39,15 @@ public class AdvanceArmies extends Order{
         this.d_cou = p_cou;
         this.PLAYER_LIST = p_playerList;
     }
+
+    /**
+     * Constructor to initialise Advance/Airlift order objects
+     * @param p_FromCountry Country from where we want to move armies
+     * @param p_ToCountry Country to which we want to move armies
+     * @param p_armies No. of armies we want to move
+     * @param p_cou It is the country class object
+     * @param p_card It checks whether the command is airlift or advance
+     */
     public AdvanceArmies(String p_FromCountry, String p_ToCountry, Integer p_armies, Country p_cou , String p_card){
         this.d_FromCountry = p_FromCountry;
         this.d_ToCountry = p_ToCountry;
@@ -34,14 +56,17 @@ public class AdvanceArmies extends Order{
         this.d_card = p_card;
     }
 
-
+    /**
+     * Implementation of Execute in Advance Order and Airlift Order
+     *
+     * @param p_p Player
+     */
     @Override
     void Execute(Player p_p) {
 
         LogEntryBuffer l_observable = new LogEntryBuffer();
         LogFile l_observer = new LogFile();
         l_observable.addObserver(l_observer);
-//        l_observable.setMsg("newsdvajgcjcgjc   xfbxfb    vaevsrbvvddvs");
         String l_message;
         d_cards.add("BOMB");
         d_cards.add("BLOCKADE");
