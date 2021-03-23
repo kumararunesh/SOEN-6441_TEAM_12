@@ -1,6 +1,8 @@
 package org.GamePlay;
 
 import org.Main.MapTable;
+import org.ObserverBasedLogging.LogEntryBuffer;
+import org.ObserverBasedLogging.LogFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class Assign {
     ConcurrentHashMap<String, Player> d_playersList = new ConcurrentHashMap<>();
-    Country l_country;
+    Country d_country;
 
     /**
      * Constructor to initialise
@@ -24,7 +26,7 @@ public class Assign {
      */
     public Assign(ConcurrentHashMap<String, Player> p_players_list, Country p_country) {
         this.d_playersList = p_players_list;
-        this.l_country = p_country;
+        this.d_country = p_country;
     }
 
     /**
@@ -33,6 +35,10 @@ public class Assign {
      * @param p_file Map File
      */
     public void assignCountries(File p_file) {
+        LogEntryBuffer l_observable = new LogEntryBuffer();
+        LogFile l_observer = new LogFile();
+        l_observable.addObserver(l_observer);
+
         Scanner l_sc = new Scanner(System.in);
         System.out.println("There are " + d_playersList.size() + " Players");
         int l_i = 1;
@@ -64,31 +70,32 @@ public class Assign {
                     l_number_of_countries_in_continent += 1;
                 }
             }
-
             if (l_country_continent.containsKey(l_z)) {
                 Integer l_continent_control_value = l_continent_key.get(l_country_continent.get(l_z));
-                l_country = new Country(l_z, l_country_continent.get(l_z), l_continent_control_value, l_number_of_countries_in_continent, l_country_neighbour.get(l_z));
-                l_country.COUNTRIESLIST.put(l_z, l_country);
+                d_country = new Country(l_z, l_country_continent.get(l_z), l_continent_control_value, l_number_of_countries_in_continent, l_country_neighbour.get(l_z));
+                d_country.COUNTRIESLIST.put(l_z, d_country);
             }
         }
-
         ArrayList<String> l_total_countries = new ArrayList<>();
-        for (String l_country : l_country.COUNTRIESLIST.keySet()) {
-            l_total_countries.add(this.l_country.COUNTRIESLIST.get(l_country).d_countryId);
+        for (String l_country : d_country.COUNTRIESLIST.keySet()) {
+            l_total_countries.add(this.d_country.COUNTRIESLIST.get(l_country).d_countryId);
         }
         int l_num_of_countries_per_player = l_total_countries.size() / d_playersList.size();
         int l_remaining_countries = l_total_countries.size() % d_playersList.size();
 
         Random l_random = new Random();
-
+        String l_message;
         for (String l_player_name1 : d_playersList.keySet()) {
             int l_x = 0;
+            l_message="";
+            l_message ="Countries assigned to player "+l_player_name1+"= ";
             ArrayList<Country> l_countries_owned = new ArrayList<>();
             while (l_x < l_num_of_countries_per_player) {
                 int l_random_int = l_random.nextInt(l_total_countries.size());
-                Country l_country = this.l_country.COUNTRIESLIST.get(l_total_countries.get(l_random_int));
+                Country l_country = this.d_country.COUNTRIESLIST.get(l_total_countries.get(l_random_int));
+                l_message+= l_country.d_countryId+" ";
                 l_countries_owned.add(l_country);
-                this.l_country.COUNTRIESLIST.get(l_total_countries.get(l_random_int)).d_owner = l_player_name1;
+                this.d_country.COUNTRIESLIST.get(l_total_countries.get(l_random_int)).d_owner = l_player_name1;
                 l_total_countries.remove(l_random_int);
                 l_x += 1;
             }
@@ -97,6 +104,7 @@ public class Assign {
                 l_player.d_owned.add(l_countries_owned.get(l_f));
             }
             d_playersList.put(l_player_name1, l_player);
+            l_observable.setMsg(l_message);
         }
         if (l_remaining_countries != 0) {
             ArrayList<String> l_player_names = new ArrayList<>();
@@ -106,9 +114,9 @@ public class Assign {
             for (int l_j = 0; l_j < l_remaining_countries; l_j++) {
                 int l_random_player_index = l_random.nextInt(l_player_names.size());
                 int l_random_country_index = l_random.nextInt(l_total_countries.size());
-                Country l_country = this.l_country.COUNTRIESLIST.get(l_total_countries.get(l_random_country_index));
+                Country l_country = this.d_country.COUNTRIESLIST.get(l_total_countries.get(l_random_country_index));
                 d_playersList.get(l_player_names.get(l_random_player_index)).d_owned.add(l_country);
-                this.l_country.COUNTRIESLIST.get(l_total_countries.get(l_random_country_index)).d_owner = l_player_names.get(l_random_player_index);
+                this.d_country.COUNTRIESLIST.get(l_total_countries.get(l_random_country_index)).d_owner = l_player_names.get(l_random_player_index);
                 l_player_names.remove(l_random_player_index);
                 l_total_countries.remove(l_random_country_index);
             }
