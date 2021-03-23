@@ -120,5 +120,23 @@ public class showMap {
             }
             System.out.println(" ");
         }
+        System.out.println("");
+
+        System.out.println("Cards of the Players: ");
+
+        for(String l_player:PLAYERS_LIST.keySet())
+        {
+            if(PLAYERS_LIST.get(l_player).d_cards.size()!=0) {
+                System.out.print(l_player + "= ");
+                for (String l_cards : PLAYERS_LIST.get(l_player).d_cards) {
+                    System.out.print(l_cards + " ");
+                }
+                System.out.println("");
+            }
+            else
+            {
+                System.out.println("No cards for player: "+l_player);
+            }
+        }
     }
 }
