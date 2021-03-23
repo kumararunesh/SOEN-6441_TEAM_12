@@ -5,6 +5,9 @@ import org.ObserverBasedLogging.LogFile;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Child class extending the Order Class , it deals with various cards order command
+ */
 public class Cards extends Order{
     Country d_country;
     String d_CountryID;
@@ -16,7 +19,12 @@ public class Cards extends Order{
     static ConcurrentHashMap<String, Player> PLAYERS_LIST = new ConcurrentHashMap<>();
     String d_card;
 
-
+    /**
+     * Constructor to initialise corresponding card objects
+     * @param p_CountryID Country on which the card will be applied
+     * @param p_card Which card is used by player
+     * @param p_cou Country class object
+     */
     public Cards(String p_CountryID, String p_card, Country p_cou ){
 
         this.d_country = p_cou;
@@ -25,6 +33,14 @@ public class Cards extends Order{
 
     }
 
+    /**
+     * Constructor to initialise corresponding card objects
+     * @param p_CountryFrom Move armies from this country
+     * @param p_CountryTo Move armies to this country
+     * @param p_armiesToAirlift No of Armies to move
+     * @param p_card Which card is used by player
+     * @param p_cou Country class object
+     */
     public Cards(String p_CountryFrom , String p_CountryTo, Integer p_armiesToAirlift, String p_card, Country p_cou ){
 
         this.d_CountryFrom = p_CountryFrom;
@@ -34,6 +50,12 @@ public class Cards extends Order{
         this.d_country = p_cou;
     }
 
+    /**
+     * Constructor to initialise corresponding card objects
+     * @param p_CountryID Country on which the card will be applied
+     * @param p_card Which card is used by player
+     * @param p_playerList The list of players currently playing the game
+     */
     public Cards(String p_CountryID, String p_card, ConcurrentHashMap<String, Player> p_playerList){
 
         this.d_negotiate = p_CountryID;
@@ -41,6 +63,11 @@ public class Cards extends Order{
         this.PLAYERS_LIST = p_playerList;
     }
 
+    /**
+     * Implementation of Execute method.
+     * In this switch case is implemented for the right card the corresponding card method will be executed.
+     * @param p_p Player
+     */
     @Override
     void Execute(Player p_p) {
 
@@ -53,7 +80,7 @@ public class Cards extends Order{
         String l_decide= "No";
         switch (d_card) {
             case "bomb":
-                if (p_p.d_cards.contains("BOMB") && !p_p.d_owned.contains(d_country.COUNTRIESLIST.get(d_CountryID))) {
+                if (p_p.d_cards.contains("BOMB")) {
                     if (!p_p.d_negotiate.contains(d_country.COUNTRIESLIST.get(d_CountryID).d_owner)) {
                         for (int l_i = 0; l_i <= p_p.d_owned.size(); l_i++) {
                             if (d_country.COUNTRIESLIST.get(p_p.d_owned.get(l_i).d_countryId).d_neighbours.contains(d_CountryID)) {
@@ -90,7 +117,7 @@ public class Cards extends Order{
                 }
                 break;
             case "blockade":
-                if(p_p.d_cards.contains("BLOCKADE") && p_p.d_owned.contains(d_country.COUNTRIESLIST.get(d_CountryID))) {
+                if(p_p.d_cards.contains("BLOCKADE")) {
                     d_country.COUNTRIESLIST.get(d_CountryID).d_numOfArmiesPlaced *= 3;
                     p_p.d_owned.remove(d_country.COUNTRIESLIST.get(d_CountryID));
                     d_country.COUNTRIESLIST.get(d_CountryID).d_owner = "Neutral";
