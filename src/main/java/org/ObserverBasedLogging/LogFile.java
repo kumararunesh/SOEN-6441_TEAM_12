@@ -6,6 +6,9 @@ import java.util.Observer;
 public class LogFile implements Observer {
     private String d_msg;
 
+       public String getD_msg() {
+        return d_msg;
+    }
     @Override
     public void update(Observable o, Object msg) {
         try {
