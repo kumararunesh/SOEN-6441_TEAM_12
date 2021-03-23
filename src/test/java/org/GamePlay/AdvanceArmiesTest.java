@@ -8,12 +8,18 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This is the class in which the Advance Armies order validity is Checked.
+ */
 public class AdvanceArmiesTest {
 
     Country d_con1 , d_con2 , d_con3 , d_con4 , d_con5;
     AdvanceArmies d_advance1 , d_advance2;
     Player d_player1 , d_player2 , d_player3 , d_player4;
 
+    /**
+     * Method to initialize the values required for the execute Method of the Advance Order class.
+     */
     @Before
     public void startUpPhase(){
 
@@ -57,6 +63,10 @@ public class AdvanceArmiesTest {
 
     }
 
+    /**
+     * Method to check the execute Method from the Advance Order class.
+     * In this case the player using advance order command wins.
+     */
     @Test
     public void advanceTestWin(){
 
@@ -65,6 +75,10 @@ public class AdvanceArmiesTest {
         assertEquals(true,d_player1.d_owned.contains(d_con2.COUNTRIESLIST.get("e")));
     }
 
+    /**
+     * Method to check the execute Method from the Advance Order class.
+     * In this case the player using advance order command loses.
+     */
     @Test
     public void advanceTestLose(){
 
