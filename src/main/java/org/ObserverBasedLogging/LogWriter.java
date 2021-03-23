@@ -13,9 +13,8 @@ public class LogWriter {
     }
     catch (Exception e)
     {
-        System.out.println(e);
+        e.printStackTrace();
     }
-   
     }
     public static void writeLog(String p_msg) throws Exception {
         LOGGER.severe(p_msg);
