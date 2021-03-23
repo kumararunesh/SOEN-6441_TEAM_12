@@ -11,6 +11,10 @@ public class LogWriter {
         this.LOGGER = Logger.getLogger("Team 12");
         this.LOGGER.addHandler(l_handler);
     }
+    catch (Exception e)
+    {
+        System.out.println(e);
+    }
    
     }
     public static void writeLog(String p_msg) throws Exception {
