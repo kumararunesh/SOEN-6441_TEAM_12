@@ -8,11 +8,17 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This is the class in which the Airlift Armies order validity is Checked.
+ */
 public class AirliftTest {
     Country d_con1 , d_con2 , d_con3 , d_con4 , d_con5;
     AdvanceArmies d_airlift1 , d_airlift2;
     Player d_player1 , d_player2 , d_player3 , d_player4;
 
+    /**
+     * Method to initialize the values required for the execute Method of the Airlift Order card.
+     */
     @Before
     public void startUpPhase(){
 
@@ -25,7 +31,7 @@ public class AirliftTest {
         d_player3 = new Player("Nitpreet");
         d_player3.d_armiesNum = 8;
 
-        d_player4 = new Player("Richa");
+        d_player4 = new Player("Arunesh");
         d_player4.d_armiesNum = 4;
 
         d_con1 = new Country("d","b",5,3,new ArrayList<>(Arrays.asList("d","e","f","g")));
@@ -56,6 +62,10 @@ public class AirliftTest {
 
     }
 
+    /**
+     * Method to check the execute Method from the Airlift Order card.
+     * In this case the country using airlift card wins.
+     */
     @Test
     public void airliftTestWin(){
 
@@ -64,6 +74,10 @@ public class AirliftTest {
         assertEquals(true,d_player1.d_owned.contains(d_con2.COUNTRIESLIST.get("e")));
     }
 
+    /**
+     * Method to check the execute Method from the Airlift Order card.
+     * In this case the player using airlift card loses.
+     */
     @Test
     public void airliftTestLose(){
 
