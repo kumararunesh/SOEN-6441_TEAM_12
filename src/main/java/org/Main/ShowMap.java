@@ -12,6 +12,10 @@ import java.util.Scanner;
 
 public class ShowMap {
     File d_FILE;
+    /**
+     * SC is a scanner used to take input from user.
+     */
+    public static Scanner SC;
 
     /**
      * This method initially check whether there is any predefined maps. If the file is empty then it will ask the user to create a new map.
@@ -26,11 +30,33 @@ public class ShowMap {
                 Scanner l_sc = new Scanner(System.in);
                 File l_directoryPath = new File("SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\");
                 String l_contents[] = l_directoryPath.list();
+                int flag=0;
                 if(l_contents.length == 0){
                     System.out.println("There are no predefined maps");
                     System.out.println("Let's create a new map");
-                    Main.EditMap();
-                    break;
+                    while(true) {
+                        System.out.println("Enter the name of the map");
+                        SC = new Scanner(System.in);
+                        String l_filename = SC.nextLine();
+                        if(l_filename.endsWith(".map"))
+                        {
+                            try {
+                                File newFile = new File(l_filename);
+                                flag=1;
+                                Main.createMapByUser(newFile);
+                                break;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else {
+                            System.out.println("Enter correct command\n");
+                        }
+
+                    }
+                    if(flag==1){
+                        break;
+                    }
                 }
                 System.out.println("Here are the list of maps");
                 System.out.println("");
