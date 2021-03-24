@@ -20,6 +20,14 @@ public abstract class ExecuteAbstract extends Phase{
     public void playGame() {
         printInvalidCommandMessage();
     }
+    
+    /**
+     * Method to print Invalid command Error if user wants to restart the GameEngine in between the execute order phase.
+     */
+    @Override
+    public void startGameEngine() {
+
+    }
 
     @Override
     public void mainGameLoop() {
