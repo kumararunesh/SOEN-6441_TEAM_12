@@ -1,23 +1,24 @@
 package org.StatePattern;
 
+
+/**
+ * Abstract class to execute the orders.
+ */
 public abstract class ExecuteAbstract extends Phase{
+    /**
+     * Constructor to call the super constructor.
+     * @param p_ge object of GameEngine1 class
+     */
     ExecuteAbstract(GameEngine1 p_ge) {
         super(p_ge);
     }
 
+    /**
+     * Method to print Invalid command Error if user enters playGame command in between the execute order phase.
+     */
     @Override
     public void playGame() {
-
-    }
-
-    @Override
-    public void startGameEngine() {
-
-    }
-
-    @Override
-    public int playGameLoop() {
-        return 0;
+        printInvalidCommandMessage();
     }
 
     @Override
