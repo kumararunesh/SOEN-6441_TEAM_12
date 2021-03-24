@@ -22,8 +22,15 @@ public class GameEngine {
      * Global Country Object
      */
     public static Country COUNTRY;
-    public static File FILE;
-
+    /**
+     * Global variable for File
+     */
+    public File FILE;
+    /**
+     * Global variable for storing the message.
+     */
+    public String d_message;
+    String d_filename;
     /**
      * Game Startup Phase Implementation
      *
@@ -74,72 +81,116 @@ public class GameEngine {
      * Phase 2 : Issue Order Phase
      * Phase 3 : Execute Order Phase
      */
-    public static void playGame() {
+    public void playGame() {
         Scanner l_sc = new Scanner(System.in);
-        while (true) {
-            System.out.println("**************************************");
-            System.out.println("Enter 'loadmap' command to continue");
-            System.out.println("**************************************");
-            String l_command = l_sc.nextLine();
-            String[] l_com = l_command.split(" ");
+        if(FILE==null) // This if-else is just for testing (MapValidation.java file in Testing-->Gameplay).
+        {
+            while (true) {
+                System.out.println("**************************************");
+                System.out.println("Enter 'loadmap' command to continue");
+                System.out.println("**************************************");
+                String l_command = l_sc.nextLine();
+                String[] l_com = l_command.split(" ");
 
-            GameEngine l_game = new GameEngine();
-            if (l_com[0].equalsIgnoreCase("loadmap")) {
-                if (l_com.length == 2) {
-                    if (l_com[1].endsWith(".map")) {
-                        String l_filename = l_com[1];
+                GameEngine l_game = new GameEngine();
+                if (l_com[0].equalsIgnoreCase("loadmap")) {
+                    if (l_com.length == 2) {
+                        if (l_com[1].endsWith(".map")) {
+                            d_filename = l_com[1];
+                            FILE = new File("src/main/resources/maps/" + d_filename);
+                            if (FILE.exists()) {
+                                MapValidation l_validation = new MapValidation();
 
-                        FILE = new File("src/main/resources/maps/" + l_filename);
-                        if (FILE.exists()) {
-                            MapValidation l_validation = new MapValidation();
+                                MapTable l_list = new MapTable();
+                                ArrayList<String> l_countries;
+                                ArrayList<String> l_continent;
+                                HashMap<String, Integer> l_contval;
+                                HashMap<Integer, String> l_countrykey;
+                                HashMap<String, String> l_countrycont;
+                                HashMap<String, ArrayList> l_countryneigh;
+                                HashMap<String, Integer> l_country_cont_key;
+                                HashMap<String, Integer> l_cont_unique_key;
+                                try {
+                                    l_countries = l_list.countryList(FILE);
+                                    l_continent = l_list.continentList(FILE);
+                                    l_contval = l_list.continentandvalue(FILE);
+                                    l_countrykey = l_list.countryanditskey(FILE);
+                                    l_countrycont = l_list.countryanditscontinent(FILE);
+                                    l_countryneigh = l_list.countryanditsneighbours(FILE);
+                                    l_country_cont_key = l_list.countryanditsuniquecontinent(FILE);
+                                    l_cont_unique_key = l_list.uniqueKeyanditscountry(FILE);
+                                    l_validation.mapValidate(FILE, l_countries, l_continent, l_contval, l_countrykey, l_countrycont, l_countryneigh, l_country_cont_key, l_cont_unique_key);
+                                } catch (Exception e) {
+                                }
 
-                            MapTable l_list = new MapTable();
-                            ArrayList<String> l_countries;
-                            ArrayList<String> l_continent;
-                            HashMap<String, Integer> l_contval;
-                            HashMap<Integer, String> l_countrykey;
-                            HashMap<String, String> l_countrycont;
-                            HashMap<String, ArrayList> l_countryneigh;
-                            HashMap<String,Integer>l_country_cont_key;
-                            HashMap<String,Integer>l_cont_unique_key;
-                            try{
-                                l_countries = l_list.countryList(FILE);
-                                l_continent = l_list.continentList(FILE);
-                                l_contval = l_list.continentandvalue(FILE);
-                                l_countrykey= l_list.countryanditskey(FILE);
-                                l_countrycont= l_list.countryanditscontinent(FILE);
-                                l_countryneigh= l_list.countryanditsneighbours(FILE);
-                                l_country_cont_key= l_list.countryanditsuniquecontinent(FILE);
-                                l_cont_unique_key = l_list.uniqueKeyanditscountry(FILE);
-                                l_validation.mapValidate(FILE,l_countries,l_continent,l_contval,l_countrykey,l_countrycont,l_countryneigh,l_country_cont_key,l_cont_unique_key);
-                            }catch(Exception e)
-                            {}
+                                if (l_validation.d_final_flag == 0) {
+                                    d_message = "Map Validated";
+                                    break;
+                                } else {
+                                    System.out.println("Invalid Map.");
+                                    d_message = "Invalid Map";
+                                    continue;
+                                }
 
-                            if(l_validation.d_final_flag ==0)
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                System.out.println("Invalid Map.");
+                            } else {
+                                System.out.println("File you entered doesn't exist\n");
+                                d_message = "File you entered doesn't exist";
                                 continue;
                             }
 
                         } else {
-                            System.out.println("File you entered doesn't exist\n");
+                            System.out.println("Enter the command with .map extension");
+                            d_message = "Enter the command with .map extension";
                             continue;
                         }
-
                     } else {
-                        System.out.println("Enter the command with .map extension");
+                        System.out.println("Wrong command. Enter 'loadmap filename.map'");
+                        d_message = "Wrong command. Enter 'loadmap filename.map'";
                         continue;
                     }
                 } else {
-                    System.out.println("Wrong command. Enter 'loadmap filename.map'");
-                    continue;
+                    d_message = "Wrong Command";
+                    System.out.println("Wrong command. Please retry");
                 }
+            }
+        }
+        else
+        {
+            if (FILE.exists()) {
+                MapValidation l_validation = new MapValidation();
+
+                MapTable l_list = new MapTable();
+                ArrayList<String> l_countries;
+                ArrayList<String> l_continent;
+                HashMap<String, Integer> l_contval;
+                HashMap<Integer, String> l_countrykey;
+                HashMap<String, String> l_countrycont;
+                HashMap<String, ArrayList> l_countryneigh;
+                HashMap<String, Integer> l_country_cont_key;
+                HashMap<String, Integer> l_cont_unique_key;
+                try {
+                    l_countries = l_list.countryList(FILE);
+                    l_continent = l_list.continentList(FILE);
+                    l_contval = l_list.continentandvalue(FILE);
+                    l_countrykey = l_list.countryanditskey(FILE);
+                    l_countrycont = l_list.countryanditscontinent(FILE);
+                    l_countryneigh = l_list.countryanditsneighbours(FILE);
+                    l_country_cont_key = l_list.countryanditsuniquecontinent(FILE);
+                    l_cont_unique_key = l_list.uniqueKeyanditscountry(FILE);
+                    l_validation.mapValidate(FILE, l_countries, l_continent, l_contval, l_countrykey, l_countrycont, l_countryneigh, l_country_cont_key, l_cont_unique_key);
+                } catch (Exception e) {
+                }
+
+                if (l_validation.d_final_flag == 0) {
+                    d_message = "Map Validated";
+                } else {
+                    System.out.println("Invalid Map.");
+                    d_message = "Invalid Map";
+                }
+
             } else {
-                System.out.println("Wrong command. Please retry");
+                System.out.println("File you entered doesn't exist\n");
+                d_message = "File you entered doesn't exist";
             }
         }
     }
