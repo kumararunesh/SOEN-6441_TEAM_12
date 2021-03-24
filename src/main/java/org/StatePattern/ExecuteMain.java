@@ -6,11 +6,25 @@ import org.ObserverBasedLogging.LogFile;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+**
+ * Main Class to start executing the orders.
+ */
 public class ExecuteMain extends ExecuteAbstract{
 
     ConcurrentHashMap<String, Player> d_playerList;
     GameEngine1 d_ge1;
     Country d_country;
+    /**
+     * d_message is the String variable to store the message to be displayed to the user.
+     */
+    public String d_message;
+    
+      /**
+     * Constructor to initialize the values.
+     * @param p_ge is the object of GameEngine1 class.
+     * @param p_playerList is the HashMap where Player Name is the key and Player Object is the value.
+     * @param p_country is the object of the country class.
+     */
     ExecuteMain(GameEngine1 p_ge, ConcurrentHashMap<String, Player> p_playerList, Country p_country)
     {
         super(p_ge);
