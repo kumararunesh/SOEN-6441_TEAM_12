@@ -16,7 +16,7 @@ public class BlockadeTest {
 
     Country d_con1 , d_con2 , d_con3;
     Cards d_card1 , d_card2;
-    Player d_p1;
+    Player d_p1 , d_p2;
 
     /**
      * Method to initialize the values required for the execute Method of the Blockade Order card.
@@ -26,6 +26,8 @@ public class BlockadeTest {
 
         d_p1 = new Player("Manjit");
         d_p1.add_card("BLOCKADE");
+        d_p2 = new Player("Manish");
+        d_p2.add_card("BLOCKADE");
 
         d_con1 = new Country("d","b",5,3,new ArrayList<>(Arrays.asList("d","e")));
         d_con2 = new Country("e","b",5,3,new ArrayList<>(Arrays.asList("d","e")));
@@ -42,7 +44,7 @@ public class BlockadeTest {
         d_card2 = new Cards("e" , "blockade" , d_con3);
 
         d_p1.issue_order(d_card1);
-        d_p1.issue_order(d_card2);
+        d_p2.issue_order(d_card2);
     }
 
     /**
@@ -62,7 +64,7 @@ public class BlockadeTest {
      */
     @Test
     public void BlockadeFail(){
-        d_card2.Execute(d_p1);
+        d_card2.Execute(d_p2);
 
         assertEquals(10 , (int) d_con2.COUNTRIESLIST.get("e").d_numOfArmiesPlaced);
     }
