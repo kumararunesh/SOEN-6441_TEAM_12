@@ -45,6 +45,10 @@ public class ExecuteMain extends ExecuteAbstract{
         l_ex.execute();
     }
 
+    /**
+     * Method to change the phase of the game to the next phase. If there is no winner in the end then it will
+     * change the phase to issueOrderPhase again and if there is a single winner in the end then this game halts.
+     */
     @Override
     public void next() {
 
