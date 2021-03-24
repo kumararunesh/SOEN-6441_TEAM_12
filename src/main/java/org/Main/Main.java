@@ -84,7 +84,7 @@ public class Main {
     }
 
     /**
-     * This method shows the map in the form of text.
+     * This method shows the maps in the form of text.
      *
      * @throws Exception If file does not found at the path mentioned at ShowMap file, this will throw exception.
      */
