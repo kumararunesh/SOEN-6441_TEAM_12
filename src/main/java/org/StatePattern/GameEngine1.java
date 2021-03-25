@@ -5,8 +5,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.GamePlay.Country;
 import org.GamePlay.Player;
+import org.StatePattern.ShowMap;
 import org.ObserverBasedLogging.LogWriter;
 
+/**
+ * Class to start the game.
+ */
 public class GameEngine1 {
 
     /**
@@ -14,8 +18,19 @@ public class GameEngine1 {
      */
     private Phase d_gamePhase;
 
+    /**
+     * Integer variable to store the Option.
+     */
     public int MYSTART;
+    /**
+     * String variable to store the command.
+     */
     public String MYCOMMAND;
+
+    /**
+     * String variable to store the message to be displayed. Used for testing file only.
+     */
+    public String MESSAGE;
 
     /**
      * Method that allows the GameEngine object to change its state.
@@ -25,7 +40,8 @@ public class GameEngine1 {
     public void setPhase(Phase p_phase) {
         d_gamePhase = p_phase;
         if(!(p_phase instanceof End)) {
-            System.out.println("new phase: " + p_phase.getClass().getSimpleName());
+            MESSAGE = "new phase: " + p_phase.getClass().getSimpleName();
+            System.out.println(MESSAGE);
         }
     }
 
@@ -37,6 +53,8 @@ public class GameEngine1 {
      * 2. What command they want to execute from the game.
      * Depending on the state of the GameEngine, each command will potentially
      * have a different behavior.
+     * @throws Exception as it is using the ShowMap function from the Main class and as
+     * it is throwing exception which needs to be handled.
      */
     public void start() throws Exception {
         Scanner l_keyboard = new Scanner(System.in);
@@ -50,7 +68,7 @@ public class GameEngine1 {
             switch (MYSTART) {
 
                 case 1:
-                    MapEditor l_map = new MapEditor(this);
+                    ShowMap l_map = new ShowMap(this);
                     setPhase(l_map);
                     break;
 
@@ -64,68 +82,68 @@ public class GameEngine1 {
             }
             int l_i=0;
             l_keyboard.nextLine();
-        do {
-            System.out.println(" =================================================");
-            System.out.println("| #   PHASE                   : command           |");
-            System.out.println(" =================================================");
-            System.out.println("| 1.  Show Map                : showmap           |");
-            System.out.println("| 2.  Edit Map                : editmap           |");
-            System.out.println("| 3.  GamePlay : load map     : loadmap           |");
-            System.out.println("| 4.  GamePlay: set Player    : gameplayer        |");
-            System.out.println("| 5.  Play:PlaySetup          : assign countries  |");
-            System.out.println("| 6.  Play:Issue Order        : order             |");
-            System.out.println("| 7.  Play:Execute Order      : execute           |");
-            System.out.println("| 7.  Play:mapshow            : mapshow           |");
-            System.out.println("| 9.  Any Phase               : end game          |");
-            System.out.println("| 10. Any Phase               : next phase        |");
-            System.out.println(" =================================================");
-            System.out.println("enter a " + d_gamePhase.getClass().getSimpleName() + " phase command: ");
-            MYCOMMAND = l_keyboard.nextLine();
-            System.out.println(" =================================================");
+            do {
+                System.out.println(" =================================================");
+                System.out.println("| #   PHASE                   : command           |");
+                System.out.println(" =================================================");
+                System.out.println("| 1.  Show Map                : showmap           |");
+                System.out.println("| 2.  Edit Map                : editmap           |");
+                System.out.println("| 3.  GamePlay : load map     : loadmap           |");
+                System.out.println("| 4.  GamePlay: set Player    : gameplayer        |");
+                System.out.println("| 5.  Play:PlaySetup          : assign countries  |");
+                System.out.println("| 6.  Play:Issue Order        : order             |");
+                System.out.println("| 7.  Play:Execute Order      : execute           |");
+                System.out.println("| 7.  Play:mapshow            : mapshow           |");
+                System.out.println("| 9.  Any Phase               : end game          |");
+                System.out.println("| 10. Any Phase               : next phase        |");
+                System.out.println(" =================================================");
+                System.out.println("enter a " + d_gamePhase.getClass().getSimpleName() + " phase command: ");
+                MYCOMMAND = l_keyboard.nextLine();
+                System.out.println(" =================================================");
 
-            switch (MYCOMMAND) {
-                case ("showmap"):
-                    d_gamePhase.ShowMaps();
-                    break;
-                case ("editmap"):
-                    d_gamePhase.EditMap();
-                    break;
-                case ("exit"):
-                    l_i=1;
-                    break;
-                case ("loadmap"):
-                    d_gamePhase.playGame();
-                    break;
-                case("gameplayer"):
-                    d_gamePhase.startGameEngine();
-                    break;
-                case("assigncountries"):
-                    d_gamePhase.assignCountries();
-                    break;
-                case("order"):
-                    d_gamePhase.playGameLoop();
-                    break;
-                case("execute"):
-                    d_gamePhase.execute();
-                    break;
-                case ("next"):
-                    d_gamePhase.next();
-                    break;
-                case ("mapshow"):
-                    d_gamePhase.mapshow();
-                    break;
-                case("end"):
-                {
-                    d_gamePhase = new End(new GameEngine1());
+                switch (MYCOMMAND) {
+                    case ("showmap"):
+                        d_gamePhase.ShowMaps();
+                        break;
+                    case ("editmap"):
+                        d_gamePhase.EditMap();
+                        break;
+                    case ("exit"):
+                        l_i=1;
+                        break;
+                    case ("loadmap"):
+                        d_gamePhase.playGame();
+                        break;
+                    case("gameplayer"):
+                        d_gamePhase.startGameEngine();
+                        break;
+                    case("assigncountries"):
+                        d_gamePhase.assignCountries();
+                        break;
+                    case("order"):
+                        d_gamePhase.playGameLoop();
+                        break;
+                    case("execute"):
+                        d_gamePhase.execute();
+                        break;
+                    case ("next"):
+                        d_gamePhase.next();
+                        break;
+                    case ("mapshow"):
+                        d_gamePhase.mapshow();
+                        break;
+                    case("end"):
+                    {
+                        d_gamePhase = new End(new GameEngine1());
+                    }
+                    default:
+                        System.out.println("this command does not exist");
                 }
-                default:
-                    System.out.println("this command does not exist");
-            }
-            if(l_i==1){
-                break;
-            }
-            l_i=0;
-             } while (!(d_gamePhase instanceof End));
+                if(l_i==1){
+                    break;
+                }
+                l_i=0;
+            } while (!(d_gamePhase instanceof End));
         } while (MYSTART != 3);
         l_keyboard.close();
     }
