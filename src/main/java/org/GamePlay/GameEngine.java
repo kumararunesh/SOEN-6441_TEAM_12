@@ -54,12 +54,15 @@ public class GameEngine {
                     String l_command_split1[] = l_command_split[l_i].split(" ");
                     if (l_command_split1[0].equalsIgnoreCase("add")) {
                         if (PLAYERS_LIST.containsKey(l_command_split1[1])) {
-                            System.out.println("Player " + l_command_split1[1] + " already exists Please re-enter your name");
+                            d_message = "Player " + l_command_split1[1] + " already exists Please re-enter your name";
+                            System.out.println(d_message);
                             break;
                         }
+                        d_message = "Player added";
                         PLAYERS_LIST.put(l_command_split1[1], new Player(l_command_split1[1]));
                         l_flag=false;
                     } else if (l_command_split1[0].equalsIgnoreCase("remove")) {
+                        d_message = "Player Removed";
                         PLAYERS_LIST.remove(l_command_split1[1]);
                         l_flag=false;
                     }
