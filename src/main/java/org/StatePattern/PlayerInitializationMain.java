@@ -15,7 +15,7 @@ public class PlayerInitializationMain extends PlayerInitializationAbstract{
      * @param p_ge is the Object of the class GameEngine1.
      * @param p_ge1 is the Object of the class GameEngine
      */
-    PlayerInitializationMain(GameEngine1 p_ge,GameEngine p_ge1) {
+    public PlayerInitializationMain(GameEngine1 p_ge,GameEngine p_ge1) {
         super(p_ge);
         this.d_ge1 = p_ge;
         this.d_ge = p_ge1;
