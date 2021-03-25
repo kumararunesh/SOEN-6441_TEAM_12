@@ -19,6 +19,9 @@ public class AdvanceArmies extends Order{
     String d_card;
     double d_probOfAttackersSuccess = 0.6;
     double d_probOfDefendersSuccess = 0.7;
+    /**
+     * HashMap to store the name of the Player as the Key and object of Player class as the Value.
+     */
     public static ConcurrentHashMap<String, Player> PLAYER_LIST = new ConcurrentHashMap<String, Player>();
     ArrayList<String> d_cards = new ArrayList<>();
 
@@ -102,27 +105,36 @@ public class AdvanceArmies extends Order{
                         if (l_k > l_defendersArmy) {
                             d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced -= d_armies;
                             d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced = d_armies - (int) Math.floor(d_probOfDefendersSuccess * l_defendersArmy / d_probOfAttackersSuccess);
-                            for (String l_s : PLAYER_LIST.keySet()) {
-                                Player l_p = PLAYER_LIST.get(l_s);
-                                if (l_p.d_owned.contains(d_cou.COUNTRIESLIST.get(d_ToCountry))) {
-                                    l_p.d_owned.remove(d_cou.COUNTRIESLIST.get(d_ToCountry));
-                                }
-
+                            if(d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced==0 && d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced==0){
+                                l_message = "Nobody won as after attack no armies are left of both the countries";
+                                System.out.println(l_message);
+                                l_observable.setMsg(l_message);
                             }
-                            p_p.d_owned.add(d_cou.COUNTRIESLIST.get(d_ToCountry));
-                            d_cou.COUNTRIESLIST.get(d_ToCountry).d_owner = p_p.d_name;
-                            l_message = d_FromCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced;
-                            System.out.println(l_message);
+                            else{
+                                for (String l_s : PLAYER_LIST.keySet()) {
+                                    Player l_p = PLAYER_LIST.get(l_s);
+                                    if (l_p.d_owned.contains(d_cou.COUNTRIESLIST.get(d_ToCountry))) {
+                                        l_p.d_owned.remove(d_cou.COUNTRIESLIST.get(d_ToCountry));
+                                    }
 
-                            l_message = "Giving cards to " + p_p.d_name;
-                            System.out.println(l_message);
-                            l_observable.setMsg(l_message);
-                            int l_rand = (int) (Math.random() * l_range);
+                                }
+                                p_p.d_owned.add(d_cou.COUNTRIESLIST.get(d_ToCountry));
+                                d_cou.COUNTRIESLIST.get(d_ToCountry).d_owner = p_p.d_name;
+                                l_message = d_FromCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced;
+                                System.out.println(l_message);
+                                l_observable.setMsg(l_message);
 
-                            p_p.d_cards.add(d_cards.get(l_rand));
+                                l_message = "Giving cards to " + p_p.d_name;
+                                System.out.println(l_message);
+                                l_observable.setMsg(l_message);
+                                int l_rand = (int) (Math.random() * l_range);
 
-                            System.out.println(p_p.d_cards);
-                            l_observable.setMsg(l_message+" "+p_p.d_cards);
+                                p_p.d_cards.add(d_cards.get(l_rand));
+
+                                System.out.println(p_p.d_cards);
+                                l_observable.setMsg(l_message+" "+p_p.d_cards);
+                            }
+
                         } else {
                             d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced -= l_k;
                             d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced -= d_armies;
@@ -167,20 +179,29 @@ public class AdvanceArmies extends Order{
                         if (l_k > l_defendersArmy) {
                             d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced -= d_armies;
                             d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced = d_armies - (int) Math.floor(0.7 * l_defendersArmy / d_probOfAttackersSuccess);
-                            for (String l_s : PLAYER_LIST.keySet()) {
-                                Player l_p = PLAYER_LIST.get(l_s);
-                                if (l_p.d_owned.contains(d_cou.COUNTRIESLIST.get(d_ToCountry))) {
-                                    l_p.d_owned.remove(d_cou.COUNTRIESLIST.get(d_ToCountry));
-                                }
+                            if(d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced==0 && d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced==0){
+                                l_message = "Nobody won as after attack no armies are left of both the countries";
+                                System.out.println(l_message);
+                                l_observable.setMsg(l_message);
                             }
-                            p_p.d_owned.add(d_cou.COUNTRIESLIST.get(d_ToCountry));
-                            d_cou.COUNTRIESLIST.get(d_ToCountry).d_owner = p_p.d_name;
-                            l_message = d_FromCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced;
-                            System.out.println(l_message);
-                            l_observable.setMsg(l_message);
-                            int l_rand = (int) (Math.random() * l_range);
+                            else{
+                                for (String l_s : PLAYER_LIST.keySet()) {
+                                    Player l_p = PLAYER_LIST.get(l_s);
+                                    if (l_p.d_owned.contains(d_cou.COUNTRIESLIST.get(d_ToCountry))) {
+                                        l_p.d_owned.remove(d_cou.COUNTRIESLIST.get(d_ToCountry));
+                                    }
+                                }
+                                p_p.d_owned.add(d_cou.COUNTRIESLIST.get(d_ToCountry));
+                                d_cou.COUNTRIESLIST.get(d_ToCountry).d_owner = p_p.d_name;
+                                l_message = d_FromCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced;
+                                System.out.println(l_message);
+                                l_observable.setMsg(l_message);
+                                int l_rand = (int) (Math.random() * l_range);
 
-                            p_p.d_cards.add(d_cards.get(l_rand));
+                                p_p.d_cards.add(d_cards.get(l_rand));
+
+                            }
+
                         } else {
                             d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced -= l_k;
                             d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced -= d_armies;
