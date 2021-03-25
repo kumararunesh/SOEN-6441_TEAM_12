@@ -95,7 +95,7 @@ public class AdvanceArmies extends Order{
                         int l_armiesLeft = (int) Math.floor(l_defendersArmy - ((d_probOfAttackersSuccess * l_attackersArmy) / d_probOfDefendersSuccess));
                         d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced -= d_armies;
                         d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced = l_armiesLeft;
-                        l_message = "As attackers armies are less , they will lose and the armies left of the " + d_ToCountry + " after the war will be " + l_armiesLeft;
+                        l_message = "As attackers armies are not sufficient , they will lose and the armies left of the " + d_ToCountry + " after the war will be " + l_armiesLeft;
                         System.out.println(l_message);
                         l_observable.setMsg(l_message);
 
