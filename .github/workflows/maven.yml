@@ -24,8 +24,8 @@ jobs:
       run: mvn install
     - name: Test
       run: mvn test
-    #- name: JavaDoc Generation
-     # run: mvn javadoc:javadoc
+    - name: JavaDoc Generation
+      run: mvn javadoc:javadoc
          
       
 
