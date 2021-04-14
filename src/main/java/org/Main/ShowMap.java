@@ -21,55 +21,11 @@ public class ShowMap {
      * This method initially check whether there is any predefined maps. If the file is empty then it will ask the user to create a new map.
      * Else this method will show the list of maps and ask to user to select a map which user want to see.
      * After that it will go back to the main menu.
+     * @param d_FILE This is the map file.
      * @throws Exception If the map name entered by user is wrong or incorrect, this will throw exception.
      */
 
-    public void mapshow() throws Exception {
-        while (true) {
-            try {
-                Scanner l_sc = new Scanner(System.in);
-                File l_directoryPath = new File("SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\");
-                String l_contents[] = l_directoryPath.list();
-                int flag=0;
-                if(l_contents.length == 0){
-                    System.out.println("There are no predefined maps");
-                    System.out.println("Let's create a new map");
-                    while(true) {
-                        System.out.println("Enter the name of the map");
-                        SC = new Scanner(System.in);
-                        String l_filename = SC.nextLine();
-                        if(l_filename.endsWith(".map"))
-                        {
-                            try {
-                                File newFile = new File(l_filename);
-                                flag=1;
-                                Main.createMapByUser(newFile);
-                                break;
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        else {
-                            System.out.println("Enter correct command\n");
-                        }
-
-                    }
-                    if(flag==1){
-                        break;
-                    }
-                }
-                System.out.println("Here are the list of maps");
-                System.out.println("");
-                System.out.println("*************************");
-                for (int l_i = 0; l_i < l_contents.length; l_i++) {
-                    System.out.println(l_contents[l_i]);
-                }
-                System.out.println("*************************");
-                System.out.println("");
-                System.out.println("Enter the name of the map you want to select (Don't use extension)");
-                String l_x = l_sc.nextLine();
-                d_FILE = new File("SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\" + l_x + ".map");
-
+    public void mapshow(File d_FILE) throws Exception {
                 MapTable l_list = new MapTable();
                 ArrayList<String> l_countries = l_list.countryList(d_FILE);
                 ArrayList<String> l_continent = l_list.continentList(d_FILE);
@@ -128,11 +84,6 @@ public class ShowMap {
                     ArrayList l_value = l_mapElement.getValue();
                     System.out.println(l_key + " = " + l_value);
                 }
-                break;
-            } catch (Exception p_e) {
-                System.out.println("Enter valid map name");
-            }
-        }
         System.out.println("");
     }
 }
