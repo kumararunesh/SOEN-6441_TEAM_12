@@ -44,5 +44,36 @@ public class ReadLines {
 
         return l_continentlines;
     }
+
+    /**
+     * This method returns the total number of lines for the continents. Let's say continent index starts from line number 4
+     * and goes upto line number 10. Therefore it will return the 10-4 = 6. This is used to extract the continent Name and its Control Value
+     * @param p_file is the name of the map file to be read.
+     * @return Integer variable l_a which represents total number of lines for the continents.
+     * @throws Exception This is the file not found exception.
+     */
+    public int continentsline(File p_file) throws Exception {
+        ReadMap l_line = new ReadMap();
+        int l_a = l_line.territorylines(p_file);
+        int l_b = l_line.Conquestcontinentlines(p_file);
+        int l_continentlines = l_a-l_b;
+
+        return l_continentlines;
+    }
+
+    /**
+     * This method is used for counting the number of line of [Territories].
+     * @param p_file is the name of the map file to be read.
+     * @return Integer variable l_countrylines which signifies the total number of lines for the country
+     * @throws Exception as it is using the variable countrylines from the ReadMap.java files which throws the exception if file not found.
+     */
+    public int territoryline(File p_file) throws Exception{
+        ReadMap l_line = new ReadMap();
+        int l_a = l_line.territorylines(p_file);
+        int l_c = l_line.totallines(p_file);
+        int l_countrylines = l_c - l_a;
+
+        return l_countrylines;
+    }
 }
 
