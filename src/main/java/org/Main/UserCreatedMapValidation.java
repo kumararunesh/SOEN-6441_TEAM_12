@@ -1,5 +1,7 @@
 package org.Main;
 
+import org.StatePattern.GameEngine1;
+
 import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -95,7 +97,6 @@ public class UserCreatedMapValidation {
         if(l_finalFlag==1)
         {
             System.out.println("Map is Incorrect");
-           // Main.menu();
         }
         else if(l_finalFlag==0)
         {
@@ -115,7 +116,8 @@ public class UserCreatedMapValidation {
                 System.out.println("**************************************");
                 System.out.println("Map is validated");
                 System.out.println("**************************************");
-               // Main.menu();
+                GameEngine1 start = new GameEngine1();
+                start.start();
             }
             else{
                 System.out.println("**************************************");
@@ -127,6 +129,8 @@ public class UserCreatedMapValidation {
                 System.out.println("**************************************");
                 System.out.println("Map is Incorrect");
                 System.out.println("**************************************");
+                GameEngine1 start = new GameEngine1();
+                start.start();
             }
         }
 
