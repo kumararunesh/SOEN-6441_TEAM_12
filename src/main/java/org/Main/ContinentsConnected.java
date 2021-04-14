@@ -29,7 +29,7 @@ public class ContinentsConnected {
      * and each countries continent id in CountriesContinent and then is sorted and compared with continentsKey arraylist..
      * if both are equal the continents are connected and if not the not connected.
      * @return boolean value whether a particulars maps continents are connected or not.
-     * @throws Exception
+     * @throws Exception this is file not found exception.
      */
     public boolean ifContinentsConnected() throws Exception {
 
@@ -38,7 +38,7 @@ public class ContinentsConnected {
         ArrayList<Integer> l_ContId = l_obj.CountriesContinent(d_file);
         Collections.sort(l_ContId);
         GraphConnected l_check = new GraphConnected(d_file);
-        System.out.println(l_check);
+
         if (l_check.ifGraphConnected() == true) {
 
             if (l_ContinentAndKey.equals(l_ContId)==true){
@@ -50,31 +50,35 @@ public class ContinentsConnected {
         return false;
     }
 
+    /**
+     * This method will check if all the continent and countries are connected i.e there is no alone country or continent should be there.
+     * @return This will return a hashmap in which the key is the unique key of continent and arraylist contains the countries in that continent.
+     * @throws Exception This is the file not found exception.
+     */
+
     public HashMap<Integer,ArrayList> ifContinentCountriesConnected() throws Exception {
         MapTable l_obj = new MapTable();
 
-        ArrayList<Integer> copy = new ArrayList<>();
-        HashMap<Integer,ArrayList> nodes = new HashMap<>();
+        ArrayList<Integer> l_copy = new ArrayList<>();
+        HashMap<Integer,ArrayList> l_nodes = new HashMap<>();
         HashMap<Integer,Integer> l_connect = l_obj.cont(d_file);
         ArrayList<Integer> l_ContinentAndKey = l_obj.continentsKey(d_file);
-        System.out.println(l_ContinentAndKey);
-        System.out.println(l_connect);
 
-        for(int i =0 ; i<l_ContinentAndKey.size() ; i++){
-            ArrayList<Integer> countries = new ArrayList<>();
-            for(Map.Entry<Integer, Integer> entry: l_connect.entrySet()){
+        for(int l_i =0 ; l_i<l_ContinentAndKey.size() ; l_i++){
+            ArrayList<Integer> l_countries = new ArrayList<>();
+            for(Map.Entry<Integer, Integer> l_entry: l_connect.entrySet()){
 
-                if(entry.getValue()== l_ContinentAndKey.get(i)){
-                    countries.add(entry.getKey());
-                    copy = countries;
-                    nodes.put(l_ContinentAndKey.get(i),copy);
+                if(l_entry.getValue()== l_ContinentAndKey.get(l_i)){
+                    l_countries.add(l_entry.getKey());
+                    l_copy = l_countries;
+                    l_nodes.put(l_ContinentAndKey.get(l_i),l_copy);
 
-                    }
+                }
 
-        }
+            }
 
         }
 
-        return nodes;
+        return l_nodes;
     }
 }
