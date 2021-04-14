@@ -86,4 +86,45 @@ public class ReadMap {
         return l_c;
     }
 
+    /**
+     * This method is used to find the line number of the string [Territories]. Let's say the [Territories] string is available at line number
+     * 25. Then this method will return the line number as 25.
+     * @param p_file is the name of the file to be read.
+     * @return Integer variable which is telling about the line number for string [countries] in the map file.
+     * @throws FileNotFoundException if the file doesn't exist.
+     */
+    public int territorylines(File p_file) throws Exception{
+        int l_c = 0;
+
+        Scanner l_sc4 = new Scanner(p_file);
+        while (l_sc4.hasNextLine()){
+            l_c++;
+            l_sc4.nextLine();
+            if(l_sc4.next().equals("[Territories]")){
+                break;
+            }
+        }
+        return l_c;
+    }
+
+    /**
+     * This method is used to find the line count of the string [Continents]. Then this count is used to find the
+     * names of different continents once we have the line number from where the continents are starting.
+     * @param p_file is the name of the file to be read.
+     * @return l_b is basically the count .
+     * @throws Exception if the file specified doesn't exist.
+     */
+    public int Conquestcontinentlines(File p_file) throws Exception{
+        int l_b = 0;
+        Scanner l_sc3 = new Scanner(p_file);
+        while (l_sc3.hasNextLine()){
+            l_b++;
+            l_sc3.nextLine();
+            if(l_sc3.next().equals("[Continents]")){
+                break;
+            }
+        }
+        return l_b;
+    }
+
 }
