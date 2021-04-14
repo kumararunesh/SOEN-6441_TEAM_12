@@ -710,6 +710,214 @@ public class MapTable {
         return l_intNeigh;
     }
 
+    /**
+     * This method is used to create the list of all the countries available in that map. This method will first look for the [Territories]
+     * string inside the map and the will read the map line by line and will append the country's name into the arraylist.
+     * @param p_file is the Object of the File.
+     * @return the String which contains the list of all countries.
+     * @throws Exception as it is using the territoryline method which is basically throwing the exception.
+     */
+    public ArrayList<String> ConquestterritoriesList(File p_file) throws Exception {
+
+        ReadLines l_line = new ReadLines();
+        int l_n =l_line.territoryline(p_file);
+
+        ArrayList<String> l_list = new ArrayList<>();
+
+        Scanner l_sc = new Scanner(p_file);
+        int l_count = 0;
+        int l_i;
+        int l_a=0;
+        while(l_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(l_sc.next().equals("[Territories]")){
+                for(l_i=0;l_i<l_n-1;l_i++){
+                    if(!l_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = l_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = l_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split(",");
+
+                    l_list.add(l_input[0]);
+                }
+                l_count=1 ;
+            }
+        }
+        return l_list;
+    }
+
+    /**
+     * This method is used to create the list of all the continents available in that map. This method will first look for the [Continents]
+     * string inside the map and the will read the map line by line and will append the continent's name into the arraylist.
+     * @param p_file is the Object of the File.
+     * @return the String which contains the list of all continents.
+     * @throws Exception This is the file not found exception.
+     */
+    public  ArrayList<String> ConquestcontinentsList(File p_file) throws Exception {
+
+        ReadLines l_line = new ReadLines();
+        int l_num = l_line.continentsline(p_file);
+
+        ArrayList<String> l_list1 = new ArrayList<>();
+
+        Scanner l_sc = new Scanner(p_file);
+        int l_count = 0;
+        int l_i;
+        int l_a=0;
+        while(l_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(l_sc.next().equals("[Continents]")){
+                for(l_i=0;l_i<l_num-1;l_i++){
+                    if(!l_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = l_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = l_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split("=");
+                    l_list1.add(l_input[0]);
+                }
+                l_count=1 ;
+            }
+        }
+        return l_list1;
+    }
+
+    /**
+     * Method which will read the certain file and will look only for the [Continents] string in the map file. Then it will split the string on space and will select the
+     * 0th index as the continent name and 1st index as the Continent control value and will place it in HashMap at their respective position
+     * @param p_file is the filename which needs to be read in order to fetch these details.
+     * @return HashMap of string and Integer whose key will contain the continent name and value will contain the control value of that particular continent.
+     * @throws Exception continentline is being used which is throwing exception and thus it needs to be handled.
+     */
+    public HashMap<String,Integer> Conquestcontinentsandvalue(File p_file) throws Exception{
+
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.continentsline(p_file);
+
+        HashMap<String,Integer> l_contval = new HashMap<>();
+
+        Scanner l_sc = new Scanner(p_file);
+        int l_count=0;
+        int l_i;
+        int l_a=0;
+        while(l_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(l_sc.next().equals("[Continents]")){
+                for(l_i=0;l_i<l_n-1;l_i++){
+                    if(!l_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = l_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = l_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split("=");
+                    int l_val = Integer.parseInt(l_input[1]);
+                    l_contval.put(l_input[0],l_val);
+                }
+                l_count = 1 ;
+            }
+        }
+        return l_contval;
+    }
+
+    /**
+     * This method will particularly look for the [Territories] string in the map file and then from the continent unique value, continent's name will be mapped
+     * using the continentList method.
+     * @param p_file contains the name of the file that has to be read.
+     * @return HashMap which contains the continent's name as the value and the country's name as the key.
+     * @throws Exception as territoryline is being used by this method which throws the exception and it needs to be handled.
+     */
+    public HashMap<String,String> Conquestcountryanditscontinent(File p_file) throws Exception{
+
+        ReadLines l_line = new ReadLines();
+        int l_n = l_line.territoryline(p_file);
+        ArrayList<String> l_continent = ConquestcontinentsList(p_file);
+        HashMap<String,String> l_countrycont = new HashMap<>();
+
+        Scanner l_sc = new Scanner(p_file);
+        int l_count=0;
+        int l_i;
+        int l_a=0;
+        while(l_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(l_sc.next().equals("[Territories]")){
+                for(l_i=0;l_i<l_n-1;l_i++){
+                    if(!l_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = l_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = l_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split(",");
+                    l_countrycont.put(l_input[0],l_input[3]);
+                }
+                l_count = 1 ;
+            }
+        }
+        return l_countrycont;
+    }
+
+    /**
+     * Method which will keep a track of the particular country and its neighbouring countries. The country's name will be used as the key
+     * and the name of the neighbouring countries are stored in the ArrayList.
+     * @param p_file is the Object of the file which has to be read.
+     * @return the HashMap containing the Integer as the Key and the ArrayList as the value.
+     * @throws Exception it is the file not found exception.
+     */
+    public HashMap<String, ArrayList> Conquestcountryanditsneighbours(File p_file) throws Exception {
+
+        ReadLines l_line = new ReadLines();
+        HashMap<String,ArrayList> l_countryNeigh= new HashMap<>();
+        Scanner l_sc = new Scanner(p_file);
+        int l_n = l_line.territoryline(p_file);
+        int l_count=0;
+        int l_i;
+        int l_a=0;
+        while(l_sc.hasNextLine()){
+            if(l_count==1){
+                break;
+            }
+            if(l_sc.next().equals("[Territories]")){
+                for(l_i=0;l_i<l_n-1;l_i++){
+                    ArrayList<String> neigh = new ArrayList<>();
+                    if(!l_sc.hasNext()){
+                        break;
+                    }
+                    String l_text = l_sc.nextLine();
+                    if(l_a == 0) {
+                        l_text = l_sc.nextLine();
+                        l_a=1;
+                    }
+                    String[] l_input = l_text.split(",");
+                    for(int i = 4; i < l_input.length; i++){
+                        neigh.add(l_input[i]);
+                    }
+                    l_countryNeigh.put(l_input[0],neigh);
+                }
+                l_count = 1 ;
+            }
+        }
+        return l_countryNeigh;
+    }
 
 }
 
