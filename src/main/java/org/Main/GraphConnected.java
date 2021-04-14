@@ -9,31 +9,32 @@ import java.util.HashMap;
  */
 
 public class GraphConnected{
-    static File FILE;
-    MapTable d_borders = new MapTable();
-    HashMap<Integer,ArrayList> d_countryNeigh;
-    List<Integer> d_realNodes;
-    List<Integer> d_country_index;
-    Stack<Integer> d_stack;
-    ArrayList<Integer> d_connections;
-    int d_max;
-    boolean[] d_visited;
-    boolean[] d_scan;
+    static File d_FILE;
+    MapTable l_borders = new MapTable();
+    HashMap<Integer,ArrayList> l_countryNeigh;
+    List<Integer> l_realNodes;
+    List<Integer> l_country_index;
+    Stack<Integer> l_stack;
+    ArrayList<Integer> l_connections;
+    int l_max;
+    boolean[] l_visited;
+    boolean[] l_scan;
 
     /**
      * Simple Constructor throwing exception.
+     * @param p_file It is the map file.
      * @throws Exception whether the file exists or not.
      */
     public GraphConnected(File p_file) throws Exception {
-        this.FILE = p_file;
-        d_countryNeigh = d_borders.CountryAndItsNeighbours(FILE);
-        d_country_index = d_borders.list(FILE);
-        d_realNodes = d_borders.max(FILE);
-        d_stack = new Stack<>();
-        d_connections = new ArrayList<>();
-        d_max = Collections.max(d_realNodes,null);
-        d_visited = new boolean[d_max +1];
-        d_scan = new boolean[d_max + 1];
+        this.d_FILE = p_file;
+        l_countryNeigh = l_borders.CountryAndItsNeighbours(d_FILE);
+        l_country_index = l_borders.list(d_FILE);
+        l_realNodes = l_borders.max(d_FILE);
+        l_stack = new Stack<>();
+        l_connections = new ArrayList<>();
+        l_max = Collections.max(l_realNodes,null);
+        l_visited = new boolean[l_max +1];
+        l_scan = new boolean[l_max + 1];
 
     }
 
@@ -45,18 +46,18 @@ public class GraphConnected{
     public HashMap<Integer,ArrayList> complete(){
         ArrayList<Integer> l_empty = new ArrayList<>();
 
-        d_scan[0] = true;
-        for (int l_i = 0; l_i<d_country_index.size(); l_i++){
-            d_scan[d_country_index.get(l_i)]= true;
+        l_scan[0] = true;
+        for (int l_i = 0; l_i< l_country_index.size(); l_i++){
+            l_scan[l_country_index.get(l_i)]= true;
         }
-        for (int l_j = 0; l_j<d_realNodes.size(); l_j++){
-            if(d_scan[d_realNodes.get(l_j)]==false){
-                int l_note = d_realNodes.get(l_j);
-                d_countryNeigh.put(l_note,l_empty);
+        for (int l_j = 0; l_j< l_realNodes.size(); l_j++){
+            if(l_scan[l_realNodes.get(l_j)]==false){
+                int l_note = l_realNodes.get(l_j);
+                l_countryNeigh.put(l_note,l_empty);
             }
         }
 
-        return  d_countryNeigh;
+        return l_countryNeigh;
 
     }
 
@@ -68,21 +69,21 @@ public class GraphConnected{
      * @param p_value variable p_value is integer value which determines from where the graph traversing should start.
      */
     public void dfs(int p_value) {
-        d_stack.push(p_value);
-        d_visited[p_value] = true;
+        l_stack.push(p_value);
+        l_visited[p_value] = true;
         complete();
         int l_count = 0;
         while (true) {
-            if(d_stack.isEmpty() == true){
+            if(l_stack.isEmpty() == true){
                 break;
             }
-            Integer l_node = d_stack.pop();
-            d_connections = d_countryNeigh.get(l_node);
-            if(!d_connections.isEmpty()){
-                for (Integer l_neighbour : d_connections) {
-                    if (!d_visited[l_neighbour]) {
-                        d_stack.push(l_neighbour);
-                        d_visited[l_neighbour] = true;
+            Integer l_node = l_stack.pop();
+            l_connections = l_countryNeigh.get(l_node);
+            if(!l_connections.isEmpty()){
+                for (Integer l_neighbour : l_connections) {
+                    if (!l_visited[l_neighbour]) {
+                        l_stack.push(l_neighbour);
+                        l_visited[l_neighbour] = true;
                     }
                 }
             }
@@ -96,19 +97,19 @@ public class GraphConnected{
      * @return boolean variable boolean which is simple true or false.
      */
     public boolean ifGraphConnected() {
-        int l_key_1 = d_countryNeigh.keySet().stream().findFirst().get();
+        int l_key_1 = l_countryNeigh.keySet().stream().findFirst().get();
         int p_start = l_key_1;
         dfs(p_start);
-        d_visited[0] = true;
-        for (int l_i = 0; l_i < d_realNodes.size(); l_i++) {
-            int l_check = d_realNodes.get(l_i);
-            boolean l_comp = d_visited[l_check];
+        l_visited[0] = true;
+        for (int l_i = 0; l_i < l_realNodes.size(); l_i++) {
+            int l_check = l_realNodes.get(l_i);
+            boolean l_comp = l_visited[l_check];
             if(l_comp == false){
                 return false;
             }
-            }
-        return true;
         }
+        return true;
+    }
 
 
     /**
@@ -117,28 +118,29 @@ public class GraphConnected{
      * @throws Exception as we are using ConnectedContinent class Functions
      */
     public boolean ContinentsCheck() throws Exception {
-        ContinentsConnected d_obj = new ContinentsConnected(FILE);
+        ContinentsConnected d_obj = new ContinentsConnected(d_FILE);
         HashMap<Integer,ArrayList> l_list = d_obj.ifContinentCountriesConnected();
         for(Map.Entry<Integer, ArrayList> l_entry: l_list.entrySet()) {
-            HashMap<Integer,ArrayList> l_check = d_borders.CountryNeighbours(FILE,l_entry.getValue());
+            HashMap<Integer,ArrayList> l_check = l_borders.CountryNeighbours(d_FILE,l_entry.getValue());
+            System.out.println("l_check" + l_check);
             List<Integer> l_nodes = l_entry.getValue();
             int l_max = Collections.max(l_nodes);
             boolean [] l_traversed = new boolean[l_max +1];
             int l_key_1 = l_check.keySet().stream().findFirst().get();
             int p_start = l_key_1;
-            d_stack.push(p_start);
+            l_stack.push(p_start);
             l_traversed[p_start] = true;
             int l_count = 0;
             while (true) {
-                if (d_stack.isEmpty() == true) {
+                if (l_stack.isEmpty() == true) {
                     break;
                 }
-                Integer l_node = d_stack.pop();
-                d_connections = l_check.get(l_node);
-                if (!d_connections.isEmpty()) {
-                    for (Integer l_neighbour : d_connections) {
+                Integer l_node = l_stack.pop();
+                l_connections = l_check.get(l_node);
+                if (!l_connections.isEmpty()) {
+                    for (Integer l_neighbour : l_connections) {
                         if (!l_traversed[l_neighbour]) {
-                            d_stack.push(l_neighbour);
+                            l_stack.push(l_neighbour);
                             l_traversed[l_neighbour] = true;
                         }
                     }
