@@ -19,3 +19,71 @@ public class TournamentMain {
     String winner;
     
        
+    public void run() {
+        gameEngine = new TournamentGameEngine();
+        System.out.println("Enter command to start the tournament mode");
+        Scanner sc = new Scanner(System.in);
+        String l_command = sc.nextLine();
+        String[] l_commandSplit= l_command.split("-");
+        if(l_commandSplit[0].equalsIgnoreCase("tournament ") && l_commandSplit.length==5)
+        {
+            listOfMapFiles = new String[l_commandSplit[1].split(" ").length-1];
+            int i=0;
+            if(l_commandSplit[1].split(" ")[0].equalsIgnoreCase("m")) {
+                for (String map : l_commandSplit[1].split(" ")) {
+                    if (map.equalsIgnoreCase("m")) {
+                        continue;
+                    } else {
+                        listOfMapFiles[i] = map;
+                        i += 1;
+                    }
+                }
+            }
+            else
+            {
+                System.out.println("Wrong command.");
+            }
+            i=0;
+            if(l_commandSplit[2].split(" ")[0].equalsIgnoreCase("p"))
+            {
+                d_playersName= new String[l_commandSplit[2].split(" ").length];
+                for(String l_playerName: l_commandSplit[2].split(" "))
+                {
+                    if(l_playerName.equalsIgnoreCase("p"))
+                    {
+                        continue;
+                    }
+                    else {
+                        d_playersName[i] = l_playerName;
+                        i+=1;
+                    }
+                }
+
+            }
+            else{
+                System.out.println("Wrong Command.");
+            }
+
+            if(l_commandSplit[3].split(" ")[0].equalsIgnoreCase("g"))
+            {
+                numberofgames= Integer.parseInt(l_commandSplit[3].split(" ")[1]);
+
+            }
+            else
+            {
+                System.out.println("Wrong Command");
+            }
+
+            if(l_commandSplit[4].split(" ")[0].equalsIgnoreCase("d"))
+            {
+                maxnumberofturns = Integer.parseInt(l_commandSplit[4].split(" ")[1]);
+            }
+            else
+            {
+                System.out.println("Wrong Command");
+            }
+        }
+        else
+        {
+            System.out.println("Enter the correct command");
+        }
