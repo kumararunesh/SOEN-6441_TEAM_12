@@ -101,12 +101,9 @@ public class GameEngine1 {
                         serialOBJ =(serialObj) l_inputStream.readObject();
 
                         GameEngine ge = new GameEngine();
-                        ge.PLAYERS_LIST = serialOBJ.d_playerList;
-                        l_playerList = ge.PLAYERS_LIST;
-                        ge.COUNTRY.COUNTRIESLIST = (ConcurrentHashMap<String, Country>) l_inputStream.readObject();
-                        l_country  =  ge.COUNTRY;
-                        //                        GamePlayMain phase = new GamePlayMain(this,ge);
-                        OrderIssuePhase phase = new OrderIssuePhase(ge.PLAYERS_LIST,ge.COUNTRY,this);
+                        ge.d_PLAYERS_LIST = serialOBJ.d_playerList;
+                        ge.d_COUNTRY.COUNTRIESLIST = (ConcurrentHashMap<String, Country>) l_inputStream.readObject();
+                        GamePlayMain phase = new GamePlayMain(this,ge);
                         setPhase(phase);
                         for(String l_playerName: l_playerList.keySet())
                         {
@@ -142,11 +139,9 @@ public class GameEngine1 {
                 System.out.println("| 2.  Edit Map                : editmap           |");
                 System.out.println("| 3.  GamePlay : load map     : loadmap           |");
                 System.out.println("| 4.  GamePlay: set Player    : gameplayer        |");
-                System.out.println("| 5.  Game Play: execution    : gameplay          |");
-                System.out.println("| 6.  LoadMap: order          : order             |");
-                System.out.println("| 6.  LoadMap: Execute orders : execute           |");
-                System.out.println("| 7.  Any Phase               : end game          |");
-                System.out.println("| 8.  Any Phase               : next phase        |");
+                System.out.println("| 6.  Game Play: execution    : gameplay          |");
+                System.out.println("| 5.  Any Phase               : end game          |");
+                System.out.println("| 6.  Any Phase               : next phase        |");
                 System.out.println(" =================================================");
                 System.out.println("enter a " + d_gamePhase.getClass().getSimpleName() + " phase command: ");
                 MYCOMMAND = l_keyboard.nextLine();
@@ -176,12 +171,6 @@ public class GameEngine1 {
                         break;
                     case ("gameplay"):
                         d_gamePhase.gamePlay();
-                        break;
-                    case("order"):
-                        d_gamePhase.mainGameLoop();
-                        break;
-                    case("execute"):
-                        d_gamePhase.execute();
                         break;
                     case("end"):
                     {
