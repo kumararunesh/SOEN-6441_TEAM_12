@@ -24,9 +24,9 @@ public class BombTest {
     @Before
     public void startUpPhase(){
 
-        d_p1 = new Player("Manjit");
+        d_p1 = new Player("human");
         d_p1.add_card("BOMB");
-        d_p2 = new Player("Manish");
+        d_p2 = new Player("human");
         d_p2.add_card("BOMB");
 
         d_con1 = new Country("d","b",5,3,new ArrayList<>(Arrays.asList("d","e")));
