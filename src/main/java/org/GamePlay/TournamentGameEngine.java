@@ -44,6 +44,17 @@ public class TournamentGameEngine {
     public String d_message;
 }
 public void executeAllOrders() {
+       public void executeAllOrders() {
         System.out.println("===============BEGIN EXECUTING ALL ORDERS=================");
         Order order;
         boolean still_more_orders = false;
+        do {
+            still_more_orders = false;
+            for (String l_s : PLAYERS_LIST.keySet()) {
+                Player p = PLAYERS_LIST.get(l_s);
+                order = p.next_order();
+                if (order != null) {
+                    still_more_orders = true;
+                    order.Execute(p);
+                }
+            }
