@@ -82,3 +82,20 @@ public String gamePlay(File p_file, int turns) {
                 if (l_name[0].equalsIgnoreCase("human")) {
                     p.setStrategy(new HumanPlayerStrategy(p, COUNTRY.COUNTRIESLIST, PLAYERS_LIST, COUNTRY));
                 }
+    }
+            if (l_s.equalsIgnoreCase("random")) {
+                p.setStrategy(new RandomPlayerStrategy(p, COUNTRY.COUNTRIESLIST, COUNTRY));
+            }
+            if (l_s.equalsIgnoreCase("aggressive")) {
+                p.setStrategy(new AggressivePlayerStrategy(p, COUNTRY.COUNTRIESLIST, COUNTRY));
+            }
+            if (l_s.equalsIgnoreCase("benevolent")) {
+                p.setStrategy(new AggressivePlayerStrategy(p, COUNTRY.COUNTRIESLIST, COUNTRY));
+            }
+            if (l_s.equalsIgnoreCase("cheater")) {
+                p.setStrategy(new CheaterPlayerStrategy(p, COUNTRY.COUNTRIESLIST, PLAYERS_LIST));
+            }
+            if (l_s.equalsIgnoreCase("human")) {
+                p.setStrategy(new HumanPlayerStrategy(p, COUNTRY.COUNTRIESLIST, PLAYERS_LIST, COUNTRY));
+            }
+
