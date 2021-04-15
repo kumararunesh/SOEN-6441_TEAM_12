@@ -24,12 +24,12 @@ public class MapValidation {
     {
         ge = new GameEngine();
         ge.d_filename = "n.map";
-        ge.FILE = new File(".\\src\\test\\resources\\maps\\n.map");
+        ge.d_FILE = new File(".\\src\\test\\resources\\maps\\n.map");
 
 
         ge1 = new GameEngine();
         ge1.d_filename = "bigeurope.map";
-        ge1.FILE = new File(".\\src\\test\\resources\\maps\\bigeurope.map");
+        ge1.d_FILE = new File(".\\src\\test\\resources\\maps\\bigeurope.map");
     }
 
     /**
