@@ -114,3 +114,13 @@ public String gamePlay(File p_file, int turns) {
                    /* if (!an_order)
                         break;*/
                 }
+   } while (an_order);
+                {
+                counter++;
+                if (counter == turns) {
+                    if (PLAYERS_LIST.size() > 1) {
+                        System.out.println("Nobody is the winner, Its a draw");
+                        return "DRAW";
+                    }
+                    break;
+                }
