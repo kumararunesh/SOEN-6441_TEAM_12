@@ -10,6 +10,7 @@ import org.GamePlay.GameEngine;
 import org.GamePlay.Player;
 import org.StatePattern.ShowMap;
 import org.ObserverBasedLogging.LogWriter;
+import org.Tournament.TournamentMain;
 
 /**
  * Class to start the game.
@@ -34,6 +35,8 @@ public class GameEngine1 {
      * String variable to store the message to be displayed. Used for testing file only.
      */
     public String MESSAGE;
+
+    public TournamentMain d_tournamentMain ;
 
     /**
      * Method that allows the GameEngine object to change its state.
@@ -60,13 +63,15 @@ public class GameEngine1 {
      * it is throwing exception which needs to be handled.
      */
     public void start() throws Exception {
+        d_tournamentMain  = new TournamentMain();
         Scanner l_keyboard = new Scanner(System.in);
         do {
             LogWriter l_log = new LogWriter();
             System.out.println("1. Edit Map");
             System.out.println("2. Play Game");
             System.out.println("3. Load Game");
-            System.out.println("4. Quit");
+            System.out.println("4. Tournament Mode");
+            System.out.println("5. Quit");
             System.out.println("Where do you want to start?: ");
             MYSTART = l_keyboard.nextInt();
             switch (MYSTART) {
@@ -85,7 +90,7 @@ public class GameEngine1 {
                     Scanner l_sc = new Scanner(System.in);
                     String l_fileName= l_sc.nextLine();
                     l_fileName+=".ser";
-                    File l_file = new File("src/main/resources/savedGames/"+l_fileName);
+                    File l_file = new File(".\\src\\main\\resources\\maps\\"+l_fileName);
                     serialObj serialOBJ;
                     Country l_country;
                     ConcurrentHashMap <String, Player> l_playerList = new ConcurrentHashMap<>();
@@ -94,12 +99,10 @@ public class GameEngine1 {
                         ObjectInputStream l_inputStream = new ObjectInputStream(l_fileInputStream);
 
                         serialOBJ =(serialObj) l_inputStream.readObject();
-/*                        l_playerList = serialOBJ.d_playerList;
-                        l_country = serialOBJ.d_country;
-                        l_country.COUNTRIESLIST = (ConcurrentHashMap<String, Country>) l_inputStream.readObject();*/
+
                         GameEngine ge = new GameEngine();
-                        ge.PLAYERS_LIST = serialOBJ.d_playerList;
-                        ge.COUNTRY.COUNTRIESLIST = (ConcurrentHashMap<String, Country>) l_inputStream.readObject();
+                        ge.d_PLAYERS_LIST = serialOBJ.d_playerList;
+                        ge.d_COUNTRY.COUNTRIESLIST = (ConcurrentHashMap<String, Country>) l_inputStream.readObject();
                         GamePlayMain phase = new GamePlayMain(this,ge);
                         setPhase(phase);
                         for(String l_playerName: l_playerList.keySet())
@@ -113,10 +116,16 @@ public class GameEngine1 {
                         }
                         l_fileInputStream.close();
                         l_inputStream.close();
+
                     }catch(Exception e)
-                    {}
+                    {
+                        System.out.println("Exception e :"+e);
+                    }
                     break;
                 case 4:
+                    String result = d_tournamentMain.run();
+                    return;
+                case 5:
                     System.out.println("Bye!");
                     return;
             }
@@ -175,7 +184,7 @@ public class GameEngine1 {
                 }
                 l_i=0;
             } while (!(d_gamePhase instanceof End));
-        } while (MYSTART != 3);
+        } while (MYSTART != 5);
         l_keyboard.close();
     }
 }
