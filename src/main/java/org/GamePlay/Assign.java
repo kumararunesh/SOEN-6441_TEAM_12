@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class Assign {
     ConcurrentHashMap<String, Player> d_playersList = new ConcurrentHashMap<>();
-    Country d_country;
+    public Country d_country;
 
     /**
      * Constructor to initialise
