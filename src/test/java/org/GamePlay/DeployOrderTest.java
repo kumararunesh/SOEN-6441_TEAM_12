@@ -16,7 +16,7 @@ public class DeployOrderTest {
     @Before
     public void setUp()
     {
-        d_p= new Player("Nitpreet");
+        d_p= new Player("human");
 
         l_cou1 = new Country("d","b",5,3,new ArrayList<>(Arrays.asList("d","e")));
         l_cou2 = new Country("e","c",5,3,new ArrayList<>(Arrays.asList("d","e")));
