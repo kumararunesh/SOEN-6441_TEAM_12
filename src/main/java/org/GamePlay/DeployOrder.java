@@ -39,5 +39,24 @@ public class DeployOrder extends Order implements Serializable {
                 l_index = i;
             }
         }
-		}
-		}
+        String l_order = "ORDER : " + p_p.d_name +" gave order :"+" Deploy armies "+ d_armiesToPlace +" to " + d_countryId;
+        String l_separator = "***********************************************************************************************************";
+        if (l_index != 10000000) {
+            if (d_armiesToPlace <= p_p.d_armiesNum) {
+                p_p.d_armiesNum = p_p.d_armiesNum - d_armiesToPlace;
+
+                d_cou.COUNTRIESLIST.get(d_countryId).d_numOfArmiesPlaced += d_armiesToPlace;
+                d_cou.COUNTRIESLIST.get(d_countryId).d_owner = p_p.d_name;
+                System.out.println(l_separator);
+                System.out.println(l_order);
+                System.out.print("EFFECT : " + p_p.d_name + " your order has been placed. Now your army count is " + p_p.d_armiesNum + ". ");
+                System.out.print("MSG : " + d_armiesToPlace + " unit of armies are placed on " + p_p.d_owned.get(l_index).d_countryId);
+                System.out.println("");
+                System.out.println(l_separator);
+                ConcurrentHashMap<String, Player> playerList = new ConcurrentHashMap<>();
+                playerList.put(p_p.d_name, p_p);
+                showMap map = new showMap(playerList, d_cou);
+                d_temp = d_armiesToPlace + " armies deployed";
+            }
+	}
+    }
