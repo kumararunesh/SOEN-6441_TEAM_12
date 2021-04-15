@@ -24,3 +24,17 @@ public class TournamentMain {
         Scanner sc = new Scanner(System.in);
         String l_command = sc.nextLine();
         String[] l_commandSplit= l_command.split("-");
+if(l_commandSplit[0].equalsIgnoreCase("tournament ") && l_commandSplit.length==5)
+        {
+            listOfMapFiles = new String[l_commandSplit[1].split(" ").length-1];
+            int i=0;
+            if(l_commandSplit[1].split(" ")[0].equalsIgnoreCase("m")) {
+                for (String map : l_commandSplit[1].split(" ")) {
+                    if (map.equalsIgnoreCase("m")) {
+                        continue;
+                    } else {
+                        listOfMapFiles[i] = map;
+                        i += 1;
+                    }
+                }
+            }
