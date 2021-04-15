@@ -7,7 +7,7 @@ import org.GamePlay.Player;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class CheaterPlayerStrategy extends PlayerStrategy {
+public class CheaterPlayerStrategy {
 
     ConcurrentHashMap <String,Country> d_countries;
     Player d_player;
@@ -19,5 +19,12 @@ public class CheaterPlayerStrategy extends PlayerStrategy {
         this.d_countries = Countries;
         this.d_player = p_player;
         this.d_playerList = p_playerList;
+    }
+	    protected Country toAttack() {
+
+        return null;
+    }
+	protected Country toAttackFrom() {
+        return null;
     }
 }
