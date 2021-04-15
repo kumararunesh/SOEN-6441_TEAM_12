@@ -1,24 +1,26 @@
 package org.GamePlay;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Country Class containing all data for one country
  */
-public class Country {
+public class Country implements Serializable {
+    private static final long serialVersionUID= -1204069388230272497L;
     /**
      * GLobal List of all countries
      */
-    static ConcurrentHashMap<String, Country> COUNTRIESLIST = new ConcurrentHashMap<>();
+    public static ConcurrentHashMap<String, Country> COUNTRIESLIST = new ConcurrentHashMap<>();
 
     int d_numberOfCountriesInContinent;
-    String d_countryId;
-    Integer d_numOfArmiesPlaced = 0;
-    ArrayList<String> d_neighbours = new ArrayList();
-    String d_continent;
-    String d_owner;
-    int d_continentBonus;
+    public String d_countryId;
+    public Integer d_numOfArmiesPlaced = 0;
+    public ArrayList<String> d_neighbours = new ArrayList();
+    public String d_continent;
+    public String d_owner;
+    public int d_continentBonus;
 
     /**
      * Constructor to intialize the country object
