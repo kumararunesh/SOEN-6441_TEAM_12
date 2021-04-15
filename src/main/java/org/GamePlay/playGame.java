@@ -1,11 +1,15 @@
 package org.GamePlay;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.StatePattern.serialObj;
 /**
  * This class is used to assign the troops
  * Deploy the reinforcements
@@ -84,188 +88,213 @@ public class playGame {
      * Showmap is the command to display all the contents of the map file along with owner of the country and the armies allocated to the certain player.
      */
 
-    public void mainGameLoop() {
-        System.out.println("Main game loop: issue orders phase");
-        Boolean l_flag = true;
+    public Order mainGameLoop() {
+        System.out.println("Human Player: issue orders phase");
+
         int l_i = 0;
-        while (l_flag) {      //Loop for iterating until all players give pass
-            l_i = 0;
-            for (String l_s : d_playerList.keySet()) {
-                Player l_p = d_playerList.get(l_s);
-                Boolean l_flag_1 = true;
-                while (l_flag_1) {  //loop for correct input for order until a player inputs correct order
-                    System.out.println(l_p.d_name + " Please issue orders from the below commands");
-                    System.out.println("*************************");
-                    System.out.println("**Deploy**\n**Advance**\n**Cards**\n    -Bomb\n    -Blockade\n    -Airlift\n    -Negotiate\n**Pass**\n**ShowMap**");
-                    System.out.println("*************************");
-                    Scanner l_sc = new Scanner(System.in);
-                    String l_command = l_sc.nextLine();
-                    String l_commandSplit[] = l_command.split(" ");
-                    if (l_commandSplit[0].equalsIgnoreCase("deploy")) {
-                        if (l_commandSplit.length == 3) {
-                            String l_countryId = l_commandSplit[1];
-                            if (d_country.COUNTRIESLIST.containsKey(l_countryId)) {
-                                String l_regex = "\\d+";
-                                if (l_commandSplit[2].matches(l_regex)) {
-                                    int l_armiesToPlace = Integer.parseInt(l_commandSplit[2]);
-                                    if (l_armiesToPlace > 0) {
-                                        l_flag_1 = false;
-                                        Order l_newOrder = new DeployOrder(l_countryId, l_armiesToPlace, d_country);
-                                        l_p.issue_order(l_newOrder);
-                                    } else {
-                                        System.out.println("Negative Army count not allowed");
-                                        continue;
-                                    }
-                                } else {
-                                    System.out.println("The army number should be an integer");
-                                    continue;
-                                }
-                            } else {
-                                System.out.println("The country that you entered doesn't exist in the Map");
-                                continue;
-                            }
-                        } else {
-                            System.out.println("Your deploy command should be like 'deploy countryName armyToPlace'\n");
-                            continue;
-                        }
-                    } else if (l_commandSplit[0].equalsIgnoreCase("bomb")) {
-                        if (l_commandSplit.length == 2) {
-                            String l_countryId = l_commandSplit[1];
-                            if (d_country.COUNTRIESLIST.containsKey(l_countryId)) {
-                                if (!l_p.d_owned.contains(d_country.COUNTRIESLIST.get(l_countryId))) {
-                                    l_flag_1 = false;
-                                    Cards l_card = new Cards(l_countryId, l_commandSplit[0], d_country);
-                                    l_p.issue_order(l_card);
-                                } else {
-                                    System.out.println("Cannot Bomb its own country");
-                                    continue;
-                                }
-                            } else {
-                                System.out.println("Not a Valid Country");
-                                continue;
-                            }
-                        } else {
-                            System.out.println("Not a Valid Command");
-                            continue;
-                        }
-                    } else if (l_commandSplit[0].equalsIgnoreCase("advance")) {
-                        if (l_commandSplit.length == 4) {
-                            String l_country_from = l_commandSplit[1];
-                            String l_country_to = l_commandSplit[2];
-                            String l_armies = l_commandSplit[3];
-                            String l_card = "empty";
-                            int l_armiesToAdvance = Integer.parseInt(l_armies);
-                            if (d_country.COUNTRIESLIST.containsKey(l_country_from) && d_country.COUNTRIESLIST.containsKey(l_country_to)) {
-                                if (l_p.d_owned.contains(d_country.COUNTRIESLIST.get(l_country_from))) {
-                                    if (d_country.COUNTRIESLIST.get(l_country_from).d_neighbours.contains(l_country_to)) {
-                                        if (l_p.d_armiesNum >= l_armiesToAdvance) {
-                                            l_flag_1 = false;
-                                            AdvanceArmies l_advance = new AdvanceArmies(l_country_from, l_country_to , l_armiesToAdvance , l_card , d_country , d_playerList);
-                                            l_p.issue_order(l_advance);
-                                        } else {
-                                            System.out.println("No of armies should be less or equal to no. of armies that player owns");
-                                            continue;
-                                        }
-                                    } else {
-                                        System.out.println("Cannot advance to " + l_country_to + " as it is not a neighbor of " + l_country_from);
-                                        continue;
-                                    }
-                                } else {
-                                    System.out.println(l_country_from + " does not belong to " + l_p.d_name);
-                                    continue;
-                                }
-                            } else {
-                                System.out.println(l_country_from + " or " + l_country_to + " are not a valid country");
-                                continue;
-                            }
-                        } else {
-                            System.out.println("Incomplete command, Please enter the full command");
-                            continue;
-                        }
-                    }else if (l_commandSplit[0].equalsIgnoreCase("blockade")) {
-                        if (l_commandSplit.length == 2) {
-                            String l_countryId = l_commandSplit[1];
-                            if (d_country.COUNTRIESLIST.containsKey(l_countryId)) {
-                                if (l_p.d_owned.contains(d_country.COUNTRIESLIST.get(l_countryId))) {
-                                    l_flag_1 = false;
-                                    Cards l_card = new Cards(l_countryId,l_commandSplit[0] ,  d_country);
-                                    l_p.issue_order(l_card);
-                                } else {
-                                    System.out.println("Cannot apply blockade to someone else'l_s country");
-                                    continue;
-                                }
-                            } else {
-                                System.out.println("Not a Valid Country");
-                                continue;
-                            }
-                        } else {
-                            System.out.println("Not a Valid Command");
-                            continue;
-                        }
-                    }else if(l_commandSplit[0].equalsIgnoreCase("airlift")){
-                        if (l_commandSplit.length == 4) {
-                            String l_countryFrom = l_commandSplit[1];
-                            String l_countryTo = l_commandSplit[2];
-                            String l_armies = l_commandSplit[3];
-                            int l_armiesToAirlift = Integer.parseInt(l_armies);
-                            if (d_country.COUNTRIESLIST.containsKey(l_countryFrom) && d_country.COUNTRIESLIST.containsKey(l_countryTo)) {
-                                if (l_p.d_owned.contains(d_country.COUNTRIESLIST.get(l_countryFrom))) {
-                                    if(l_p.d_armiesNum>=l_armiesToAirlift){
-                                        l_flag_1 = false;
-                                        Cards l_card = new Cards(l_countryFrom,l_countryTo ,l_armiesToAirlift ,l_commandSplit[0] ,d_country);
-                                        l_p.issue_order(l_card);
-                                    }
-                                    else {
-                                        System.out.println("Not enough number of armies to airlift");
-                                    }
 
-                                } else {
-                                    System.out.println("Cannot airlift armies from someone else'l_s country");
-                                    continue;
-                                }
-                            } else {
-                                System.out.println(l_countryFrom  + "" + "or " + l_countryTo +" Not a Valid Country");
-                                continue;
-                            }
-                        } else {
-                            System.out.println("Not a Valid Command");
-                            continue;
-                        }
-
-                    }
-                    else if(l_commandSplit[0].equalsIgnoreCase("negotiate")){
-                        if (l_commandSplit.length == 2) {
-                            String l_playerID = l_commandSplit[1];
-                            if (d_playerList.containsKey(l_playerID)) {
+        Player l_p = d_playerList.get("human");
+        Boolean l_flag_1 = true;
+        while (l_flag_1) {  //loop for correct input for order until a player inputs correct order
+            System.out.println(l_p.d_name + " Please issue orders from the below commands");
+            System.out.println("*************************");
+            System.out.println("**Deploy**\n**Advance**\n**Cards**\n    -Bomb\n    -Blockade\n    -Airlift\n    -Negotiate\n**Pass**\n**ShowMap**\n**Savegame**");
+            System.out.println("*************************");
+            Scanner l_sc = new Scanner(System.in);
+            String l_command = l_sc.nextLine();
+            String l_commandSplit[] = l_command.split(" ");
+            if (l_commandSplit[0].equalsIgnoreCase("deploy")) {
+                if (l_commandSplit.length == 3) {
+                    String l_countryId = l_commandSplit[1];
+                    if (d_country.COUNTRIESLIST.containsKey(l_countryId)) {
+                        String l_regex = "\\d+";
+                        if (l_commandSplit[2].matches(l_regex)) {
+                            int l_armiesToPlace = Integer.parseInt(l_commandSplit[2]);
+                            if (l_armiesToPlace > 0) {
                                 l_flag_1 = false;
-                                Cards l_card = new Cards(l_playerID , l_commandSplit[0] ,d_playerList);
-                                l_p.issue_order(l_card);
+                                return new DeployOrder(l_countryId, l_armiesToPlace, d_country);
+                            } else {
+                                System.out.println("Negative Army count not allowed");
+                                continue;
+                            }
+                        } else {
+                            System.out.println("The army number should be an integer");
+                            continue;
+                        }
+                    } else {
+                        System.out.println("The country that you entered doesn't exist in the Map");
+                        continue;
+                    }
+                } else {
+                    System.out.println("Your deploy command should be like 'deploy countryName armyToPlace'\n");
+                    continue;
+                }
+            } else if (l_commandSplit[0].equalsIgnoreCase("bomb")) {
+                if (l_commandSplit.length == 2) {
+                    String l_countryId = l_commandSplit[1];
+                    if (d_country.COUNTRIESLIST.containsKey(l_countryId)) {
+                        if (!l_p.d_owned.contains(d_country.COUNTRIESLIST.get(l_countryId))) {
+                            l_flag_1 = false;
+                            return new Cards(l_countryId, l_commandSplit[0], d_country);
+                        } else {
+                            System.out.println("Cannot Bomb its own country");
+                            continue;
+                        }
+                    } else {
+                        System.out.println("Not a Valid Country");
+                        continue;
+                    }
+                } else {
+                    System.out.println("Not a Valid Command");
+                    continue;
+                }
+            } else if (l_commandSplit[0].equalsIgnoreCase("advance")) {
+                if (l_commandSplit.length == 4) {
+                    String l_country_from = l_commandSplit[1];
+                    String l_country_to = l_commandSplit[2];
+                    String l_armies = l_commandSplit[3];
+                    String l_card = "empty";
+                    int l_armiesToAdvance = Integer.parseInt(l_armies);
+                    if (d_country.COUNTRIESLIST.containsKey(l_country_from) && d_country.COUNTRIESLIST.containsKey(l_country_to)) {
+                        if (l_p.d_owned.contains(d_country.COUNTRIESLIST.get(l_country_from))) {
+                            if (d_country.COUNTRIESLIST.get(l_country_from).d_neighbours.contains(l_country_to)) {
+                                if (l_p.d_armiesNum >= l_armiesToAdvance) {
+                                    l_flag_1 = false;
+                                    return new AdvanceArmies(l_country_from, l_country_to , l_armiesToAdvance , l_card , d_country , d_playerList);
+                                } else {
+                                    System.out.println("No of armies should be less or equal to no. of armies that player owns");
+                                    continue;
+                                }
+                            } else {
+                                System.out.println("Cannot advance to " + l_country_to + " as it is not a neighbor of " + l_country_from);
+                                continue;
+                            }
+                        } else {
+                            System.out.println(l_country_from + " does not belong to " + l_p.d_name);
+                            continue;
+                        }
+                    } else {
+                        System.out.println(l_country_from + " or " + l_country_to + " are not a valid country");
+                        continue;
+                    }
+                } else {
+                    System.out.println("Incomplete command, Please enter the full command");
+                    continue;
+                }
+            }else if (l_commandSplit[0].equalsIgnoreCase("blockade")) {
+                if (l_commandSplit.length == 2) {
+                    String l_countryId = l_commandSplit[1];
+                    if (d_country.COUNTRIESLIST.containsKey(l_countryId)) {
+                        if (l_p.d_owned.contains(d_country.COUNTRIESLIST.get(l_countryId))) {
+                            l_flag_1 = false;
+                            return new Cards(l_countryId,l_commandSplit[0] ,  d_country);
+                        } else {
+                            System.out.println("Cannot apply blockade to someone else 'l_s country");
+                            continue;
+                        }
+                    } else {
+                        System.out.println("Not a Valid Country");
+                        continue;
+                    }
+                } else {
+                    System.out.println("Not a Valid Command");
+                    continue;
+                }
+            }else if(l_commandSplit[0].equalsIgnoreCase("airlift")){
+                if (l_commandSplit.length == 4) {
+                    String l_countryFrom = l_commandSplit[1];
+                    String l_countryTo = l_commandSplit[2];
+                    String l_armies = l_commandSplit[3];
+                    int l_armiesToAirlift = Integer.parseInt(l_armies);
+                    if (d_country.COUNTRIESLIST.containsKey(l_countryFrom) && d_country.COUNTRIESLIST.containsKey(l_countryTo)) {
+                        if (l_p.d_owned.contains(d_country.COUNTRIESLIST.get(l_countryFrom))) {
+                            if(l_p.d_armiesNum>=l_armiesToAirlift){
+                                l_flag_1 = false;
+                                return new Cards(l_countryFrom,l_countryTo ,l_armiesToAirlift ,l_commandSplit[0] ,d_country);
                             }
                             else {
-                                System.out.println("This player does not exists");
+                                System.out.println("Not enough number of armies to airlift");
                             }
 
                         } else {
-                            System.out.println("Not a valid command");
+                            System.out.println("Cannot airlift armies from someone else'l_s country");
                             continue;
                         }
-                    }
-                    else if (l_commandSplit[0].equalsIgnoreCase("pass")) {
-                        PassOrder l_order = new PassOrder(l_p, d_country);
-                        l_p.issue_order(l_order);
-                        l_i++;
-                        l_flag_1 = false;
-                    } else if (l_commandSplit[0].equalsIgnoreCase("showmap")) {
-                        showMap l_map = new showMap(d_playerList, d_country);
-                        l_map.check();
                     } else {
-                        System.out.println("Wrong command. Re-enter the correct one");
+                        System.out.println(l_countryFrom  + "" + "or " + l_countryTo +" Not a Valid Country");
+                        continue;
                     }
+                } else {
+                    System.out.println("Not a Valid Command");
+                    continue;
                 }
-                if (l_i == d_playerList.size()) {
-                    l_flag = false; //for outer loop
+
+            }
+            else if(l_commandSplit[0].equalsIgnoreCase("negotiate")){
+                if (l_commandSplit.length == 2) {
+                    String l_playerID = l_commandSplit[1];
+                    if (d_playerList.containsKey(l_playerID)) {
+                        l_flag_1 = false;
+                        return new Cards(l_playerID , l_commandSplit[0] ,d_playerList);
+                    }
+                    else {
+                        System.out.println("This player does not exists");
+                    }
+
+                } else {
+                    System.out.println("Not a valid command");
+                    continue;
                 }
             }
+            else if (l_commandSplit[0].equalsIgnoreCase("pass")) {
+                l_i++;
+                l_flag_1 = false;
+                return new PassOrder(l_p, d_country);
+
+            } else if (l_commandSplit[0].equalsIgnoreCase("showmap")) {
+                showMap l_map = new showMap(d_playerList, d_country);
+                l_map.check();
+                return null;
+            }
+            else if(l_commandSplit[0].equalsIgnoreCase("savegame"))
+            {
+                System.out.println("Inside this savegame statement");
+                if(l_commandSplit.length==2){
+                    if(!l_command.contains(".")){
+                        String l_fileName = l_commandSplit[1];
+                        l_fileName += ".ser";
+//                        System.out.println(System.getProperty("user.dir"));
+                        File l_file = new File("C:\\SOEN-6441_TEAM_12-main\\src\\main\\resources\\maps\\" + l_fileName);
+                        try {
+                            FileOutputStream l_fileOutputStream = new FileOutputStream(l_file);
+                            ObjectOutputStream l_outputStream = new ObjectOutputStream(l_fileOutputStream);
+                            serialObj obj = new serialObj(d_playerList,d_country);
+                            l_outputStream.writeObject(obj);
+                            l_outputStream.writeObject(d_country.COUNTRIESLIST);
+
+                            l_outputStream.close();
+                            l_fileOutputStream.close();
+                        } catch (Exception e) {
+                            System.out.println("Exception e: "+e);
+                        }
+                    }
+                    else
+                    {
+                        System.out.println("Write savemap command without file extension");
+                    }
+                }
+                else
+                {
+                    System.out.println("Command should be like 'savegame filename' (Don't enter extension)");
+                }
+            }
+
+            else {
+                System.out.println("Wrong command. Re-enter the correct one");
+                return null;
+            }
+
         }
-    }
+    return null;
+   }
 }
