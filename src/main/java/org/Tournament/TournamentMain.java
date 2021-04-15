@@ -105,3 +105,12 @@ public class TournamentMain {
             {
                 PLAYERS_LIST.put(d_playersName[t], new Player(d_playersName[t]));
             }
+for (int j = 0; j < numberofgames; j++) {
+
+                winner = gameEngine.gamePlay(d_file,maxnumberofturns);
+
+            }
+            gameState.put(listOfMapFiles[i],winner);
+        }
+        }
+    }
