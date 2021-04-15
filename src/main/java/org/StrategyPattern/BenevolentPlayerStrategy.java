@@ -15,8 +15,14 @@ public class BenevolentPlayerStrategy{
         this.d_countries = p_countries;
         this.country = country;
     }
-    @Override
     protected Country toAttack() {
+        return null;
+    }
+    protected Country toAttackFrom() {
+        return null;
+    }
+
+    protected Country toMoveFrom() {
         return null;
     }
 }
