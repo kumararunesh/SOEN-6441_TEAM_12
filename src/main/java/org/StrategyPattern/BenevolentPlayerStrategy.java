@@ -15,21 +15,23 @@ public class BenevolentPlayerStrategy{
         this.d_countries = p_countries;
         this.country = country;
     }
-    @Override
+    
     protected Country toAttack() {
         return null;
     }
-	    @Override
+
+    
     protected Country toAttackFrom() {
         return null;
     }
 
-    @Override
+    
     protected Country toMoveFrom() {
         return null;
     }
-	
-	    protected Country toDefend() {
+
+    
+    protected Country toDefend() {
         int l_index=0;
         int l_counter=0;
         int l_minValue=1000000;
@@ -44,4 +46,16 @@ public class BenevolentPlayerStrategy{
         }
         return d_player.d_owned.get(l_index);
     }
+
+    
+    public Order createOrder() {
+        if(d_player.d_owned.size()>0) {
+            return new DeployOrder(toDefend().d_countryId, d_player.d_armiesNum, country);
+        }
+        else
+        {
+            return null;
+        }
+    }
 }
+
