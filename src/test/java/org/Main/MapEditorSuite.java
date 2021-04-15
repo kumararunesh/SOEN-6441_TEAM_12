@@ -10,6 +10,9 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({GraphConnectedTest.class,
         MapTableTest.class,
         ReadLinesTest.class,
-        ContinentSubGraphTest.class})
+        ContinentSubGraphTest.class,
+        ReadMapTest.class,
+        ConquestMapTest.class
+})
 public class MapEditorSuite {
 }

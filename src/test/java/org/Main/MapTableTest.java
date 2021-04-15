@@ -220,30 +220,7 @@ public class MapTableTest {
             e.printStackTrace();
         }
     }
-
-    /**
-     * This method test whether the countries and their neighbors present in a map is same as expected or not.
-     */
-
-    @Test
-    public void testCountryAndItsNeighbors() {
-        File l_file = new File(".\\src\\main\\resources\\maps\\h.map");
-        MapTable l_map = new MapTable();
-        try {
-            HashMap<String, ArrayList> l_countryNeigh = new HashMap<>();
-            l_countryNeigh.put("c", new ArrayList(Arrays.asList("d", "e", "f", "g", "y")));
-            l_countryNeigh.put("d", new ArrayList(Arrays.asList("c", "e")));
-            l_countryNeigh.put("e", new ArrayList(Arrays.asList("f", "c", "d")));
-            l_countryNeigh.put("f", new ArrayList(Arrays.asList("d", "c")));
-            l_countryNeigh.put("g", new ArrayList(Arrays.asList("d", "c")));
-            l_countryNeigh.put("y", new ArrayList(Arrays.asList("d", "e")));
-
-            assertEquals(l_countryNeigh, l_map.countryanditsneighbours(l_file));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    
     /**
      * This method test whether the countries and their neighbors present in a map are different than expected.
      * If the countries and their neighbors are different then expected than this test will get pass.
