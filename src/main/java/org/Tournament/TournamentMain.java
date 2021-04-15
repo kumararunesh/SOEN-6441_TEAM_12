@@ -38,3 +38,24 @@ if(l_commandSplit[0].equalsIgnoreCase("tournament ") && l_commandSplit.length==5
                     }
                 }
             }
+     else
+            {
+                System.out.println("Wrong command.");
+            }
+            i=0;
+            if(l_commandSplit[2].split(" ")[0].equalsIgnoreCase("p"))
+            {
+                d_playersName= new String[l_commandSplit[2].split(" ").length];
+                for(String l_playerName: l_commandSplit[2].split(" "))
+                {
+                    if(l_playerName.equalsIgnoreCase("p"))
+                    {
+                        continue;
+                    }
+                    else {
+                        d_playersName[i] = l_playerName;
+                        i+=1;
+                    }
+                }
+
+            }
