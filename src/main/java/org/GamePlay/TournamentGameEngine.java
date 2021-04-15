@@ -1,3 +1,19 @@
+package org.GamePlay;
+
+import org.ObserverBasedLogging.LogEntryBuffer;
+import org.ObserverBasedLogging.LogFile;
+import org.StrategyPattern.*;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
+
+/**
+ * Game Engine Class for Stratup Phase and all three game phases of Main game loop
+ * Phase 1 : Reinforcement Phase
+ * Phase 2 : Issue Order Phase
+ * Phase 3 : Execute Order Phase
+ */
 public class TournamentGameEngine {
   /**
      * GLobal List of Players
