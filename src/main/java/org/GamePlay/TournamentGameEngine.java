@@ -58,3 +58,6 @@ public void executeAllOrders() {
                     order.Execute(p);
                 }
             }
+           } while (still_more_orders);
+        System.out.println("===============END EXECUTING ALL ORDERS===================");
+    }
