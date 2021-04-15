@@ -1,0 +1,118 @@
+[Map]
+author=
+image=Board.map
+wrap=no
+scroll=horizontal
+warn=yes
+ 
+[Continents]
+Right Thruster=6
+Right Escape Pod=8
+Left Cargo=10
+Left Thruster=6
+Hyperdrive=12
+Cockpit=5
+Right Cargo=10
+Left Escape Pod=8
+ 
+[Territories]
+Territory82,13,15,Right Escape Pod,Territory84,Territory81,Territory80
+Territory85,6,14,Cockpit,Territory36,Cockpit03,Territory33,Cockpit02,Territory32,Territory22
+Territory84,11,7,Right Escape Pod,Territory82
+Territory81,5,10,Right Escape Pod,Territory82,Territory80,Territory78
+Territory80,12,9,Right Escape Pod,Territory81,Territory82,Territory79
+Territory05,12,13,Left Cargo,Territory08,Territory06,Territory04
+Territory04,13,7,Left Cargo,Territory05,Territory10,Territory69,Territory11
+Territory87,8,16,Right Thruster,Territory22,Territory27,Territory88
+Territory86,5,8,Right Thruster,Territory22,Territory23,Territory88
+Territory89,7,14,Hyperdrive,Territory51,Territory95,Territory48,Territory94,Territory49
+Territory88,6,13,Right Thruster,Territory28,Territory86,Territory87,Territory27,Territory26,Territory25,Territory24,Territory23
+Territory72,8,14,Left Escape Pod,Territory71,Territory73,Territory92,Territory37
+Territory71,6,14,Left Escape Pod,Territory37,Territory72,Territory70,Territory68
+Territory74,8,13,Right Escape Pod,Territory77,Territory75,Territory94,Territory93
+Territory73,11,8,Left Escape Pod,Territory92,Territory11,Territory72,Territory70
+Territory70,5,12,Left Escape Pod,Territory11,Territory71,Territory73,Territory69
+Territory79,6,7,Right Escape Pod,Territory78,Territory80,Territory76,Territory17,Territory18
+Territory76,5,15,Right Escape Pod,Territory79,Territory77,Territory75,Territory18
+Territory75,6,7,Right Escape Pod,Territory76,Territory74,Territory18,Territory94
+Territory78,12,7,Right Escape Pod,Territory81,Territory79,Territory77
+Territory77,6,15,Right Escape Pod,Territory78,Territory76,Territory74,Territory93
+Territory61,7,10,Left Thruster,Territory57,Territory62,Territory99
+Territory60,11,8,Left Thruster,Territory59,Territory57
+Territory63,5,7,Left Escape Pod,Territory65
+Territory62,6,13,Left Thruster,Territory57,Territory33,Territory61
+Territory69,12,16,Left Escape Pod,Territory11,Territory70,Territory68,Territory66,Territory04
+Territory68,12,8,Left Escape Pod,Territory69,Territory71,Territory67
+Territory65,13,11,Left Escape Pod,Territory67,Territory66,Territory63
+Territory67,6,14,Left Escape Pod,Territory68,Territory66,Territory65
+Territory66,14,13,Left Escape Pod,Territory69,Territory67,Territory65
+Territory50,5,9,Hyperdrive,47,Territory47,Territory51,Territory36!,Territory101
+Territory52,13,8,Left Thruster,Territory100,Territory98
+Territory51,11,11,Hyperdrive,Territory47,Territory50,Territory48,Territory95,Territory89
+Territory58,8,15,Left Thruster,Territory98,Territory57,Territory100
+Territory57,5,11,Left Thruster,Territory99,Territory60,Territory98,Territory58,Territory61,Territory35,Territory62,Territory33
+Territory59,6,9,Left Thruster,Territory60
+Territory54,13,13,Left Thruster,Territory100
+Territory53,13,16,Left Thruster,Territory100
+Territory56,10,11,Left Thruster,Territory100,Territory99
+Territory55,9,16,Left Thruster,Territory100
+Territory41,14,15,Hyperdrive,Territory40
+Territory40,5,7,Hyperdrive,Territory93,Territory37,Territory42,Territory43,Territory41
+47,6,12,Hyperdrive,Territory45,Territory47,Territory50,Territory44,Territory101
+Territory47,10,7,Hyperdrive,47,Territory44,Territory50,Territory48,Territory51
+Territory49,6,7,Hyperdrive,Territory90,Territory48,Territory89,Territory44
+Territory48,7,10,Hyperdrive,Territory44,Territory49,Territory47,Territory51,Territory89
+Territory43,5,14,Hyperdrive,Territory40
+Territory42,7,7,Hyperdrive,Territory40
+Territory45,11,16,Hyperdrive,47,Territory44,Territory 99a,Territory 99a,Territory 99a,Territory 99a,Territory 99a,Territory 99a
+Territory44,8,13,Hyperdrive,Territory45,Territory48,Territory47,Territory49,47,Territory 99a,Territory 99a,Territory 99a
+Territory39,13,9,Hyperdrive,Territory 99a,Territory91
+Territory30,11,9,Right Thruster,Territory22,Territory29
+Territory36,6,8,Cockpit,Territory35,Territory33,Territory22,Territory85,Territory97
+Territory35,11,7,Cockpit,Territory36,Territory33,Territory57,Territory96
+Territory37,14,8,Hyperdrive,Territory92,Territory40,Territory72,Territory71
+Territory32,11,9,Right Thruster,Territory22,Territory85
+Territory31,7,15,Right Thruster,Territory22,Territory87,Territory32
+Territory36!,12,9,Hyperdrive,Territory50,Territory101,Territory12,Territory07,Territory96,Territory92
+Territory33,12,7,Cockpit,Territory36,Territory35,Cockpit01,Cockpit02,Territory57,Territory85,Territory62
+Territory29,7,8,Right Thruster,Territory30
+Territory28,7,10,Right Thruster,Territory22,Territory88
+Territory25,14,13,Right Thruster,Territory88
+Territory24,11,8,Right Thruster,Territory88
+Territory27,5,11,Right Thruster,Territory87,Territory88
+Territory26,7,10,Right Thruster,Territory88
+Territory21,9,8,Right Cargo,Territory19,Territory14,Territory95,Territory20
+Territory20,7,13,Right Cargo,Territory19,Territory14,Territory15,Territory16,Territory21
+Territory23,10,11,Right Thruster,Territory86,Territory88
+Territory22,13,13,Right Thruster,Territory36,Territory87,Territory30,Territory28,Territory86,Territory85,Territory32,Territory31
+Territory18,5,12,Right Cargo,Territory75,Territory17,Territory76,Territory79,Territory19
+Territory17,12,14,Right Cargo,Territory18,Territory16,Territory19,Territory79
+Territory 99a,5,16,Hyperdrive,Territory92,Territory45,Territory90,Territory39
+Territory19,11,8,Right Cargo,Territory17,Territory94,Territory21,Territory20,Territory18
+Territory94,7,13,Hyperdrive,Territory89,Territory95,Territory 99a,Territory 99a,Territory 99a,Territory 99a,Territory 99a,Territory 99a
+Territory93,12,7,Hyperdrive,Territory94,Territory40,Territory74,Territory77
+Territory96,5,10,Cockpit,Territory97,Territory35,Territory12,Territory36!
+Territory95,14,8,Hyperdrive,Territory97,Territory51,Territory89,Territory21,Territory13,Territory94
+Territory90,8,11,Hyperdrive,Territory 99a,Territory91,Territory44,Territory49,Territory 99a,Territory 99a,Territory 99a,Territory 99a
+Territory92,14,12,Hyperdrive,Territory37,Territory 99a,Territory101,Territory10,Territory73,Territory72,Territory36!
+Territory91,12,10,Hyperdrive,Territory39,Territory90
+Territory14,12,7,Right Cargo,Territory13,Territory21,Territory15,Territory20
+Territory13,9,13,Right Cargo,Territory95,Territory14,Territory97
+Territory16,6,10,Right Cargo,Territory17,Territory20,Territory15
+Territory15,10,8,Right Cargo,Territory14,Territory20,Territory16
+Cockpit03,9,10,Cockpit,Cockpit02,Territory85
+Territory10,8,11,Left Cargo,Territory92,Territory04,Territory11,Territory06,Territory07
+Territory98,10,10,Left Thruster,Territory57,Territory100,Territory58,Territory52
+Territory97,5,12,Cockpit,Territory36,Territory96,Territory13,Territory95
+Cockpit01,10,15,Cockpit,Cockpit02,Territory33
+Territory12,7,9,Left Cargo,Territory36!,Territory09,Territory96
+Cockpit02,9,14,Cockpit,Cockpit01,Cockpit03,Territory33,Territory85
+Territory11,8,9,Left Cargo,Territory10,Territory73,Territory70,Territory69,Territory04
+Territory99,13,11,Left Thruster,Territory57,Territory56,Territory100,Territory61
+Territory101,6,7,Hyperdrive,Territory50,Territory36!,Territory92,47,Territory45
+Territory07,5,15,Left Cargo,Territory36!,Territory09,Territory10,Territory06
+Territory06,6,11,Left Cargo,Territory09,Territory05,Territory10,Territory07,Territory08
+Territory09,12,13,Left Cargo,Territory12,Territory08,Territory07,Territory06
+Territory08,12,14,Left Cargo,Territory09,Territory05,Territory06
+Territory100,5,11,Left Thruster,Territory98,Territory58,Territory55,Territory54,Territory53,Territory52,Territory56,Territory99
+
