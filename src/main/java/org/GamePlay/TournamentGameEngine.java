@@ -60,4 +60,8 @@ public class TournamentGameEngine {
         } while (still_more_orders);
         System.out.println("===============END EXECUTING ALL ORDERS===================");
     }
+public String gamePlay(File p_file, int turns) {
 
+        for (String l_s : PLAYERS_LIST.keySet()) {
+            Player p = PLAYERS_LIST.get(l_s);
+            System.out.println(p.getD_name());
