@@ -43,3 +43,7 @@ public class TournamentGameEngine {
      */
     public String d_message;
 }
+public void executeAllOrders() {
+        System.out.println("===============BEGIN EXECUTING ALL ORDERS=================");
+        Order order;
+        boolean still_more_orders = false;
