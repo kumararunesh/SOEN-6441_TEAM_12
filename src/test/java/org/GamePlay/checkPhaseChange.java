@@ -43,7 +43,7 @@ public class checkPhaseChange {
     public void checkNext()
     {
         d_obj.d_ge = new GameEngine();
-        d_obj.d_ge.FILE = new File("C:\\Final Project\\src\\test\\resources\\maps\\h.map");
+        d_obj.d_ge.d_FILE = new File("C:\\Final Project\\src\\test\\resources\\maps\\h.map");
         d_obj.next();
         assertEquals("new phase: PlayerInitializationMain", d_ge1.MESSAGE);
     }

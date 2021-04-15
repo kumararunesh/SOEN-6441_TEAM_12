@@ -27,7 +27,7 @@ public class StartUpPhase {
         d_ge = new GameEngine();
         d_ge1.setPhase(d_gStartup);
         d_gStartup.d_ge = d_ge;
-        d_gStartup.d_ge.FILE = null;
+        d_gStartup.d_ge.d_FILE = null;
     }
 
     /**
