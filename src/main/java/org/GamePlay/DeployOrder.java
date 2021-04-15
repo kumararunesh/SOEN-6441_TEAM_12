@@ -57,6 +57,28 @@ public class DeployOrder extends Order implements Serializable {
                 playerList.put(p_p.d_name, p_p);
                 showMap map = new showMap(playerList, d_cou);
                 d_temp = d_armiesToPlace + " armies deployed";
+            } else {
+                d_cou.COUNTRIESLIST.get(d_countryId).d_numOfArmiesPlaced += p_p.d_armiesNum;
+                d_cou.COUNTRIESLIST.get(d_countryId).d_owner = p_p.d_name;
+                System.out.println(l_separator);
+                System.out.println(l_order);
+                System.out.println("EFFECT : " + p_p.d_name + " you only own " + p_p.d_armiesNum + " armies and all of them are now placed on " + p_p.d_owned.get(l_index).d_countryId);
+                System.out.println(l_separator);
+                d_temp = "You only own " + p_p.d_armiesNum + " armies";
+                p_p.d_armiesNum = 0;
             }
-	}
+        } else {
+            p_p.d_armiesNum = p_p.d_armiesNum - d_armiesToPlace;
+            if (p_p.d_armiesNum < 0) {
+                p_p.d_armiesNum = 0;
+            }
+            System.out.println(l_separator);
+            System.out.println(l_order);
+            System.out.println("EFFECT : You don't own this country. Penalty has been applied. Now your army count is " + p_p.d_armiesNum);
+            System.out.println(l_separator);
+            d_temp = "You don't own this country";
+        }
+
     }
+
+}
