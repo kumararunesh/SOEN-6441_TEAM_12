@@ -21,7 +21,7 @@ public class Player implements Serializable {
     public int d_continentValue; // Continent Control Value ;
     public ArrayList<String> d_cards = new ArrayList<>();
     public ArrayList<String> d_negotiate = new ArrayList<>();
-    PlayerStrategy strategy;
+    PlayerStrategy d_strategy;
 
 
     /**
@@ -33,7 +33,7 @@ public class Player implements Serializable {
     }
 
     public void setStrategy(PlayerStrategy p_strat) {
-        strategy = p_strat;
+        d_strategy = p_strat;
     }
 
     /**
@@ -68,16 +68,27 @@ public class Player implements Serializable {
 
     /**
      *function to issue order .
-     * @param order issue order object
+     * @param p_order issue order object
      */
-    public boolean issue_order(Order order)
+    public boolean issue_order(Order p_order)
     {
-        order = strategy.createOrder();
-        if (order != null) {
-            d_orders.add(order);
+        p_order = d_strategy.createOrder();
+        if (p_order != null) {
+            d_orders.add(p_order);
             return true;
         }
         return false;
+    }
+
+    /**
+     *function to issue order .
+     * @param p_order issue order object
+     */
+    public boolean issue_orders(Order p_order)
+    {
+        d_orders.add(p_order);
+        return true;
+
     }
 
     /**
@@ -86,11 +97,11 @@ public class Player implements Serializable {
      */
     public Order next_order() {
         if (!this.d_name.equalsIgnoreCase("cheater")) {
-            Order to_return = null;
+            Order l_to_return = null;
             if (!this.d_orders.isEmpty()) {
-                to_return = this.d_orders.poll();
+                l_to_return = this.d_orders.poll();
                 this.d_orders.remove(d_orders.peek());
-                return to_return;
+                return l_to_return;
 
             }
         }

@@ -21,49 +21,51 @@ public class GameEngine {
     /**
      * GLobal List of Players
      */
-    public static ConcurrentHashMap<String, Player> PLAYERS_LIST = new ConcurrentHashMap<String, Player>(); // concurrent only - thread safe .
-    public static ArrayList<String> Behaviours = new ArrayList<String>();
+    public static ConcurrentHashMap<String, Player> d_PLAYERS_LIST = new ConcurrentHashMap<String, Player>(); // concurrent only - thread safe .
+    public static ArrayList<String> d_Behaviours = new ArrayList<String>();
     public void set_Behaviour(){
-        Behaviours.add("random");
-        Behaviours.add("human");
-        Behaviours.add("aggressive");
-        Behaviours.add("cheater");
-        Behaviours.add("benevolent");
+        d_Behaviours.add("random");
+        d_Behaviours.add("human");
+        d_Behaviours.add("aggressive");
+        d_Behaviours.add("cheater");
+        d_Behaviours.add("benevolent");
     }
 
-    public playGame play;
-    public Assign assign;
-    public Order order;
+    public playGame d_play;
+    public Assign d_assign;
+    public Order d_order;
     /**
      * Global Country Object
      */
-    public static Country COUNTRY;
+    public static Country d_COUNTRY;
     /**
      * Global variable for File
      */
-    public File FILE;
+    public File d_FILE;
     /**
      * Global variable for storing the message.
      */
     public String d_message;
     String d_filename;
 
-
+    /**
+     * This where startegy patter orders are executed
+     */
     public void executeAllOrders() {
         System.out.println("===============BEGIN EXECUTING ALL ORDERS=================");
-        Order order;
-        boolean still_more_orders = false;
+        Order l_order;
+        boolean l_still_more_orders = false;
         do {
-            still_more_orders = false;
-            for (String l_s : PLAYERS_LIST.keySet()) {
-                Player p = PLAYERS_LIST.get(l_s);
-                order = p.next_order();
-                if (order != null) {
-                    still_more_orders = true;
-                    order.Execute(p);
+            l_still_more_orders = false;
+            for (String l_s : d_PLAYERS_LIST.keySet()) {
+                Player p = d_PLAYERS_LIST.get(l_s);
+                l_order = p.next_order();
+                if (l_order != null) {
+                    l_still_more_orders = true;
+                    l_order.Execute(p);
                 }
             }
-        } while (still_more_orders);
+        } while (l_still_more_orders);
         System.out.println("===============END EXECUTING ALL ORDERS===================");
     }
 
@@ -92,7 +94,7 @@ public class GameEngine {
                 for (int l_i = 1; l_i < l_command_split.length; l_i++) {
                     String l_command_split1[] = l_command_split[l_i].split(" ");
                     if (l_command_split1[0].equalsIgnoreCase("add")) {
-                        if (PLAYERS_LIST.containsKey(l_command_split1[1])) {
+                        if (d_PLAYERS_LIST.containsKey(l_command_split1[1])) {
                             d_message = "Player " + l_command_split1[1] + " already exists Please re-enter your name";
                             l_counter+= 1;
                             l_command_split1[1]+="-" + l_counter;
@@ -100,11 +102,11 @@ public class GameEngine {
                         }
 
                         d_message = "Player added";
-                        PLAYERS_LIST.put(l_command_split1[1], new Player(l_command_split1[1]));
+                        d_PLAYERS_LIST.put(l_command_split1[1], new Player(l_command_split1[1]));
                         l_flag=false;
                     } else if (l_command_split1[0].equalsIgnoreCase("remove")) {
                         d_message = "Player Removed";
-                        PLAYERS_LIST.remove(l_command_split1[1]);
+                        d_PLAYERS_LIST.remove(l_command_split1[1]);
                         l_flag=false;
                     }
                 }
@@ -113,61 +115,65 @@ public class GameEngine {
             }
             System.out.println("");
             System.out.println("All Players as of now");
-            for (String l_s : PLAYERS_LIST.keySet()) {
-                Player p = PLAYERS_LIST.get(l_s);
+            for (String l_s : d_PLAYERS_LIST.keySet()) {
+                Player p = d_PLAYERS_LIST.get(l_s);
                 System.out.println(p.getD_name());
             }
 
         }
     }
 
+    /**
+     * This is where Strategy pattern implements
+     * @param p_file
+     */
     public void gamePlay(File p_file){
 
-        play = new playGame(PLAYERS_LIST,COUNTRY);
-        assign = new Assign(PLAYERS_LIST,COUNTRY);
-        assign.assignCountries(p_file);
-        int val = play.playGameLoop();
+        d_play = new playGame(d_PLAYERS_LIST,d_COUNTRY);
+        d_assign = new Assign(d_PLAYERS_LIST,d_COUNTRY);
+        d_assign.assignCountries(p_file);
+        int val = d_play.playGameLoop();
 
-        for (String l_s : PLAYERS_LIST.keySet()) {
-            Player p = PLAYERS_LIST.get(l_s);
+        for (String l_s : d_PLAYERS_LIST.keySet()) {
+            Player p = d_PLAYERS_LIST.get(l_s);
             System.out.println(p.getD_name());
             if(l_s.contains("-")){
                 String[] l_name = l_s.split("-");
                 if(l_name[0].equalsIgnoreCase("random")){
-                    p.setStrategy(new RandomPlayerStrategy(p,COUNTRY.COUNTRIESLIST,COUNTRY));
+                    p.setStrategy(new RandomPlayerStrategy(p,d_COUNTRY.COUNTRIESLIST,d_COUNTRY));
                 }
                 if(l_name[0].equalsIgnoreCase("aggressive")){
-                    p.setStrategy(new AggressivePlayerStrategy(p,COUNTRY.COUNTRIESLIST,COUNTRY));
+                    p.setStrategy(new AggressivePlayerStrategy(p,d_COUNTRY.COUNTRIESLIST,d_COUNTRY));
                 }
                 if(l_name[0].equalsIgnoreCase("benevolent")){
-                    p.setStrategy(new BenevolentPlayerStrategy(p,COUNTRY.COUNTRIESLIST,COUNTRY));
+                    p.setStrategy(new BenevolentPlayerStrategy(p,d_COUNTRY.COUNTRIESLIST,d_COUNTRY));
                 }
                 if(l_name[0].equalsIgnoreCase("cheater")){
-                    p.setStrategy(new CheaterPlayerStrategy(p,COUNTRY.COUNTRIESLIST,PLAYERS_LIST));
+                    p.setStrategy(new CheaterPlayerStrategy(p,d_COUNTRY.COUNTRIESLIST,d_PLAYERS_LIST));
                 }
                 if(l_name[0].equalsIgnoreCase("human")){
-                    p.setStrategy(new HumanPlayerStrategy(p,COUNTRY.COUNTRIESLIST,PLAYERS_LIST,COUNTRY));
+                    p.setStrategy(new HumanPlayerStrategy(p,d_COUNTRY.COUNTRIESLIST,d_PLAYERS_LIST,d_COUNTRY));
                 }
 
             }
             if(l_s.equalsIgnoreCase("random")){
-                p.setStrategy(new RandomPlayerStrategy(p,COUNTRY.COUNTRIESLIST,COUNTRY));
+                p.setStrategy(new RandomPlayerStrategy(p,d_COUNTRY.COUNTRIESLIST,d_COUNTRY));
             }
             if(l_s.equalsIgnoreCase("aggressive")){
-                p.setStrategy(new AggressivePlayerStrategy(p,COUNTRY.COUNTRIESLIST,COUNTRY));
+                p.setStrategy(new AggressivePlayerStrategy(p,d_COUNTRY.COUNTRIESLIST,d_COUNTRY));
             }
             if(l_s.equalsIgnoreCase("benevolent")){
-                p.setStrategy(new AggressivePlayerStrategy(p,COUNTRY.COUNTRIESLIST,COUNTRY));
+                p.setStrategy(new AggressivePlayerStrategy(p,d_COUNTRY.COUNTRIESLIST,d_COUNTRY));
             }
             if(l_s.equalsIgnoreCase("cheater")){
-                p.setStrategy(new CheaterPlayerStrategy(p,COUNTRY.COUNTRIESLIST,PLAYERS_LIST));
+                p.setStrategy(new CheaterPlayerStrategy(p,d_COUNTRY.COUNTRIESLIST,d_PLAYERS_LIST));
             }
             if(l_s.equalsIgnoreCase("human")){
-                p.setStrategy(new HumanPlayerStrategy(p,COUNTRY.COUNTRIESLIST,PLAYERS_LIST,COUNTRY));
+                p.setStrategy(new HumanPlayerStrategy(p,d_COUNTRY.COUNTRIESLIST,d_PLAYERS_LIST,d_COUNTRY));
             }
 
         }
-        showMap sMap = new showMap(PLAYERS_LIST,COUNTRY);
+        showMap sMap = new showMap(d_PLAYERS_LIST,d_COUNTRY);
         LogEntryBuffer l_observable = new LogEntryBuffer();
         LogFile l_observer = new LogFile();
         l_observable.addObserver(l_observer);
@@ -176,25 +182,25 @@ public class GameEngine {
             boolean an_order = true;
 
             do {
-                for (String l_player : PLAYERS_LIST.keySet()) {
-                    Player p = PLAYERS_LIST.get(l_player);
-                    an_order = p.issue_order(order);
+                for (String l_player : d_PLAYERS_LIST.keySet()) {
+                    Player p = d_PLAYERS_LIST.get(l_player);
+                    an_order = p.issue_order(d_order);
                     if (!an_order)
                         break;
                 }
-                for(String l_player: PLAYERS_LIST.keySet())
+                for(String l_player: d_PLAYERS_LIST.keySet())
                 {
-                    if (PLAYERS_LIST.get(l_player).d_owned.size()==0)
+                    if (d_PLAYERS_LIST.get(l_player).d_owned.size()==0)
                     {
-                        PLAYERS_LIST.remove(l_player);
+                        d_PLAYERS_LIST.remove(l_player);
                         d_message = l_player+" you have lost the game. So you're out of the game!!!";
                         System.out.println(d_message);
                         l_observable.setMsg(d_message);
                     }
                 }
-                if(PLAYERS_LIST.size()==1)
+                if(d_PLAYERS_LIST.size()==1)
                 {
-                    for(String player: PLAYERS_LIST.keySet()) {
+                    for(String player: d_PLAYERS_LIST.keySet()) {
                         d_message = player + " is the winner of the game!!!!!!!!";
                         System.out.println(d_message);
                         l_observable.setMsg(d_message);
@@ -219,7 +225,7 @@ public class GameEngine {
      */
     public void playGame() {
         Scanner l_sc = new Scanner(System.in);
-        if(FILE==null) // This if-else is just for testing (MapValidation.java file in Testing-->Gameplay).
+        if(d_FILE==null) // This if-else is just for testing (MapValidation.java file in Testing-->Gameplay).
         {
             while (true) {
                 System.out.println("**************************************");
@@ -234,12 +240,12 @@ public class GameEngine {
                     if (l_com.length == 2) {
                         if (l_com[1].endsWith(".map")) {
                             d_filename = l_com[1];
-                            FILE = new File(".\\src\\main\\resources\\maps\\" + d_filename);
-                            if (FILE.exists()) {
+                            d_FILE = new File(".\\src\\main\\resources\\maps\\" + d_filename);
+                            if (d_FILE.exists()) {
                                 int l_flag=0;
                                 Scanner l_sc3 = null;
                                 try {
-                                    l_sc3 = new Scanner(FILE);
+                                    l_sc3 = new Scanner(d_FILE);
                                 } catch (FileNotFoundException e) {
                                     e.printStackTrace();
                                 }
@@ -267,15 +273,15 @@ public class GameEngine {
                                     HashMap<String, Integer> l_country_cont_key;
                                     HashMap<String, Integer> l_cont_unique_key;
                                     try {
-                                        l_countries = l_list.countryList(FILE);
-                                        l_continent = l_list.continentList(FILE);
-                                        l_contval = l_list.continentandvalue(FILE);
-                                        l_countrykey = l_list.countryanditskey(FILE);
-                                        l_countrycont = l_list.countryanditscontinent(FILE);
-                                        l_countryneigh = l_list.countryanditsneighbours(FILE);
-                                        l_country_cont_key = l_list.countryanditsuniquecontinent(FILE);
-                                        l_cont_unique_key = l_list.uniqueKeyanditscountry(FILE);
-                                        l_validation.mapValidate(FILE, l_countries, l_continent, l_contval, l_countrykey, l_countrycont, l_countryneigh, l_country_cont_key, l_cont_unique_key);
+                                        l_countries = l_list.countryList(d_FILE);
+                                        l_continent = l_list.continentList(d_FILE);
+                                        l_contval = l_list.continentandvalue(d_FILE);
+                                        l_countrykey = l_list.countryanditskey(d_FILE);
+                                        l_countrycont = l_list.countryanditscontinent(d_FILE);
+                                        l_countryneigh = l_list.countryanditsneighbours(d_FILE);
+                                        l_country_cont_key = l_list.countryanditsuniquecontinent(d_FILE);
+                                        l_cont_unique_key = l_list.uniqueKeyanditscountry(d_FILE);
+                                        l_validation.mapValidate(d_FILE, l_countries, l_continent, l_contval, l_countrykey, l_countrycont, l_countryneigh, l_country_cont_key, l_cont_unique_key);
                                     } catch (Exception e) {
                                     }
                                     d_tempFlag = l_validation.d_final_flag;
@@ -291,13 +297,13 @@ public class GameEngine {
                                     HashMap<String, String> l_countrycont;
                                     HashMap<String, ArrayList> l_countryneigh;
                                     try {
-                                        l_countries = l_list.ConquestterritoriesList(FILE);
-                                        l_continent = l_list.ConquestcontinentsList(FILE);
-                                        l_contval = l_list.Conquestcontinentsandvalue(FILE);
-                                        l_countrykey=l_list.listCountryIdConquests(FILE);
-                                        l_countrycont = l_list.Conquestcountryanditscontinent(FILE);
-                                        l_countryneigh = l_list.Conquestcountryanditsneighbours(FILE);
-                                        l_validation.mapValidate(FILE, l_countries, l_continent, l_contval, l_countrycont, l_countryneigh);
+                                        l_countries = l_list.ConquestterritoriesList(d_FILE);
+                                        l_continent = l_list.ConquestcontinentsList(d_FILE);
+                                        l_contval = l_list.Conquestcontinentsandvalue(d_FILE);
+                                        l_countrykey=l_list.listCountryIdConquests(d_FILE);
+                                        l_countrycont = l_list.Conquestcountryanditscontinent(d_FILE);
+                                        l_countryneigh = l_list.Conquestcountryanditsneighbours(d_FILE);
+                                        l_validation.mapValidate(d_FILE, l_countries, l_continent, l_contval, l_countrycont, l_countryneigh);
                                     } catch (Exception e) {
                                     }
                                     d_tempFlag = l_validation.d_final_flag;
@@ -336,7 +342,7 @@ public class GameEngine {
         }
         else
         {
-            if (FILE.exists()) {
+            if (d_FILE.exists()) {
                 MapValidation l_validation = new MapValidation();
 
                 MapTable l_list = new MapTable();
@@ -349,15 +355,15 @@ public class GameEngine {
                 HashMap<String, Integer> l_country_cont_key;
                 HashMap<String, Integer> l_cont_unique_key;
                 try {
-                    l_countries = l_list.countryList(FILE);
-                    l_continent = l_list.continentList(FILE);
-                    l_contval = l_list.continentandvalue(FILE);
-                    l_countrykey = l_list.countryanditskey(FILE);
-                    l_countrycont = l_list.countryanditscontinent(FILE);
-                    l_countryneigh = l_list.countryanditsneighbours(FILE);
-                    l_country_cont_key = l_list.countryanditsuniquecontinent(FILE);
-                    l_cont_unique_key = l_list.uniqueKeyanditscountry(FILE);
-                    l_validation.mapValidate(FILE, l_countries, l_continent, l_contval, l_countrykey, l_countrycont, l_countryneigh, l_country_cont_key, l_cont_unique_key);
+                    l_countries = l_list.countryList(d_FILE);
+                    l_continent = l_list.continentList(d_FILE);
+                    l_contval = l_list.continentandvalue(d_FILE);
+                    l_countrykey = l_list.countryanditskey(d_FILE);
+                    l_countrycont = l_list.countryanditscontinent(d_FILE);
+                    l_countryneigh = l_list.countryanditsneighbours(d_FILE);
+                    l_country_cont_key = l_list.countryanditsuniquecontinent(d_FILE);
+                    l_cont_unique_key = l_list.uniqueKeyanditscountry(d_FILE);
+                    l_validation.mapValidate(d_FILE, l_countries, l_continent, l_contval, l_countrykey, l_countrycont, l_countryneigh, l_country_cont_key, l_cont_unique_key);
                 } catch (Exception e) {
                 }
 
