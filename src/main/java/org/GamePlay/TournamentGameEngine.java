@@ -14,4 +14,16 @@ public class TournamentGameEngine {
    public playGame play;
     public Assign assign;
     public Order order;
+  /**
+     * Global Country Object
+     */
+    public static Country COUNTRY;
+    /**
+     * Global variable for File
+     */
+    public File FILE;
+    /**
+     * Global variable for storing the message.
+     */
+    public String d_message;
 }
