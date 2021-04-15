@@ -6,6 +6,7 @@ import org.StrategyPattern.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -19,8 +20,10 @@ public class TournamentGameEngine {
      * GLobal List of Players
      */
     public static ConcurrentHashMap<String, Player> PLAYERS_LIST = new ConcurrentHashMap<String, Player>(); // concurrent only - thread safe .
+    HashMap<String, String> winner = new HashMap<>();
     public static ArrayList<String> Behaviours = new ArrayList<String>();
-    public void set_Behaviour(){
+
+    public void set_Behaviour() {
         Behaviours.add("random");
         Behaviours.add("human");
         Behaviours.add("aggressive");
@@ -63,9 +66,10 @@ public class TournamentGameEngine {
     }
 
 
+    public HashMap<String, String> gamePlay(File p_file, int turns, ConcurrentHashMap<String, Player> p_playerList, Country p_country, String map, HashMap<String, String> mapInfo) {
 
-    public String gamePlay(File p_file, int turns) {
-
+        PLAYERS_LIST = p_playerList;
+        COUNTRY = p_country;
         for (String l_s : PLAYERS_LIST.keySet()) {
             Player p = PLAYERS_LIST.get(l_s);
             System.out.println(p.getD_name());
@@ -119,45 +123,47 @@ public class TournamentGameEngine {
                 for (String l_player : PLAYERS_LIST.keySet()) {
                     Player p = PLAYERS_LIST.get(l_player);
                     an_order = p.issue_order(order);
-                   /* if (!an_order)
-                        break;*/
+                    if (!an_order)
+                        break;
                 }
-            } while (an_order);
                 {
-                counter++;
-                if (counter == turns) {
-                    if (PLAYERS_LIST.size() > 1) {
-                        System.out.println("Nobody is the winner, Its a draw");
-                        return "DRAW";
+                    counter++;
+                    if (counter == turns) {
+                        if (PLAYERS_LIST.size() > 1) {
+                            mapInfo.put(map, "DRAW");
+                            //System.out.println("Nobody is the winner, Its a draw");
+                            return mapInfo;
+                        }
+                        break;
                     }
-                    break;
-                }
-                for (String l_player : PLAYERS_LIST.keySet()) {
-                    if (PLAYERS_LIST.get(l_player).d_owned.size() == 0) {
-                        PLAYERS_LIST.remove(l_player);
-                        //d_message = l_player + " you have lost the game. So you're out of the game!!!";
-                        System.out.println(d_message);
-                        l_observable.setMsg(d_message);
+                    for (String l_player : PLAYERS_LIST.keySet()) {
+                        if (PLAYERS_LIST.get(l_player).d_owned.size() == 0) {
+                            PLAYERS_LIST.remove(l_player);
+                            //d_message = l_player + " you have lost the game. So you're out of the game!!!";
+                            System.out.println(d_message);
+                            l_observable.setMsg(d_message);
+                        }
+                    }
+                    if (PLAYERS_LIST.size() == 1) {
+                        for (String player : PLAYERS_LIST.keySet()) {
+                            //   d_message = player + " is the winner of the game!!!!!!!!";
+                            System.out.println(d_message);
+                            l_observable.setMsg(d_message);
+                            end = false;
+                            mapInfo.put(map, player);
+                            return mapInfo;
+                        }
+                        break;
                     }
                 }
-                if (PLAYERS_LIST.size() == 1) {
-                    for (String player : PLAYERS_LIST.keySet()) {
-                        d_message = player + " is the winner of the game!!!!!!!!";
-                        System.out.println(d_message);
-                        l_observable.setMsg(d_message);
-                        end = false;
-                        return player;
-                    }
-                    break;
-                }
+
                 //sMap.check();
                 executeAllOrders();
-            }
+            } while (an_order);
 
 
         }
-        return "Winner";
+        return mapInfo;
 
     }
-
 }
