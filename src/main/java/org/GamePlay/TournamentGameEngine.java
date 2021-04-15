@@ -30,7 +30,7 @@ public class TournamentGameEngine {
    public playGame play;
     public Assign assign;
     public Order order;
-  /**
+     /**
      * Global Country Object
      */
     public static Country COUNTRY;
@@ -42,9 +42,8 @@ public class TournamentGameEngine {
      * Global variable for storing the message.
      */
     public String d_message;
-}
-public void executeAllOrders() {
-       public void executeAllOrders() {
+
+    public void executeAllOrders() {
         System.out.println("===============BEGIN EXECUTING ALL ORDERS=================");
         Order order;
         boolean still_more_orders = false;
@@ -58,6 +57,7 @@ public void executeAllOrders() {
                     order.Execute(p);
                 }
             }
-           } while (still_more_orders);
+        } while (still_more_orders);
         System.out.println("===============END EXECUTING ALL ORDERS===================");
     }
+
