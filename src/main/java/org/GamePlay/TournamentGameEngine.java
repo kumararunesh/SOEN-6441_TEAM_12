@@ -11,4 +11,7 @@ public class TournamentGameEngine {
         Behaviours.add("cheater");
         Behaviours.add("benevolent");
     }
+   public playGame play;
+    public Assign assign;
+    public Order order;
 }
