@@ -33,6 +33,27 @@ if(l_commandSplit[0].equalsIgnoreCase("tournament ") && l_commandSplit.length==5
                     if (map.equalsIgnoreCase("m")) {
                         continue;
                     } else {
+                        System.out.println("Wrong Command.");
+            }
+
+            if(l_commandSplit[3].split(" ")[0].equalsIgnoreCase("g"))
+            {
+                numberofgames= Integer.parseInt(l_commandSplit[3].split(" ")[1]);
+
+            }
+                     else
+            {
+                System.out.println("Wrong Command");
+            }
+                    if(l_commandSplit[4].split(" ")[0].equalsIgnoreCase("d"))
+            {
+                maxnumberofturns = Integer.parseInt(l_commandSplit[4].split(" ")[1]);
+            }
+                     else
+            {
+                System.out.println("Wrong Command");
+            }
+                    
                         listOfMapFiles[i] = map;
                         i += 1;
                     }
