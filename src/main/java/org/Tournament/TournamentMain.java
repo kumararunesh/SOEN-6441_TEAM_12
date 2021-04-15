@@ -14,3 +14,6 @@ public class TournamentMain {
     Assign d_assign;
     TournamentGameEngine gameEngine ;
     public playGame play;
+
+    String[] d_playersName;
+    String winner;
