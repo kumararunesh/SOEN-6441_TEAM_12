@@ -4,7 +4,7 @@ import org.GamePlay.*;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public class BenevolentPlayerStrategy{
+public class BenevolentPlayerStrategy extends PlayerStrategy{
     Player d_player;
     ConcurrentHashMap<String, Country> d_countries;
     Country country;
@@ -15,22 +15,22 @@ public class BenevolentPlayerStrategy{
         this.d_countries = p_countries;
         this.country = country;
     }
-    
+    @Override
     protected Country toAttack() {
         return null;
     }
 
-    
+    @Override
     protected Country toAttackFrom() {
         return null;
     }
 
-    
+    @Override
     protected Country toMoveFrom() {
         return null;
     }
 
-    
+    @Override
     protected Country toDefend() {
         int l_index=0;
         int l_counter=0;
@@ -47,7 +47,7 @@ public class BenevolentPlayerStrategy{
         return d_player.d_owned.get(l_index);
     }
 
-    
+    @Override
     public Order createOrder() {
         if(d_player.d_owned.size()>0) {
             return new DeployOrder(toDefend().d_countryId, d_player.d_armiesNum, country);
