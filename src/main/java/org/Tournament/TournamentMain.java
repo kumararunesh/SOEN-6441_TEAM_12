@@ -3,15 +3,17 @@ package org.Tournament;
 import org.GamePlay.*;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TournamentMain {
 
     String listOfMapFiles[] ;
-    public static ConcurrentHashMap<String, Player> PLAYERS_LIST = new ConcurrentHashMap<String, Player>(); // concurrent only - thread safe .
-    public static ConcurrentHashMap<String, Country> COUNTRIES = new ConcurrentHashMap<>();
+    public  ConcurrentHashMap<String, Player> PLAYERS_LIST = new ConcurrentHashMap<String, Player>(); // concurrent only - thread safe .
+    public  ConcurrentHashMap<String, Country> COUNTRIES = new ConcurrentHashMap<>();
     public HashMap<String,String> gameState = new HashMap<>();
     Country d_country;
     File d_file;
@@ -23,16 +25,21 @@ public class TournamentMain {
     Assign d_assign;
     TournamentGameEngine gameEngine ;
     public playGame play;
+    public ArrayList<String> winners = new ArrayList<String>();
 
 
     String[] d_playersName;
     String winner;
 
-    public void run() {
-        gameEngine = new TournamentGameEngine();
+    public String run() {
         System.out.println("Enter command to start the tournament mode");
         Scanner sc = new Scanner(System.in);
         String l_command = sc.nextLine();
+        return run(l_command);
+    }
+
+    public String run(String l_command){
+        gameEngine = new TournamentGameEngine();
         String[] l_commandSplit= l_command.split("-");
         if(l_commandSplit[0].equalsIgnoreCase("tournament ") && l_commandSplit.length==5)
         {
@@ -50,7 +57,8 @@ public class TournamentMain {
             }
             else
             {
-                System.out.println("Wrong command.");
+                System.out.println("Enter correct map command.");
+                return "Enter correct map command";
             }
             i=0;
             if(l_commandSplit[2].split(" ")[0].equalsIgnoreCase("p"))
@@ -70,7 +78,8 @@ public class TournamentMain {
 
             }
             else{
-                System.out.println("Wrong Command.");
+                System.out.println("Enter correct Player command.");
+                return "Enter correct Player command";
             }
 
             if(l_commandSplit[3].split(" ")[0].equalsIgnoreCase("g"))
@@ -80,7 +89,8 @@ public class TournamentMain {
             }
             else
             {
-                System.out.println("Wrong Command");
+                System.out.println("Enter correct Game command");
+                return "Enter correct Game command";
             }
 
             if(l_commandSplit[4].split(" ")[0].equalsIgnoreCase("d"))
@@ -89,39 +99,44 @@ public class TournamentMain {
             }
             else
             {
-                System.out.println("Wrong Command");
+                System.out.println("Enter correct no of turns command");
+                return "Enter correct no of turns command";
             }
         }
         else
         {
             System.out.println("Enter the correct command");
+            return "Wrong command";
         }
 
-
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < listOfMapFiles.length; i++) {
             System.out.println("Map" + listOfMapFiles[i] + " : ");
             d_file = new File("src/main/resources/maps/" + listOfMapFiles[i]);
 
-            // PLAYERS_LIST.put(players);
-            for(int t = 0 ; t<d_playersName.length -1 ; t++)
-            {
-                PLAYERS_LIST.put(d_playersName[t], new Player(d_playersName[t]));
-            }
-            // GamePlay Assign-countries (playerList, null Country Object)
-            d_assign = new Assign(PLAYERS_LIST,d_country);
-            d_assign.assignCountries(d_file);
-            COUNTRIES = d_assign.d_country.COUNTRIESLIST;
-            d_country = d_assign.d_country;
-
-            play = new playGame(PLAYERS_LIST,d_country);
-            play.playGameLoop();
 
             for (int j = 0; j < numberofgames; j++) {
+                for(int t = 0 ; t<d_playersName.length -1 ; t++)
+                {
+                    PLAYERS_LIST.put(d_playersName[t], new Player(d_playersName[t]));
+                }
 
-                winner = gameEngine.gamePlay(d_file,maxnumberofturns);
+                d_assign = new Assign(PLAYERS_LIST,d_country);
+                d_assign.assignCountries(d_file);
+                COUNTRIES = d_assign.d_country.COUNTRIESLIST;
+                d_country = d_assign.d_country;
 
+                play = new playGame(PLAYERS_LIST,d_country);
+                play.playGameLoop();
+                int k = j+1;
+                gameState = gameEngine.gamePlay(d_file,maxnumberofturns,PLAYERS_LIST,d_country,listOfMapFiles[i],gameState);
+                winners.add("Winner of game " + k +" on map " + listOfMapFiles[i] + " is " +gameState.get(listOfMapFiles[i]) +"\n");
             }
-            gameState.put(listOfMapFiles[i],winner);
+
+            System.out.println(winners + "\n");
         }
-        }
+        return "Tournament Over";
     }
+
+
+
+}
