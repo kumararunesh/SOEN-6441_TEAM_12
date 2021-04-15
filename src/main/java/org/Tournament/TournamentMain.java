@@ -1,3 +1,12 @@
+package org.Tournament;
+
+import org.GamePlay.*;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class TournamentMain {
 
     String listOfMapFiles[] ;
@@ -15,10 +24,10 @@ public class TournamentMain {
     TournamentGameEngine gameEngine ;
     public playGame play;
 
+
     String[] d_playersName;
     String winner;
-    
-       
+
     public void run() {
         gameEngine = new TournamentGameEngine();
         System.out.println("Enter command to start the tournament mode");
@@ -33,15 +42,6 @@ public class TournamentMain {
                 for (String map : l_commandSplit[1].split(" ")) {
                     if (map.equalsIgnoreCase("m")) {
                         continue;
-                         // GamePlay Assign-countries (playerList, null Country Object)
-            d_assign = new Assign(PLAYERS_LIST,d_country);
-            d_assign.assignCountries(d_file);
-            COUNTRIES = d_assign.d_country.COUNTRIESLIST;
-            d_country = d_assign.d_country;
-
-            play = new playGame(PLAYERS_LIST,d_country);
-            play.playGameLoop();
-
                     } else {
                         listOfMapFiles[i] = map;
                         i += 1;
@@ -96,7 +96,9 @@ public class TournamentMain {
         {
             System.out.println("Enter the correct command");
         }
-         for (int i = 0; i < 1; i++) {
+
+
+        for (int i = 0; i < 1; i++) {
             System.out.println("Map" + listOfMapFiles[i] + " : ");
             d_file = new File("src/main/resources/maps/" + listOfMapFiles[i]);
 
@@ -105,7 +107,16 @@ public class TournamentMain {
             {
                 PLAYERS_LIST.put(d_playersName[t], new Player(d_playersName[t]));
             }
-for (int j = 0; j < numberofgames; j++) {
+            // GamePlay Assign-countries (playerList, null Country Object)
+            d_assign = new Assign(PLAYERS_LIST,d_country);
+            d_assign.assignCountries(d_file);
+            COUNTRIES = d_assign.d_country.COUNTRIESLIST;
+            d_country = d_assign.d_country;
+
+            play = new playGame(PLAYERS_LIST,d_country);
+            play.playGameLoop();
+
+            for (int j = 0; j < numberofgames; j++) {
 
                 winner = gameEngine.gamePlay(d_file,maxnumberofturns);
 
