@@ -17,3 +17,10 @@ public class TournamentMain {
 
     String[] d_playersName;
     String winner;
+    
+        public void run() {
+        gameEngine = new TournamentGameEngine();
+        System.out.println("Enter command to start the tournament mode");
+        Scanner sc = new Scanner(System.in);
+        String l_command = sc.nextLine();
+        String[] l_commandSplit= l_command.split("-");
