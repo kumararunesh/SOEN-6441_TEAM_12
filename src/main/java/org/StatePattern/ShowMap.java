@@ -28,6 +28,11 @@ public class ShowMap extends ShowMapAbstract {
         this.d_ge = p_ge;
     }
 
+    @Override
+    public void gamePlay() {
+
+    }
+
     /**
      * This method set the phase to ShowMap phase and also call the ShowMap function to print the map details.
      * @throws Exception If file/map is not found then it will throw the exception.

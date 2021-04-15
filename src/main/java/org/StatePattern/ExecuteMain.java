@@ -43,6 +43,11 @@ public class ExecuteMain extends ExecuteAbstract{
         l_showmap.check();
     }
 
+    @Override
+    public void gamePlay() {
+
+    }
+
     /**
      * Method to execute the orders issued by the player.
      */

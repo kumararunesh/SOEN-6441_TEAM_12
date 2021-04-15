@@ -31,6 +31,11 @@ public class OrderIssuePhase extends IssueOrderAbstract {
         this.d_ge = p_ge;
     }
 
+    @Override
+    public void gamePlay() {
+
+    }
+
     /**
      * Method to start assigning the armies to the player.
      * @return the integer value containing the total number of armies of the particular player.

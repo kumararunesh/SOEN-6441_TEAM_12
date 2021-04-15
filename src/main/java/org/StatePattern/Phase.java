@@ -14,6 +14,7 @@ public abstract class Phase {
     abstract public void playGame();
     //Initialize Player, Assign Countries;
     abstract public void startGameEngine();
+    abstract public void gamePlay();
 
     //Reinforcement:
     abstract public int playGameLoop();

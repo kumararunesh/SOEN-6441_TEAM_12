@@ -28,6 +28,11 @@ public class MapEditor extends MapEditorAbstract {
         this.d_ge = p_ge;
     }
 
+    @Override
+    public void gamePlay() {
+
+    }
+
     /**3
      * This method set the phase to MapEditor phase and also call the EditMap function to edit the map.
      * @throws Exception If file/map is not found then it will throw the exception.

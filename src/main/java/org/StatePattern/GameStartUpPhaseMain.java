@@ -54,7 +54,7 @@ public class GameStartUpPhaseMain extends GameStartUpPhase {
      */
     public void next()
     {
-        if(d_ge.d_FILE==null)
+        if(d_ge.d_FILE ==null)
         {
             d_message ="You first need to load the map before going further";
             System.out.println(d_message);

@@ -34,6 +34,12 @@ public class End extends Phase {
     public void startGameEngine() {
 
     }
+
+    @Override
+    public void gamePlay() {
+
+    }
+
     /**
      * This is just the declaration of the execute method.
      */

@@ -40,7 +40,7 @@ public class PlayerInitializationMain extends PlayerInitializationAbstract{
     public void next() {
         boolean l_temp=true;
         try{
-            if(d_ge.d_PLAYERS_LIST.size()>=2)
+            if(d_ge.PLAYERS_LIST.size()>=2)
             {
                 l_temp=false;
             }

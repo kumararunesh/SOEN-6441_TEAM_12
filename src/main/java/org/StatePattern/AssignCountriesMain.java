@@ -31,6 +31,11 @@ public class AssignCountriesMain extends AssignCountriesAbstract {
         this.d_ge1 = p_ge;
     }
 
+    @Override
+    public void gamePlay() {
+
+    }
+
     /**
      * Method to start assigning countries to the player.
      */
@@ -38,6 +43,7 @@ public class AssignCountriesMain extends AssignCountriesAbstract {
     {
         Assign l_a = new Assign(d_playerList, d_country);
         l_a.assignCountries(d_file);
+        d_country = l_a.d_country;
     }
 
     /**
