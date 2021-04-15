@@ -3,6 +3,7 @@ package org.GamePlay;
 import org.ObserverBasedLogging.LogEntryBuffer;
 import org.ObserverBasedLogging.LogFile;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -10,8 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Child class extending the Order Class , it deals with advance Order and airlift order command
  */
-public class AdvanceArmies extends Order{
-
+public class AdvanceArmies extends Order implements Serializable {
+    private static final long serialVersionUID = -1691590954228314787L;
     String d_FromCountry;
     String d_ToCountry;
     Integer d_armies;
@@ -77,26 +78,42 @@ public class AdvanceArmies extends Order{
         d_cards.add("NEGOTIATE");
 
         int l_range = 4;
+        String l_separator = "***********************************************************************************************************";
 
-        if(d_card !="AIRLIFT"){
+
+        if(d_card !="airlift"){
+            String l_order ="ORDER : " + p_p.d_name +" gave order :"+" Advance armies "+ d_armies +" from " + d_FromCountry +" to "+ d_ToCountry;
+
             if(!p_p.d_negotiate.contains(d_cou.COUNTRIESLIST.get(d_ToCountry).d_owner)) {
                 int l_attackersArmy = d_armies;
                 int l_defendersArmy = d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced;
 
                 if (p_p.d_owned.contains(d_cou.COUNTRIESLIST.get(d_ToCountry))) {
                     d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced += d_armies;
-                    l_message  = "As the " + d_ToCountry + " also belongs to " + p_p.d_name + " we simply add the armies to the armies of this country";
+                    System.out.println(l_separator);
+                    System.out.println(l_order);
+                    l_message  = "EFFECT : As the " + d_ToCountry + " also belongs to " + p_p.d_name + " we simply add the armies to the armies of this country";
                     System.out.println(l_message);
+                    System.out.println(l_separator);
                     l_observable.setMsg(l_message);
                 }
                 else {
 
                     if (l_attackersArmy <= l_defendersArmy) {
                         int l_armiesLeft = (int) Math.floor(l_defendersArmy - ((d_probOfAttackersSuccess * l_attackersArmy) / d_probOfDefendersSuccess));
+                        if(l_armiesLeft<0){
+                            l_armiesLeft=0;
+                        }
                         d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced -= d_armies;
+                        if(d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced<0){
+                            d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced=0;
+                        }
                         d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced = l_armiesLeft;
-                        l_message = "As attackers armies are not sufficient , they will lose and the armies left of the " + d_ToCountry + " after the war will be " + l_armiesLeft;
+                        System.out.println(l_separator);
+                        System.out.println(l_order);
+                        l_message = "EFFECT : As attackers armies are not sufficient , they will lose and the armies left of the " + d_ToCountry + " after the war will be " + l_armiesLeft;
                         System.out.println(l_message);
+                        System.out.println(l_separator);
                         l_observable.setMsg(l_message);
 
                     } else {
@@ -104,10 +121,19 @@ public class AdvanceArmies extends Order{
 
                         if (l_k > l_defendersArmy) {
                             d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced -= d_armies;
+                            if(d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced<0){
+                                d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced=0;
+                            }
                             d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced = d_armies - (int) Math.floor(d_probOfDefendersSuccess * l_defendersArmy / d_probOfAttackersSuccess);
+                            if(d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced<0){
+                                d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced=0;
+                            }
                             if(d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced==0 && d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced==0){
-                                l_message = "Nobody won as after attack no armies are left of both the countries";
+                                System.out.println(l_separator);
+                                System.out.println(l_order);
+                                l_message = "EFFECT : Nobody won as after attack no armies are left of both the countries";
                                 System.out.println(l_message);
+                                System.out.println(l_separator);
                                 l_observable.setMsg(l_message);
                             }
                             else{
@@ -120,12 +146,16 @@ public class AdvanceArmies extends Order{
                                 }
                                 p_p.d_owned.add(d_cou.COUNTRIESLIST.get(d_ToCountry));
                                 d_cou.COUNTRIESLIST.get(d_ToCountry).d_owner = p_p.d_name;
-                                l_message = d_FromCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced;
+                                System.out.println(l_separator);
+                                System.out.println(l_order);
+                                l_message = "EFFECT : " +d_FromCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced;
                                 System.out.println(l_message);
+                                System.out.println(l_separator);
                                 l_observable.setMsg(l_message);
-
+                                System.out.println(l_separator);
                                 l_message = "Giving cards to " + p_p.d_name;
                                 System.out.println(l_message);
+                                System.out.println(l_separator);
                                 l_observable.setMsg(l_message);
                                 int l_rand = (int) (Math.random() * l_range);
 
@@ -137,29 +167,45 @@ public class AdvanceArmies extends Order{
 
                         } else {
                             d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced -= l_k;
+                            if(d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced<0){
+                                d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced=0;
+                            }
                             d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced -= d_armies;
-                            l_message = d_ToCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced;
+                            if(d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced<0){
+                                d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced=0;
+                            }
+                            System.out.println(l_separator);
+                            System.out.println(l_order);
+                            l_message ="EFFECT : " +  d_ToCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced;
                             System.out.println(l_message);
+                            System.out.println(l_separator);
                             l_observable.setMsg(l_message);
                         }
                     }
                 }
             }
             else {
-                l_message = "Cannot advance armies to this country as you have negotiated with its owner";
+                System.out.println(l_separator);
+                System.out.println(l_order);
+                l_message = "EFFECT : Cannot advance armies to this country as you have negotiated with its owner";
                 System.out.println(l_message);
+                System.out.println(l_separator);
                 l_observable.setMsg(l_message);
             }
         }
         else{
+            String l_order = p_p.d_name +" gave order :"+" Airlift armies "+ d_armies +" from " + d_FromCountry +" to "+ d_ToCountry;
             if(!p_p.d_negotiate.contains(d_cou.COUNTRIESLIST.get(d_ToCountry).d_owner)) {
                 int l_attackersArmy = d_armies;
                 int l_defendersArmy = d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced;
 
                 if (p_p.d_owned.contains(d_cou.COUNTRIESLIST.get(d_ToCountry))) {
                     d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced += d_armies;
-                    l_message = "As the " + d_ToCountry + " also belongs to " + p_p.d_name + " we simply add the armies to the armies of this country";
+                    System.out.println(l_separator);
+                    System.out.println(l_order);
+                    l_message = "EFFECT : As the " + d_ToCountry + " also belongs to " + p_p.d_name + " we simply add the armies to the armies of this country";
                     System.out.println(l_message);
+                    System.out.println(l_separator);
                     l_observable.setMsg(l_message);
                 }
                 else {
@@ -167,10 +213,19 @@ public class AdvanceArmies extends Order{
                     if (l_attackersArmy <= l_defendersArmy) {
 
                         int l_armiesLeft = (int) Math.floor(l_defendersArmy - ((d_probOfAttackersSuccess * l_attackersArmy) / d_probOfDefendersSuccess));
+                        if(l_armiesLeft<0){
+                            l_armiesLeft=0;
+                        }
                         d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced -= d_armies;
+                        if(d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced<0){
+                            d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced=0;
+                        }
                         d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced = l_armiesLeft;
-                        l_message = "As attackers armies are less , they will lose and the armies left of the " + d_ToCountry + " after the war will be " + l_armiesLeft;
+                        System.out.println(l_separator);
+                        System.out.println(l_order);
+                        l_message = "EFFECT : As attackers armies are less , they will lose and the armies left of the " + d_ToCountry + " after the war will be " + l_armiesLeft;
                         System.out.println(l_message);
+                        System.out.println(l_separator);
                         l_observable.setMsg(l_message);
 
                     } else {
@@ -178,10 +233,19 @@ public class AdvanceArmies extends Order{
 
                         if (l_k > l_defendersArmy) {
                             d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced -= d_armies;
+                            if(d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced<0){
+                                d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced=0;
+                            }
                             d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced = d_armies - (int) Math.floor(0.7 * l_defendersArmy / d_probOfAttackersSuccess);
+                            if(d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced<0){
+                                d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced=0;
+                            }
                             if(d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced==0 && d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced==0){
-                                l_message = "Nobody won as after attack no armies are left of both the countries";
+                                System.out.println(l_separator);
+                                System.out.println(l_order);
+                                l_message = "EFFECT : Nobody won as after attack no armies are left of both the countries";
                                 System.out.println(l_message);
+                                System.out.println(l_separator);
                                 l_observable.setMsg(l_message);
                             }
                             else{
@@ -193,9 +257,13 @@ public class AdvanceArmies extends Order{
                                 }
                                 p_p.d_owned.add(d_cou.COUNTRIESLIST.get(d_ToCountry));
                                 d_cou.COUNTRIESLIST.get(d_ToCountry).d_owner = p_p.d_name;
-                                l_message = d_FromCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced;
+                                System.out.println(l_separator);
+                                System.out.println(l_order);
+                                l_message = "EFFECT : " +d_FromCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced;
                                 System.out.println(l_message);
+                                System.out.println(l_separator);
                                 l_observable.setMsg(l_message);
+
                                 int l_rand = (int) (Math.random() * l_range);
 
                                 p_p.d_cards.add(d_cards.get(l_rand));
@@ -204,17 +272,29 @@ public class AdvanceArmies extends Order{
 
                         } else {
                             d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced -= l_k;
+                            if(d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced<0){
+                                d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced=0;
+                            }
                             d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced -= d_armies;
-                            l_message = d_ToCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced;
+                            if(d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced<0){
+                                d_cou.COUNTRIESLIST.get(d_FromCountry).d_numOfArmiesPlaced=0;
+                            }
+                            System.out.println(l_separator);
+                            System.out.println(l_order);
+                            l_message = "EFFECT : " + d_ToCountry + " won and armies left are " + d_cou.COUNTRIESLIST.get(d_ToCountry).d_numOfArmiesPlaced;
                             System.out.println(l_message);
+                            System.out.println(l_separator);
                             l_observable.setMsg(l_message);
                         }
                     }
                 }
             }
             else {
-                l_message = "Cannot airlift armies this country as you have negotiated with its owner";
+                System.out.println(l_separator);
+                System.out.println(l_order);
+                l_message = "EFFECT : Cannot airlift armies this country as you have negotiated with its owner";
                 System.out.println(l_message);
+                System.out.println(l_separator);
                 l_observable.setMsg(l_message);
             }
         }
