@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Phase 3 : Execute Order Phase
  */
 public class TournamentGameEngine {
-  /**
+    /**
      * GLobal List of Players
      */
     public static ConcurrentHashMap<String, Player> PLAYERS_LIST = new ConcurrentHashMap<String, Player>(); // concurrent only - thread safe .
@@ -27,10 +27,11 @@ public class TournamentGameEngine {
         Behaviours.add("cheater");
         Behaviours.add("benevolent");
     }
-   public playGame play;
+
+    public playGame play;
     public Assign assign;
     public Order order;
-     /**
+    /**
      * Global Country Object
      */
     public static Country COUNTRY;
@@ -60,12 +61,15 @@ public class TournamentGameEngine {
         } while (still_more_orders);
         System.out.println("===============END EXECUTING ALL ORDERS===================");
     }
-public String gamePlay(File p_file, int turns) {
+
+
+
+    public String gamePlay(File p_file, int turns) {
 
         for (String l_s : PLAYERS_LIST.keySet()) {
             Player p = PLAYERS_LIST.get(l_s);
             System.out.println(p.getD_name());
- if (l_s.contains("-")) {
+            if (l_s.contains("-")) {
                 String[] l_name = l_s.split("-");
                 if (l_name[0].equalsIgnoreCase("random")) {
                     p.setStrategy(new RandomPlayerStrategy(p, COUNTRY.COUNTRIESLIST, COUNTRY));
@@ -82,7 +86,8 @@ public String gamePlay(File p_file, int turns) {
                 if (l_name[0].equalsIgnoreCase("human")) {
                     p.setStrategy(new HumanPlayerStrategy(p, COUNTRY.COUNTRIESLIST, PLAYERS_LIST, COUNTRY));
                 }
-    }
+
+            }
             if (l_s.equalsIgnoreCase("random")) {
                 p.setStrategy(new RandomPlayerStrategy(p, COUNTRY.COUNTRIESLIST, COUNTRY));
             }
@@ -98,7 +103,8 @@ public String gamePlay(File p_file, int turns) {
             if (l_s.equalsIgnoreCase("human")) {
                 p.setStrategy(new HumanPlayerStrategy(p, COUNTRY.COUNTRIESLIST, PLAYERS_LIST, COUNTRY));
             }
-  }
+
+        }
         showMap sMap = new showMap(PLAYERS_LIST, COUNTRY);
         LogEntryBuffer l_observable = new LogEntryBuffer();
         LogFile l_observer = new LogFile();
@@ -107,14 +113,16 @@ public String gamePlay(File p_file, int turns) {
         boolean end = true;
         while (end) {
             boolean an_order = true;
- do {
+
+
+            do {
                 for (String l_player : PLAYERS_LIST.keySet()) {
                     Player p = PLAYERS_LIST.get(l_player);
                     an_order = p.issue_order(order);
                    /* if (!an_order)
                         break;*/
                 }
-   } while (an_order);
+            } while (an_order);
                 {
                 counter++;
                 if (counter == turns) {
@@ -124,7 +132,7 @@ public String gamePlay(File p_file, int turns) {
                     }
                     break;
                 }
-                   for (String l_player : PLAYERS_LIST.keySet()) {
+                for (String l_player : PLAYERS_LIST.keySet()) {
                     if (PLAYERS_LIST.get(l_player).d_owned.size() == 0) {
                         PLAYERS_LIST.remove(l_player);
                         //d_message = l_player + " you have lost the game. So you're out of the game!!!";
@@ -132,7 +140,7 @@ public String gamePlay(File p_file, int turns) {
                         l_observable.setMsg(d_message);
                     }
                 }
-                  if (PLAYERS_LIST.size() == 1) {
+                if (PLAYERS_LIST.size() == 1) {
                     for (String player : PLAYERS_LIST.keySet()) {
                         d_message = player + " is the winner of the game!!!!!!!!";
                         System.out.println(d_message);
@@ -141,3 +149,15 @@ public String gamePlay(File p_file, int turns) {
                         return player;
                     }
                     break;
+                }
+                //sMap.check();
+                executeAllOrders();
+            }
+
+
+        }
+        return "Winner";
+
+    }
+
+}
