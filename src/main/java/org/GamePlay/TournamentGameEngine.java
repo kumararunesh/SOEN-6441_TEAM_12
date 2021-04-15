@@ -107,3 +107,10 @@ public String gamePlay(File p_file, int turns) {
         boolean end = true;
         while (end) {
             boolean an_order = true;
+ do {
+                for (String l_player : PLAYERS_LIST.keySet()) {
+                    Player p = PLAYERS_LIST.get(l_player);
+                    an_order = p.issue_order(order);
+                   /* if (!an_order)
+                        break;*/
+                }
