@@ -132,3 +132,12 @@ public String gamePlay(File p_file, int turns) {
                         l_observable.setMsg(d_message);
                     }
                 }
+                  if (PLAYERS_LIST.size() == 1) {
+                    for (String player : PLAYERS_LIST.keySet()) {
+                        d_message = player + " is the winner of the game!!!!!!!!";
+                        System.out.println(d_message);
+                        l_observable.setMsg(d_message);
+                        end = false;
+                        return player;
+                    }
+                    break;
