@@ -3,10 +3,7 @@ package org.Main;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * This class allows user to edit the map. Either it can be continent, countries or neighbours.
@@ -97,6 +94,14 @@ public class EditMapConquest {
                                     if (l_country_neighbour.get(l_country).contains(l_c)) {
                                         l_country_neighbour.get(l_country).remove(l_c);
                                     }
+                                }
+                            }
+                            Iterator<Map.Entry<String, String> >
+                                    iterator = l_country_continent.entrySet().iterator();
+                            while (iterator.hasNext()) {
+                                Map.Entry entry = iterator.next();
+                                if (l_continent_name.equals(entry.getValue())) {
+                                    iterator.remove();
                                 }
                             }
                         } else {
