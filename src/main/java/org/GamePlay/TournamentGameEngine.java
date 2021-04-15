@@ -98,4 +98,12 @@ public String gamePlay(File p_file, int turns) {
             if (l_s.equalsIgnoreCase("human")) {
                 p.setStrategy(new HumanPlayerStrategy(p, COUNTRY.COUNTRIESLIST, PLAYERS_LIST, COUNTRY));
             }
-
+  }
+        showMap sMap = new showMap(PLAYERS_LIST, COUNTRY);
+        LogEntryBuffer l_observable = new LogEntryBuffer();
+        LogFile l_observer = new LogFile();
+        l_observable.addObserver(l_observer);
+        int counter = 0;
+        boolean end = true;
+        while (end) {
+            boolean an_order = true;
