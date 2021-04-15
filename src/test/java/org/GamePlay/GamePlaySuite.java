@@ -1,5 +1,6 @@
 package org.GamePlay;
 
+import org.Tournament.TournamentMainTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -18,7 +19,8 @@ import org.junit.runners.Suite;
         MapValidation.class,
         NegotiateTest.class,
         playGameTest.class,
-        StartUpPhase.class
+        StartUpPhase.class,
+        TournamentMainTest.class
 })
 public class GamePlaySuite {
 }

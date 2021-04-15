@@ -23,16 +23,16 @@ public class AdvanceArmiesTest {
     @Before
     public void startUpPhase(){
 
-        d_player1= new Player("Manjit");
+        d_player1= new Player("random");
         d_player1.d_armiesNum = 10;
 
-        d_player2 = new Player("Manish");
+        d_player2 = new Player("random");
         d_player2.d_armiesNum = 5;
 
-        d_player3 = new Player("Nitpreet");
+        d_player3 = new Player("random");
         d_player3.d_armiesNum = 8;
 
-        d_player4 = new Player("Richa");
+        d_player4 = new Player("aggressive");
         d_player4.d_armiesNum = 4;
 
         d_con1 = new Country("d","b",5,3,new ArrayList<>(Arrays.asList("d","e","f","g")));
@@ -58,8 +58,8 @@ public class AdvanceArmiesTest {
         d_player3.d_owned.add(d_con4);
         d_player4.d_owned.add(d_con5);
 
-        d_player1.issue_order(d_advance1);
-        d_player3.issue_order(d_advance2);
+        d_player1.issue_orders(d_advance1);
+        d_player3.issue_orders(d_advance2);
 
     }
 

@@ -24,9 +24,9 @@ public class BombTest {
     @Before
     public void startUpPhase(){
 
-        d_p1 = new Player("human");
+        d_p1 = new Player("Manjit");
         d_p1.add_card("BOMB");
-        d_p2 = new Player("human");
+        d_p2 = new Player("Manish");
         d_p2.add_card("BOMB");
 
         d_con1 = new Country("d","b",5,3,new ArrayList<>(Arrays.asList("d","e")));
@@ -44,8 +44,8 @@ public class BombTest {
         d_card1 = new Cards("e" , "bomb" , d_con3);
         d_card2 = new Cards("e" , "bomb" , d_con3);
 
-        d_p1.issue_order(d_card1);
-        d_p2.issue_order(d_card2);
+        d_p1.issue_orders(d_card1);
+        d_p2.issue_orders(d_card2);
     }
 
     /**

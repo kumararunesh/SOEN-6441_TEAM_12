@@ -43,8 +43,8 @@ public class BlockadeTest {
         d_card1 = new Cards("d" , "blockade" , d_con3);
         d_card2 = new Cards("e" , "blockade" , d_con3);
 
-        d_p1.issue_order(d_card1);
-        d_p2.issue_order(d_card2);
+        d_p1.issue_orders(d_card1);
+        d_p2.issue_orders(d_card2);
     }
 
     /**

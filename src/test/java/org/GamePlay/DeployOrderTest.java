@@ -5,79 +5,35 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static org.junit.Assert.assertEquals;
 
+public class DeployOrderTest {
 
-/**
- * This is the class in which the Negotiate order validity is Checked.
- */
-public class NegotiateTest {
-
-    Country d_con1 , d_con2 , d_con3 ;
-    Cards d_card1 , d_card2;
-    Player d_p1,d_p2,d_p3;
-    ConcurrentHashMap<String,Player> d_playerList = new ConcurrentHashMap<>();
-
-    /**
-     * Method to initialize the values required for the execute Method of the Negotiate Order card.
-     */
+    Country l_cou1,l_cou2,l_cou;
+    DeployOrder d_order;
+    Player d_p;
     @Before
-    public void startUpPhase(){
+    public void setUp()
+    {
+        d_p= new Player("Nitpreet");
 
-        d_p1 = new Player("human");
-        d_p1.add_card("NEGOTIATE");
+        l_cou1 = new Country("d","b",5,3,new ArrayList<>(Arrays.asList("d","e")));
+        l_cou2 = new Country("e","c",5,3,new ArrayList<>(Arrays.asList("d","e")));
+        l_cou.COUNTRIESLIST.put("d",l_cou1);
+        l_cou.COUNTRIESLIST.put("e",l_cou2);
+        d_order = new DeployOrder("d",10,l_cou);
 
-        d_p2 = new Player("human");
-        d_p2.add_card("NEGOTIATE");
-
-        d_p3 = new Player("human");
-
-        d_playerList.put("human" , d_p1);
-        d_playerList.put("human" , d_p2);
-        d_playerList.put("human" , d_p3);
-
-        d_con1 = new Country("d","b",5,3,new ArrayList<>(Arrays.asList("d","e","f")));
-        d_con2 = new Country("e","c",5,3,new ArrayList<>(Arrays.asList("d","e","f")));
-        d_con3 = new Country("f","a",5,3,new ArrayList<>(Arrays.asList("d","e","f")));
-
-        d_con3.COUNTRIESLIST.put("d", d_con1);
-        d_con3.COUNTRIESLIST.put("e", d_con2);
-
-        d_con1.d_numOfArmiesPlaced = 20;
-        d_con2.d_numOfArmiesPlaced = 10;
-
-        d_p1.d_owned.add(d_con1);
-        d_p2.d_owned.add(d_con2);
-        d_p3.d_owned.add(d_con3);
-
-        d_card1 = new Cards(d_p2.d_name, "negotiate" , d_playerList);
-        d_card2 = new Cards(d_p1.d_name, "negotiate" , d_playerList);
-
-        d_p1.issue_order(d_card1);
-        d_p2.issue_order(d_card2);
+        d_p.d_owned.add(l_cou1);
+        d_p.d_armiesNum=4;
+        d_p.d_owned.add(l_cou2);
+        d_p.issue_orders(d_order);
     }
 
-    /**
-     * Method to check the execute Method from the Negotiate Order card.
-     * In this case the country using Negotiate card successfully executes.
-     */
     @Test
-    public void NegotiatePass(){
-        d_card1.Execute(d_p1);
+    public void executeTest() {
+        d_order.Execute(d_p);
 
-        assertEquals(true, d_p1.d_negotiate.contains(d_p2.d_name));
-    }
-
-    /**
-     * Method to check the execute Method from the Negotiate Order card.
-     * In this case the country using Negotiate card does not successfully executes.
-     */
-    @Test
-    public void NegotiateFail(){
-        d_card2.Execute(d_p1);
-
-        assertEquals(false , d_p2.d_negotiate.contains(d_p3.d_name));
+        assertEquals("You only own 4 armies",d_order.d_temp);
     }
 }

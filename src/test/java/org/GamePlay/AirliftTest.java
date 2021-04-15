@@ -57,8 +57,8 @@ public class AirliftTest {
         d_player3.d_owned.add(d_con4);
         d_player4.d_owned.add(d_con5);
 
-        d_player1.issue_order(d_airlift1);
-        d_player3.issue_order(d_airlift2);
+        d_player1.issue_orders(d_airlift1);
+        d_player3.issue_orders(d_airlift2);
 
     }
 
