@@ -124,3 +124,11 @@ public String gamePlay(File p_file, int turns) {
                     }
                     break;
                 }
+                   for (String l_player : PLAYERS_LIST.keySet()) {
+                    if (PLAYERS_LIST.get(l_player).d_owned.size() == 0) {
+                        PLAYERS_LIST.remove(l_player);
+                        //d_message = l_player + " you have lost the game. So you're out of the game!!!";
+                        System.out.println(d_message);
+                        l_observable.setMsg(d_message);
+                    }
+                }
