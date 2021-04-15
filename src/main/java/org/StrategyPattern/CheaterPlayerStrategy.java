@@ -34,4 +34,29 @@ public class CheaterPlayerStrategy{
     protected Country toDefend() {
         return null;
     }
+	    public Order createOrder() {
+        ArrayList<Country> l_tempList = new ArrayList<>();
+        for(Country l_country : d_player.d_owned)
+        {
+
+            for (String l_neighbour : l_country.d_neighbours)
+            {
+
+                Country l_tempNeighCountry = l_country.COUNTRIESLIST.get(l_neighbour);
+                if(!d_player.d_owned.contains(l_tempNeighCountry) ) {
+                    String l_oldOwnerName = l_tempNeighCountry.d_owner;
+                    Player d_tempOldPlayer = d_playerList.get(l_oldOwnerName);
+                    d_tempOldPlayer.d_owned.remove(l_tempNeighCountry);
+                    d_playerList.put(l_oldOwnerName,d_tempOldPlayer);
+                    l_tempNeighCountry.d_owner = d_player.d_name;
+                    l_tempList.add(l_tempNeighCountry);
+                    l_tempNeighCountry.d_numOfArmiesPlaced = 2 * l_tempNeighCountry.d_numOfArmiesPlaced;
+                    System.out.println("");
+                }
+
+            }
+
+        }
+		return null;
+		}
 }
