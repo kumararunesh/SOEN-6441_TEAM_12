@@ -33,6 +33,15 @@ public class TournamentMain {
                 for (String map : l_commandSplit[1].split(" ")) {
                     if (map.equalsIgnoreCase("m")) {
                         continue;
+                         // GamePlay Assign-countries (playerList, null Country Object)
+            d_assign = new Assign(PLAYERS_LIST,d_country);
+            d_assign.assignCountries(d_file);
+            COUNTRIES = d_assign.d_country.COUNTRIESLIST;
+            d_country = d_assign.d_country;
+
+            play = new playGame(PLAYERS_LIST,d_country);
+            play.playGameLoop();
+
                     } else {
                         listOfMapFiles[i] = map;
                         i += 1;
