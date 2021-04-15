@@ -7,7 +7,7 @@ import org.GamePlay.Player;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class CheaterPlayerStrategy{
+public class CheaterPlayerStrategy extends PlayerStrategy {
 
     ConcurrentHashMap <String,Country> d_countries;
     Player d_player;
@@ -20,21 +20,30 @@ public class CheaterPlayerStrategy{
         this.d_player = p_player;
         this.d_playerList = p_playerList;
     }
-	    protected Country toAttack() {
+
+    @Override
+    protected Country toAttack() {
 
         return null;
     }
-	protected Country toAttackFrom() {
-        return null;
-    }
-	    protected Country toMoveFrom() {
+
+    @Override
+    protected Country toAttackFrom() {
         return null;
     }
 
+    @Override
+    protected Country toMoveFrom() {
+        return null;
+    }
+
+    @Override
     protected Country toDefend() {
         return null;
     }
-	    public Order createOrder() {
+
+    @Override
+    public Order createOrder() {
         ArrayList<Country> l_tempList = new ArrayList<>();
         for(Country l_country : d_player.d_owned)
         {
@@ -57,6 +66,14 @@ public class CheaterPlayerStrategy{
             }
 
         }
-		return null;
-		}
+        for(Country l_cou: l_tempList)
+        {
+            d_player.d_owned.add(l_cou);
+        }
+        d_playerList.put(d_player.d_name,d_player);
+
+
+
+        return null;
+    }
 }
