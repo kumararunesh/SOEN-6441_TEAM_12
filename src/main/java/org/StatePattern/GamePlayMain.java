@@ -22,7 +22,7 @@ public class GamePlayMain extends GamePlayAbstract{
      */
     @Override
     public void gamePlay() {
-        d_ge.gamePlay(d_ge.FILE);
+        d_ge.gamePlay(d_ge.d_FILE);
     }
 
     /**

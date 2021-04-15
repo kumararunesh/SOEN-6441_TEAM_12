@@ -43,13 +43,18 @@ public class GameStartUpPhaseMain extends GameStartUpPhase {
         printInvalidCommandMessage();
     }
 
+    @Override
+    public void gamePlay() {
+
+    }
+
     /**
      * Method to change the phase to the next phase. If the map is not loaded then it will show
      * an error saying to load the map first else it will change the Phase to Player Initialization.
      */
     public void next()
     {
-        if(d_ge.FILE==null)
+        if(d_ge.d_FILE==null)
         {
             d_message ="You first need to load the map before going further";
             System.out.println(d_message);

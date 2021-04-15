@@ -26,7 +26,12 @@ public class PlayerInitializationMain extends PlayerInitializationAbstract{
      */
     @Override
     public void startGameEngine() {
-        d_ge.startGameEngine(d_ge.FILE);
+        d_ge.startGameEngine(d_ge.d_FILE);
+    }
+
+    @Override
+    public void gamePlay() {
+
     }
 
     /**
@@ -35,7 +40,7 @@ public class PlayerInitializationMain extends PlayerInitializationAbstract{
     public void next() {
         boolean l_temp=true;
         try{
-            if(d_ge.PLAYERS_LIST.size()>=2)
+            if(d_ge.d_PLAYERS_LIST.size()>=2)
             {
                 l_temp=false;
             }
@@ -43,7 +48,7 @@ public class PlayerInitializationMain extends PlayerInitializationAbstract{
         {}
         if(l_temp==false)
         {
-            d_ge1.setPhase(new AssignCountriesMain(d_ge1, d_ge.PLAYERS_LIST, d_ge.COUNTRY, d_ge.FILE));
+            d_ge1.setPhase(new GamePlayMain(d_ge1, d_ge));
         }
         else
         {
