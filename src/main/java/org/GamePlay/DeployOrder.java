@@ -1,12 +1,13 @@
 package org.GamePlay;
 
+import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Child class extending the Order Class , it deals with only deploy Order command
  */
-public class DeployOrder extends Order {
-    String d_typeOfOrder = "DeployOrder";
+public class DeployOrder extends Order implements Serializable {
+    private static final long serialVersionUID = 2113471175527832670L;
     String d_countryId;
     Integer d_armiesToPlace;
     Country d_cou;
@@ -38,37 +39,5 @@ public class DeployOrder extends Order {
                 l_index = i;
             }
         }
-        if (l_index != 10000000) {
-            if (d_armiesToPlace <= p_p.d_armiesNum) {
-                p_p.d_armiesNum = p_p.d_armiesNum - d_armiesToPlace;
-
-                d_cou.COUNTRIESLIST.get(d_countryId).d_numOfArmiesPlaced += d_armiesToPlace;
-                d_cou.COUNTRIESLIST.get(d_countryId).d_owner = p_p.d_name;
-
-                System.out.print(p_p.d_name + " your order has been placed. Now your army count is " + p_p.d_armiesNum + ". ");
-                System.out.print(d_armiesToPlace + " unit of armies are placed on " + p_p.d_owned.get(l_index).d_countryId);
-                System.out.println("");
-                ConcurrentHashMap<String, Player> playerList = new ConcurrentHashMap<>();
-                playerList.put(p_p.d_name, p_p);
-                showMap map = new showMap(playerList, d_cou);
-                d_temp = d_armiesToPlace + " armies deployed";
-            } else {
-//            p_p.OWNED.get(l_index).NUMOFARMIESPLACED = ARMIESTOPLACE;
-                d_cou.COUNTRIESLIST.get(d_countryId).d_numOfArmiesPlaced += p_p.d_armiesNum;
-                d_cou.COUNTRIESLIST.get(d_countryId).d_owner = p_p.d_name;
-                System.out.println(p_p.d_name + " you only own " + p_p.d_armiesNum + " armies and all of them are now placed on " + p_p.d_owned.get(l_index).d_countryId);
-                d_temp = "You only own " + p_p.d_armiesNum + " armies";
-                p_p.d_armiesNum = 0;
-            }
-        } else {
-            p_p.d_armiesNum = p_p.d_armiesNum - d_armiesToPlace;
-            if (p_p.d_armiesNum < 0) {
-                p_p.d_armiesNum = 0;
-            }
-            System.out.println("You don't own this country. Penalty has been applied. Now your army count is " + p_p.d_armiesNum);
-            d_temp = "You don't own this country";
-        }
-
-    }
-
-}
+		}
+		}
