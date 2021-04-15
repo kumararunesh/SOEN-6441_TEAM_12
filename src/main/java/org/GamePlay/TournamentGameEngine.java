@@ -65,3 +65,20 @@ public String gamePlay(File p_file, int turns) {
         for (String l_s : PLAYERS_LIST.keySet()) {
             Player p = PLAYERS_LIST.get(l_s);
             System.out.println(p.getD_name());
+ if (l_s.contains("-")) {
+                String[] l_name = l_s.split("-");
+                if (l_name[0].equalsIgnoreCase("random")) {
+                    p.setStrategy(new RandomPlayerStrategy(p, COUNTRY.COUNTRIESLIST, COUNTRY));
+                }
+                if (l_name[0].equalsIgnoreCase("aggressive")) {
+                    p.setStrategy(new AggressivePlayerStrategy(p, COUNTRY.COUNTRIESLIST, COUNTRY));
+                }
+                if (l_name[0].equalsIgnoreCase("benevolent")) {
+                    p.setStrategy(new BenevolentPlayerStrategy(p, COUNTRY.COUNTRIESLIST, COUNTRY));
+                }
+                if (l_name[0].equalsIgnoreCase("cheater")) {
+                    p.setStrategy(new CheaterPlayerStrategy(p, COUNTRY.COUNTRIESLIST, PLAYERS_LIST));
+                }
+                if (l_name[0].equalsIgnoreCase("human")) {
+                    p.setStrategy(new HumanPlayerStrategy(p, COUNTRY.COUNTRIESLIST, PLAYERS_LIST, COUNTRY));
+                }
