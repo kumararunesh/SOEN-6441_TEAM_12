@@ -1,9 +1,12 @@
 package org.StatePattern;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.GamePlay.Country;
+import org.GamePlay.GameEngine;
 import org.GamePlay.Player;
 import org.StatePattern.ShowMap;
 import org.ObserverBasedLogging.LogWriter;
@@ -62,7 +65,8 @@ public class GameEngine1 {
             LogWriter l_log = new LogWriter();
             System.out.println("1. Edit Map");
             System.out.println("2. Play Game");
-            System.out.println("3. Quit");
+            System.out.println("3. Load Game");
+            System.out.println("4. Quit");
             System.out.println("Where do you want to start?: ");
             MYSTART = l_keyboard.nextInt();
             switch (MYSTART) {
@@ -77,6 +81,42 @@ public class GameEngine1 {
                     setPhase(l_ge);
                     break;
                 case 3:
+                    System.out.println("Enter fileName (without extension): ");
+                    Scanner l_sc = new Scanner(System.in);
+                    String l_fileName= l_sc.nextLine();
+                    l_fileName+=".ser";
+                    File l_file = new File("src/main/resources/savedGames/"+l_fileName);
+                    serialObj serialOBJ;
+                    Country l_country;
+                    ConcurrentHashMap <String, Player> l_playerList = new ConcurrentHashMap<>();
+                    try{
+                        FileInputStream l_fileInputStream = new FileInputStream(l_file);
+                        ObjectInputStream l_inputStream = new ObjectInputStream(l_fileInputStream);
+
+                        serialOBJ =(serialObj) l_inputStream.readObject();
+/*                        l_playerList = serialOBJ.d_playerList;
+                        l_country = serialOBJ.d_country;
+                        l_country.COUNTRIESLIST = (ConcurrentHashMap<String, Country>) l_inputStream.readObject();*/
+                        GameEngine ge = new GameEngine();
+                        ge.PLAYERS_LIST = serialOBJ.d_playerList;
+                        ge.COUNTRY.COUNTRIESLIST = (ConcurrentHashMap<String, Country>) l_inputStream.readObject();
+                        GamePlayMain phase = new GamePlayMain(this,ge);
+                        setPhase(phase);
+                        for(String l_playerName: l_playerList.keySet())
+                        {
+                            System.out.print("PlayerName: "+l_playerName+" owned countries are:-");
+                            for(Country cou:l_playerList.get(l_playerName).d_owned)
+                            {
+                                System.out.print(" "+cou.d_countryId);
+                            }
+                            System.out.println("");
+                        }
+                        l_fileInputStream.close();
+                        l_inputStream.close();
+                    }catch(Exception e)
+                    {}
+                    break;
+                case 4:
                     System.out.println("Bye!");
                     return;
             }
@@ -90,12 +130,9 @@ public class GameEngine1 {
                 System.out.println("| 2.  Edit Map                : editmap           |");
                 System.out.println("| 3.  GamePlay : load map     : loadmap           |");
                 System.out.println("| 4.  GamePlay: set Player    : gameplayer        |");
-                System.out.println("| 5.  Play:PlaySetup          : assign countries  |");
-                System.out.println("| 6.  Play:Issue Order        : order             |");
-                System.out.println("| 7.  Play:Execute Order      : execute           |");
-                System.out.println("| 7.  Play:mapshow            : mapshow           |");
-                System.out.println("| 9.  Any Phase               : end game          |");
-                System.out.println("| 10. Any Phase               : next phase        |");
+                System.out.println("| 6.  Game Play: execution    : gameplay          |");
+                System.out.println("| 5.  Any Phase               : end game          |");
+                System.out.println("| 6.  Any Phase               : next phase        |");
                 System.out.println(" =================================================");
                 System.out.println("enter a " + d_gamePhase.getClass().getSimpleName() + " phase command: ");
                 MYCOMMAND = l_keyboard.nextLine();
@@ -117,20 +154,14 @@ public class GameEngine1 {
                     case("gameplayer"):
                         d_gamePhase.startGameEngine();
                         break;
-                    case("assigncountries"):
-                        d_gamePhase.assignCountries();
-                        break;
-                    case("order"):
-                        d_gamePhase.playGameLoop();
-                        break;
-                    case("execute"):
-                        d_gamePhase.execute();
-                        break;
                     case ("next"):
                         d_gamePhase.next();
                         break;
                     case ("mapshow"):
                         d_gamePhase.mapshow();
+                        break;
+                    case ("gameplay"):
+                        d_gamePhase.gamePlay();
                         break;
                     case("end"):
                     {
