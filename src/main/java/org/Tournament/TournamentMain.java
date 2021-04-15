@@ -87,3 +87,12 @@ public class TournamentMain {
         {
             System.out.println("Enter the correct command");
         }
+         for (int i = 0; i < 1; i++) {
+            System.out.println("Map" + listOfMapFiles[i] + " : ");
+            d_file = new File("src/main/resources/maps/" + listOfMapFiles[i]);
+
+            // PLAYERS_LIST.put(players);
+            for(int t = 0 ; t<d_playersName.length -1 ; t++)
+            {
+                PLAYERS_LIST.put(d_playersName[t], new Player(d_playersName[t]));
+            }
